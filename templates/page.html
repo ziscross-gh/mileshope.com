@@ -66,6 +66,26 @@
             {{ page.content | safe }}
         </div>
 
+        <!-- Author Bio -->
+        {% if page.date %}
+        <aside class="author-bio">
+            <div class="author-bio-content">
+                <div class="author-avatar">
+                    <span class="avatar-placeholder">MH</span>
+                </div>
+                <div class="author-info">
+                    <h3 class="author-name">{{ config.extra.author }}</h3>
+                    <p class="author-description">
+                        Practitioner and student of Bazi (Chinese astrology) and Tarot.
+                        Exploring the intersection of ancient wisdom and modern life.
+                        Sharing insights on spirituality, divination, and personal growth.
+                    </p>
+                    <a href="{{ get_url(path='@/about.md') }}" class="author-link">More about me →</a>
+                </div>
+            </div>
+        </aside>
+        {% endif %}
+
         <!-- Post Footer -->
         <footer class="post-footer">
             <!-- Social Sharing -->
