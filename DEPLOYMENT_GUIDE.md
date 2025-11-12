@@ -68,7 +68,7 @@ Use these exact settings:
 
 1. In your Cloudflare Pages project, go to **Custom domains**
 2. Click **Set up a custom domain**
-3. Enter: `mileshope.com`
+3. Enter: `www.mileshope.com` (primary domain)
 4. Click **Continue**
 
 ### 3.2 Configure DNS
@@ -83,7 +83,7 @@ Cloudflare will provide DNS records. You need to:
 1. Add these records at your domain registrar:
 
 ```
-CNAME  mileshope.com  →  mileshope.pages.dev
+CNAME  www  →  mileshope.pages.dev
 ```
 
 2. Or migrate your domain to Cloudflare (recommended):
@@ -92,11 +92,11 @@ CNAME  mileshope.com  →  mileshope.pages.dev
    - Follow the nameserver setup instructions
    - Update nameservers at your registrar
 
-### 3.3 Add www Subdomain (Optional)
+### 3.3 Add Root Domain Redirect (Optional)
 
 1. Click **Set up a custom domain** again
-2. Enter: `www.mileshope.com`
-3. Set up redirect: `www.mileshope.com` → `mileshope.com`
+2. Enter: `mileshope.com` (without www)
+3. Set up redirect: `mileshope.com` → `www.mileshope.com` (301 redirect)
 
 ## Step 4: SSL/HTTPS Configuration
 

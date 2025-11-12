@@ -50,7 +50,7 @@ Use this checklist to deploy your site to production.
 ### Add Domain
 - [ ] In Cloudflare Pages, go to **Custom domains**
 - [ ] Click **Set up a custom domain**
-- [ ] Enter: `mileshope.com`
+- [ ] Enter: `www.mileshope.com` (primary)
 - [ ] Click **Continue**
 
 ### DNS Configuration
@@ -60,17 +60,17 @@ Use this checklist to deploy your site to production.
 - [ ] Wait 2-3 minutes for propagation
 
 **Option B: Domain elsewhere**
-- [ ] Add CNAME record: `mileshope.com` → `mileshope.pages.dev`
+- [ ] Add CNAME record: `www` → `mileshope.pages.dev`
 - [ ] OR migrate to Cloudflare (recommended)
 - [ ] Wait up to 24 hours for DNS propagation
 
-### WWW Subdomain (Optional)
-- [ ] Add custom domain: `www.mileshope.com`
-- [ ] Configure redirect to main domain
+### Root Domain Redirect (Optional)
+- [ ] Add custom domain: `mileshope.com` (without www)
+- [ ] Configure redirect: `mileshope.com` → `www.mileshope.com`
 
 ### SSL Certificate
 - [ ] Verify SSL certificate is active (automatic)
-- [ ] Test HTTPS: `https://mileshope.com`
+- [ ] Test HTTPS: `https://www.mileshope.com`
 
 ## Post-Deployment Verification ✓
 

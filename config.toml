@@ -1,7 +1,7 @@
 # MilesHope.com - Zola Configuration
 
 # Base URL of the site
-base_url = "https://mileshope.com"
+base_url = "https://www.mileshope.com"
 
 # Site title
 title = "mileshope.com"
