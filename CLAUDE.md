@@ -107,24 +107,66 @@ tags = ["tag1", "tag2"]
 ### Static Pages
 Pages like About and Services don't require a `date` field in frontmatter. The template handles optional dates gracefully.
 
-## Notion Integration (Planned - Week 2)
+## Notion Integration (Week 2 - Implemented)
 
-A Rust CLI tool will be built to:
-1. Fetch content from Notion API
-2. Convert Notion blocks to Markdown
-3. Generate proper frontmatter
-4. Sync to `content/blog/` directory
+The `notion-sync/` directory contains a Rust CLI tool that syncs blog posts from Notion to Zola.
 
-Tool structure (planned):
+### Tool Structure
 ```
-notion-to-zola/
+notion-sync/
 ├── src/
-│   ├── main.rs          # CLI entry point
+│   ├── main.rs          # CLI entry point and sync orchestration
 │   ├── notion.rs        # Notion API client
 │   ├── markdown.rs      # Markdown converter
-│   └── frontmatter.rs   # Metadata handler
-└── Cargo.toml
+│   └── frontmatter.rs   # Frontmatter generator
+├── Cargo.toml           # Dependencies
+├── .env.example         # Environment template
+└── README.md            # Full documentation
 ```
+
+### Usage
+
+1. **Setup** (first time only):
+   ```bash
+   cd notion-sync
+   cp .env.example .env
+   # Edit .env with your NOTION_API_KEY and NOTION_DATABASE_ID
+   ```
+
+2. **Run sync**:
+   ```bash
+   cd notion-sync
+   cargo run
+   ```
+
+3. **Build site** after sync:
+   ```bash
+   cd ..
+   zola build
+   ```
+
+### Notion Database Requirements
+
+Your Notion database must have these properties:
+- **Name** or **Title** (Title type) - Post title
+- **Status** (Status type) - Must include "Published" option
+- **Published** or **Date** (Date type) - Publication date
+- **Tags** (Multi-select, optional) - Post tags
+- **Categories** (Multi-select, optional) - Post categories
+- **Description** (Text, optional) - SEO description
+
+### Supported Content
+
+The tool converts these Notion blocks to Markdown:
+- Paragraphs with formatting (bold, italic, code, strikethrough)
+- Headings (H1, H2, H3)
+- Bulleted and numbered lists
+- Code blocks with syntax highlighting
+- Quotes and callouts
+- Links
+- Dividers
+
+See `notion-sync/README.md` for detailed setup instructions.
 
 ## Development Workflow
 
@@ -153,4 +195,13 @@ notion-to-zola/
 - Git repository initialized
 - Site builds and serves successfully
 
-**Next Steps (Week 2)**: Build Notion integration Rust tool for automated content syncing
+**Week 2 Status**: ✅ Complete
+- Rust CLI tool for Notion integration created
+- Notion API client implemented with authentication
+- Notion-to-Markdown converter built (supports headings, paragraphs, lists, code, quotes)
+- Frontmatter generator implemented (TOML format for Zola)
+- Sync script writes markdown files to `content/blog/` directory
+- Comprehensive documentation added (notion-sync/README.md)
+- Tool builds successfully and ready for testing
+
+**Next Steps (Week 2 Testing)**: Test with live Notion database, then proceed to Week 3 (Design & Styling)
