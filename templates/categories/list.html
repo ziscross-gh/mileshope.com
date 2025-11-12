@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}All Categories | {{ config.title }}{% endblock %}
+
+{% block content %}
+<div class="taxonomy-list">
+    <div class="container">
+        <header class="taxonomy-header">
+            <h1>All Categories</h1>
+        </header>
+
+        <div class="categories-grid">
+            {% for term in terms %}
+            <a href="{{ term.permalink }}" class="category-card">
+                <h3>{{ term.name }}</h3>
+                <p>{{ term.pages | length }} post(s)</p>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

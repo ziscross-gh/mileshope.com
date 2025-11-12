@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ config.title }}{% endblock %}</title>
+    <meta name="description" content="{% block description %}{{ config.description }}{% endblock %}">
+
+    <!-- SEO Meta Tags -->
+    <meta name="author" content="{{ config.extra.author }}">
+    {% block extra_meta %}{% endblock %}
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="{% block og_title %}{{ config.title }}{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}{{ config.description }}{% endblock %}">
+    <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+    <meta property="og:url" content="{{ current_url | default(value=config.base_url) }}">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% block twitter_title %}{{ config.title }}{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}{{ config.description }}{% endblock %}">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ get_url(path='css/style.css') }}">
+    {% block extra_css %}{% endblock %}
+
+    <!-- RSS Feed -->
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ get_url(path='rss.xml') }}">
+</head>
+<body>
+    <!-- Navigation -->
+    <header class="site-header">
+        <nav class="navbar">
+            <div class="container">
+                <a href="{{ config.base_url }}" class="site-logo">{{ config.title }}</a>
+                <ul class="nav-menu">
+                    <li><a href="{{ get_url(path='@/blog/_index.md') }}">Blog</a></li>
+                    <li><a href="{{ get_url(path='@/about.md') }}">About</a></li>
+                    <li><a href="{{ get_url(path='@/services.md') }}">Services</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; {{ now() | date(format="%Y") }} {{ config.extra.author }}. All rights reserved.</p>
+            <p>Built with <a href="https://www.getzola.org/" target="_blank" rel="noopener">Zola</a></p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

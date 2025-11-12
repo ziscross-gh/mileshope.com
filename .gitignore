@@ -1,0 +1,20 @@
+# Zola build output
+public/
+
+# macOS
+.DS_Store
+
+# Editor directories
+.vscode/
+.idea/
+
+# Rust
+target/
+Cargo.lock
+
+# Environment variables
+.env
+.env.local
+
+# Notion sync tool (optional - may want to track these)
+# .notion-cache/

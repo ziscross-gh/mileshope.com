@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Tag: {{ term.name }} | {{ config.title }}{% endblock %}
+
+{% block content %}
+<div class="taxonomy-page">
+    <div class="container">
+        <header class="taxonomy-header">
+            <h1>Posts tagged with "{{ term.name }}"</h1>
+            <p class="taxonomy-count">{{ term.pages | length }} post(s)</p>
+        </header>
+
+        <div class="posts-list">
+            {% for page in term.pages %}
+            <article class="post-item">
+                <h2><a href="{{ page.permalink }}">{{ page.title }}</a></h2>
+                {% if page.summary %}
+                <p class="post-excerpt">{{ page.summary }}</p>
+                {% endif %}
+                <div class="post-meta">
+                    <time datetime="{{ page.date }}">{{ page.date | date(format="%B %d, %Y") }}</time>
+                    {% if page.reading_time %}
+                    <span class="reading-time">{{ page.reading_time }} min read</span>
+                    {% endif %}
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+
+        <div class="back-link">
+            <a href="/tags/">&larr; View all tags</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

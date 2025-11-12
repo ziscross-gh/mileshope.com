@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="homepage">
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero-title">{{ config.title }}</h1>
+            <p class="hero-subtitle">{{ config.description }}</p>
+            <div class="hero-cta">
+                <a href="{{ get_url(path='@/blog/_index.md') }}" class="btn btn-primary">Read the Blog</a>
+                <a href="{{ get_url(path='@/services.md') }}" class="btn btn-secondary">Explore Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent Posts Section -->
+    <section class="recent-posts">
+        <div class="container">
+            <h2>Recent Posts</h2>
+            {% set blog_section = get_section(path="blog/_index.md") %}
+            <div class="post-grid">
+                {% for page in blog_section.pages | slice(end=6) %}
+                <article class="post-card">
+                    <h3><a href="{{ page.permalink }}">{{ page.title }}</a></h3>
+                    {% if page.summary %}
+                    <p class="post-excerpt">{{ page.summary }}</p>
+                    {% endif %}
+                    <div class="post-meta">
+                        <time datetime="{{ page.date }}">{{ page.date | date(format="%B %d, %Y") }}</time>
+                        {% if page.reading_time %}
+                        <span class="reading-time">{{ page.reading_time }} min read</span>
+                        {% endif %}
+                    </div>
+                    {% if page.taxonomies.tags %}
+                    <div class="post-tags">
+                        {% for tag in page.taxonomies.tags %}
+                        <a href="{{ get_taxonomy_url(kind='tags', name=tag) }}" class="tag">{{ tag }}</a>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </article>
+                {% endfor %}
+            </div>
+            <div class="view-all">
+                <a href="{{ get_url(path='@/blog/_index.md') }}" class="btn">View All Posts</a>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

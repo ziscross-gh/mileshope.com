@@ -1,0 +1,58 @@
+# MilesHope.com - Zola Configuration
+
+# Base URL of the site
+base_url = "https://mileshope.com"
+
+# Site title
+title = "Miles Hope"
+
+# Site description
+description = "Exploring the intersection of spirituality, technology, and personal growth through bazi, tarot, and mindful living."
+
+# Language for the site
+default_language = "en"
+
+# Theme (can be changed later)
+# theme = ""
+
+# Compile Sass files
+compile_sass = true
+
+# Minify HTML in release mode
+minify_html = true
+
+# Build search index for elasticlunr.js
+build_search_index = true
+
+# Generate RSS feed
+generate_feeds = true
+feed_filenames = ["rss.xml"]
+
+# Taxonomies (categories and tags)
+taxonomies = [
+    {name = "categories", feed = true},
+    {name = "tags", feed = true},
+]
+
+[markdown]
+# Enable syntax highlighting
+highlight_code = true
+highlight_theme = "base16-ocean-dark"
+
+# Enable smart punctuation
+smart_punctuation = true
+
+# Render emoji
+render_emoji = true
+
+[extra]
+# Additional site metadata
+author = "Miles Hope"
+
+# Social media links (add as needed)
+# twitter = ""
+# github = ""
+# email = ""
+
+# Google Analytics or Plausible (add later)
+# analytics_id = ""
