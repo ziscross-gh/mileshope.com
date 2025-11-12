@@ -25,19 +25,54 @@
     <link rel="stylesheet" href="{{ get_url(path='css/style.css') }}">
     {% block extra_css %}{% endblock %}
 
+    <!-- Search Index -->
+    <script src="https://unpkg.com/elasticlunr@0.9.5/elasticlunr.min.js"></script>
+
     <!-- RSS Feed -->
     <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ get_url(path='rss.xml') }}">
 </head>
 <body>
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress" id="readingProgress"></div>
+
+    <!-- Search Modal -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-modal-content">
+            <div class="search-header">
+                <input type="text" id="searchInput" placeholder="Search posts..." aria-label="Search">
+                <button class="search-close" id="searchClose" aria-label="Close search">&times;</button>
+            </div>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </div>
+
     <!-- Navigation -->
     <header class="site-header">
         <nav class="navbar">
             <div class="container">
                 <a href="{{ config.base_url }}" class="site-logo">{{ config.title }}</a>
-                <ul class="nav-menu">
+
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                    <span class="hamburger"></span>
+                    <span class="hamburger"></span>
+                    <span class="hamburger"></span>
+                </button>
+
+                <ul class="nav-menu" id="navMenu">
                     <li><a href="{{ get_url(path='@/blog/_index.md') }}">Blog</a></li>
                     <li><a href="{{ get_url(path='@/about.md') }}">About</a></li>
                     <li><a href="{{ get_url(path='@/services.md') }}">Services</a></li>
+                    <li>
+                        <button class="search-toggle" id="searchToggle" aria-label="Search">
+                            <span class="search-icon">🔍</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                            <span class="theme-icon">🌙</span>
+                        </button>
+                    </li>
                 </ul>
             </div>
         </nav>
@@ -57,6 +92,164 @@
     </footer>
 
     <!-- Scripts -->
+    <script>
+        // Reading Progress Bar
+        (function() {
+            const progressBar = document.getElementById('readingProgress');
+            if (progressBar) {
+                window.addEventListener('scroll', function() {
+                    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                    const scrolled = (winScroll / height) * 100;
+                    progressBar.style.width = scrolled + '%';
+                });
+            }
+        })();
+
+        // Mobile Menu Toggle
+        (function() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const navMenu = document.getElementById('navMenu');
+
+            if (mobileMenuToggle) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                    document.body.classList.toggle('menu-open');
+                });
+
+                // Close menu when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!mobileMenuToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                        mobileMenuToggle.classList.remove('active');
+                        navMenu.classList.remove('active');
+                        document.body.classList.remove('menu-open');
+                    }
+                });
+
+                // Close menu when clicking a link
+                navMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileMenuToggle.classList.remove('active');
+                        navMenu.classList.remove('active');
+                        document.body.classList.remove('menu-open');
+                    });
+                });
+            }
+        })();
+
+        // Dark Mode Toggle
+        (function() {
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = themeToggle.querySelector('.theme-icon');
+            const html = document.documentElement;
+
+            // Check for saved theme preference or default to light mode
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            html.setAttribute('data-theme', currentTheme);
+            updateThemeIcon(currentTheme);
+
+            themeToggle.addEventListener('click', function() {
+                const theme = html.getAttribute('data-theme');
+                const newTheme = theme === 'light' ? 'dark' : 'light';
+                html.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateThemeIcon(newTheme);
+            });
+
+            function updateThemeIcon(theme) {
+                themeIcon.textContent = theme === 'light' ? '🌙' : '☀️';
+            }
+        })();
+
+        // Search Functionality
+        (function() {
+            const searchToggle = document.getElementById('searchToggle');
+            const searchModal = document.getElementById('searchModal');
+            const searchClose = document.getElementById('searchClose');
+            const searchInput = document.getElementById('searchInput');
+            const searchResults = document.getElementById('searchResults');
+            let searchIndex = null;
+
+            // Load search index
+            fetch('{{ get_url(path="search_index.en.json") }}')
+                .then(response => response.json())
+                .then(data => {
+                    searchIndex = elasticlunr.Index.load(data);
+                })
+                .catch(err => console.error('Failed to load search index:', err));
+
+            // Open search modal
+            searchToggle.addEventListener('click', function() {
+                searchModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                searchInput.focus();
+            });
+
+            // Close search modal
+            searchClose.addEventListener('click', closeSearch);
+            searchModal.addEventListener('click', function(e) {
+                if (e.target === searchModal) {
+                    closeSearch();
+                }
+            });
+
+            // ESC key to close
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && searchModal.classList.contains('active')) {
+                    closeSearch();
+                }
+            });
+
+            function closeSearch() {
+                searchModal.classList.remove('active');
+                document.body.style.overflow = '';
+                searchInput.value = '';
+                searchResults.innerHTML = '';
+            }
+
+            // Search on input
+            searchInput.addEventListener('input', function() {
+                const query = this.value.trim();
+
+                if (query.length < 2) {
+                    searchResults.innerHTML = '';
+                    return;
+                }
+
+                if (!searchIndex) {
+                    searchResults.innerHTML = '<div class="search-no-results">Search index is loading...</div>';
+                    return;
+                }
+
+                const results = searchIndex.search(query, {
+                    fields: {
+                        title: {boost: 2},
+                        body: {boost: 1}
+                    },
+                    expand: true
+                });
+
+                if (results.length === 0) {
+                    searchResults.innerHTML = '<div class="search-no-results">No results found for "' + query + '"</div>';
+                    return;
+                }
+
+                let html = '';
+                results.slice(0, 10).forEach(result => {
+                    const item = result.doc;
+                    const excerpt = item.body ? item.body.substring(0, 150) + '...' : '';
+                    html += `
+                        <div class="search-result-item">
+                            <h3><a href="${item.permalink}">${item.title}</a></h3>
+                            <p class="search-result-excerpt">${excerpt}</p>
+                        </div>
+                    `;
+                });
+                searchResults.innerHTML = html;
+            });
+        })();
+    </script>
     {% block extra_js %}{% endblock %}
 </body>
 </html>

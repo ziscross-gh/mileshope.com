@@ -71,9 +71,20 @@
             <!-- Social Sharing -->
             <div class="share-buttons">
                 <h3>Share this post</h3>
-                <a href="https://twitter.com/intent/tweet?text={{ page.title }}&url={{ page.permalink }}" target="_blank" rel="noopener" class="share-btn twitter">Twitter</a>
-                <a href="https://www.facebook.com/sharer/sharer.php?u={{ page.permalink }}" target="_blank" rel="noopener" class="share-btn facebook">Facebook</a>
-                <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ page.permalink }}&title={{ page.title }}" target="_blank" rel="noopener" class="share-btn linkedin">LinkedIn</a>
+                <div class="share-btn-container">
+                    <a href="https://twitter.com/intent/tweet?text={{ page.title }}&url={{ page.permalink }}" target="_blank" rel="noopener" class="share-btn twitter">
+                        <span>🐦</span> Twitter
+                    </a>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ page.permalink }}" target="_blank" rel="noopener" class="share-btn facebook">
+                        <span>📘</span> Facebook
+                    </a>
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ page.permalink }}&title={{ page.title }}" target="_blank" rel="noopener" class="share-btn linkedin">
+                        <span>💼</span> LinkedIn
+                    </a>
+                    <button class="share-btn copy" id="copyLinkBtn" data-url="{{ page.permalink }}">
+                        <span>🔗</span> <span class="copy-text">Copy Link</span>
+                    </button>
+                </div>
             </div>
 
             <!-- Navigation to previous/next posts -->
@@ -96,4 +107,36 @@
         </footer>
     </div>
 </article>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Copy Link Functionality
+(function() {
+    const copyBtn = document.getElementById('copyLinkBtn');
+    if (copyBtn) {
+        copyBtn.addEventListener('click', function() {
+            const url = this.getAttribute('data-url');
+            const copyText = this.querySelector('.copy-text');
+
+            navigator.clipboard.writeText(url).then(() => {
+                const originalText = copyText.textContent;
+                copyText.textContent = 'Copied!';
+                this.classList.add('copied');
+
+                setTimeout(() => {
+                    copyText.textContent = originalText;
+                    this.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                copyText.textContent = 'Failed';
+                setTimeout(() => {
+                    copyText.textContent = 'Copy Link';
+                }, 2000);
+            });
+        });
+    }
+})();
+</script>
 {% endblock %}

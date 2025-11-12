@@ -8,9 +8,9 @@ MilesHope.com is a static blog website built with Zola (a fast static site gener
 
 **Tech Stack:**
 - **Zola**: Static site generator for fast, efficient blog generation
-- **Rust**: Custom tooling for Notion integration and automation (planned for Week 2)
+- **Python**: Simple sync script for Notion integration
 - **Deployment**: Cloudflare Pages (planned for Week 5)
-- **Content Source**: Notion database (integration planned)
+- **Content Source**: Notion database (synced via Python script)
 
 ## Essential Commands
 
@@ -109,40 +109,31 @@ Pages like About and Services don't require a `date` field in frontmatter. The t
 
 ## Notion Integration (Week 2 - Implemented)
 
-The `notion-sync/` directory contains a Rust CLI tool that syncs blog posts from Notion to Zola.
+The project uses a simple Python script (`sync.py`) that syncs published blog posts from Notion to Zola.
 
-### Tool Structure
-```
-notion-sync/
-├── src/
-│   ├── main.rs          # CLI entry point and sync orchestration
-│   ├── notion.rs        # Notion API client
-│   ├── markdown.rs      # Markdown converter
-│   └── frontmatter.rs   # Frontmatter generator
-├── Cargo.toml           # Dependencies
-├── .env.example         # Environment template
-└── README.md            # Full documentation
-```
-
-### Usage
+### Quick Start
 
 1. **Setup** (first time only):
    ```bash
-   cd notion-sync
+   # Install Python dependency
+   pip3 install requests
+
+   # Copy environment template
    cp .env.example .env
    # Edit .env with your NOTION_API_KEY and NOTION_DATABASE_ID
    ```
 
 2. **Run sync**:
    ```bash
-   cd notion-sync
-   cargo run
+   # Load environment variables and run sync
+   source .env
+   python3 sync.py
    ```
 
 3. **Build site** after sync:
    ```bash
-   cd ..
-   zola build
+   zola serve  # Preview
+   zola build  # Production build
    ```
 
 ### Notion Database Requirements
@@ -158,15 +149,15 @@ Your Notion database must have these properties:
 ### Supported Content
 
 The tool converts these Notion blocks to Markdown:
-- Paragraphs with formatting (bold, italic, code, strikethrough)
+- Paragraphs with rich text formatting (bold, italic, code, strikethrough, links)
 - Headings (H1, H2, H3)
 - Bulleted and numbered lists
 - Code blocks with syntax highlighting
 - Quotes and callouts
-- Links
+- Images (external and uploaded)
 - Dividers
 
-See `notion-sync/README.md` for detailed setup instructions.
+See `SYNC_README.md` for detailed setup instructions and troubleshooting.
 
 ## Development Workflow
 
@@ -195,13 +186,15 @@ See `notion-sync/README.md` for detailed setup instructions.
 - Git repository initialized
 - Site builds and serves successfully
 
-**Week 2 Status**: ✅ Complete
-- Rust CLI tool for Notion integration created
-- Notion API client implemented with authentication
-- Notion-to-Markdown converter built (supports headings, paragraphs, lists, code, quotes)
-- Frontmatter generator implemented (TOML format for Zola)
-- Sync script writes markdown files to `content/blog/` directory
-- Comprehensive documentation added (notion-sync/README.md)
-- Tool builds successfully and ready for testing
+**Week 2 Status**: ✅ Complete (Revised with MCP)
+- Python sync script created (replaces Rust CLI for simplicity)
+- Direct Notion API integration with requests library
+- Notion-to-Markdown converter implemented (supports headings, paragraphs, lists, code, quotes, callouts, images)
+- TOML frontmatter generator for Zola compatibility
+- Automatic slug generation from post titles
+- Filters for "Published" status only
+- Environment-based configuration (.env file)
+- Comprehensive documentation (SYNC_README.md)
+- Ready for testing with live Notion database
 
-**Next Steps (Week 2 Testing)**: Test with live Notion database, then proceed to Week 3 (Design & Styling)
+**Next Steps**: Test sync script with your Notion database, then proceed to Week 3 (Design & Styling)

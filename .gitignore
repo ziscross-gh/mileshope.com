@@ -16,5 +16,13 @@ Cargo.lock
 .env
 .env.local
 
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Backups
+backup/
+
 # Notion sync tool (optional - may want to track these)
 # .notion-cache/
