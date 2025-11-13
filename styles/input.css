@@ -9,6 +9,12 @@
   --color-purple-darker: #553c9a;
   --color-gold: #d69e2e;
   --color-gold-light: #fbd38d;
+  --color-gray-600: #4a5568;
+  --color-gray-700: #2d3748;
+  --color-gray-800: #1a202c;
+  --color-gray-100: #f7fafc;
+  --color-gray-200: #e2e8f0;
+  --color-gray-400: #cbd5e0;
 
   /* Semantic color tokens */
   --color-primary: var(--color-purple);
@@ -17,6 +23,10 @@
   /* Font families */
   --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --font-serif: Georgia, 'Times New Roman', serif;
+
+  /* Container */
+  --container-max-w: 1200px;
+  --container-padding: 1rem;
 }
 
 /* Custom component classes for complex patterns */
@@ -103,4 +113,211 @@ html.dark a {
 
 html.dark a:hover {
   color: #d6bcfa;
+}
+
+/* Layout Components */
+
+/* Container */
+.container {
+  max-width: var(--container-max-w);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+/* Header & Navigation */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #fff;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 1rem 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+html.dark .site-header {
+  background: #1a202c;
+  border-bottom-color: #4a5568;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+}
+
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 3rem;
+}
+
+.site-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #4a5568;
+  text-decoration: none;
+  font-family: var(--font-serif);
+}
+
+.site-logo:hover {
+  color: #805ad5;
+}
+
+html.dark .site-logo {
+  color: #f7fafc;
+}
+
+html.dark .site-logo:hover {
+  color: #b794f4;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.nav-menu a {
+  color: #2d3748;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.nav-menu a:hover {
+  color: #805ad5;
+}
+
+html.dark .nav-menu a {
+  color: #f7fafc;
+}
+
+html.dark .nav-menu a:hover {
+  color: #b794f4;
+}
+
+.search-toggle,
+.theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  transition: all 0.2s ease;
+  border-radius: 6px;
+}
+
+.search-toggle:hover,
+.theme-toggle:hover {
+  background: rgba(128, 90, 213, 0.1);
+}
+
+/* Mobile Menu */
+.mobile-menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 1001;
+}
+
+.hamburger {
+  display: block;
+  width: 25px;
+  height: 2px;
+  background: #2d3748;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+html.dark .hamburger {
+  background: #f7fafc;
+}
+
+.mobile-menu-toggle.active .hamburger:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.mobile-menu-toggle.active .hamburger:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-toggle.active .hamburger:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+/* Responsive Mobile Menu */
+@media (max-width: 768px) {
+  .mobile-menu-toggle {
+    display: flex;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background: #fff;
+    flex-direction: column;
+    padding: 80px 2rem 2rem;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    transition: right 0.3s ease;
+    z-index: 1000;
+    overflow-y: auto;
+    gap: 0;
+  }
+
+  html.dark .nav-menu {
+    background: #1a202c;
+  }
+
+  .nav-menu.active {
+    right: 0;
+  }
+
+  .nav-menu li {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  .nav-menu a {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+    border-radius: 8px;
+  }
+
+  .nav-menu a:hover {
+    background: #f7fafc;
+  }
+
+  html.dark .nav-menu a:hover {
+    background: #2d3748;
+  }
+}
+
+/* Footer */
+.site-footer {
+  background: #4a5568;
+  color: white;
+  padding: 2rem 0;
+  margin-top: 4rem;
+  text-align: center;
+}
+
+.site-footer a {
+  color: white;
+  text-decoration: underline;
 }
