@@ -708,6 +708,153 @@ html.dark .search-no-results {
 }
 
 /* ================================================
+   Blog Listing Page (Section)
+   ================================================ */
+
+.blog-section {
+  padding: 3rem 0;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-header h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #2d3748;
+}
+
+html.dark .section-header h1 {
+  color: #f7fafc;
+}
+
+.section-description {
+  font-size: 1.2rem;
+  color: #4a5568;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+html.dark .section-description {
+  color: #cbd5e0;
+}
+
+.posts-list {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.post-item {
+  padding: 2rem 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+html.dark .post-item {
+  border-bottom-color: #4a5568;
+}
+
+.post-item:last-child {
+  border-bottom: none;
+}
+
+.post-item h2 {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  color: #2d3748;
+}
+
+html.dark .post-item h2 {
+  color: #f7fafc;
+}
+
+.post-item h2 a {
+  color: #2d3748;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+html.dark .post-item h2 a {
+  color: #f7fafc;
+}
+
+.post-item h2 a:hover {
+  color: #805ad5;
+}
+
+html.dark .post-item h2 a:hover {
+  color: #b794f4;
+}
+
+.post-item .post-excerpt {
+  color: #4a5568;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+html.dark .post-item .post-excerpt {
+  color: #cbd5e0;
+}
+
+.post-item .post-meta {
+  margin-bottom: 1rem;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3rem;
+  padding: 2rem 0;
+}
+
+.pagination-link {
+  padding: 0.75rem 1.5rem;
+  background: #805ad5;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.pagination-link:hover {
+  background: #6b46c1;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(128, 90, 213, 0.3);
+}
+
+.pagination-info {
+  color: #4a5568;
+  font-size: 0.95rem;
+}
+
+html.dark .pagination-info {
+  color: #cbd5e0;
+}
+
+@media (max-width: 768px) {
+  .section-header h1 {
+    font-size: 2rem;
+  }
+
+  .section-description {
+    font-size: 1rem;
+  }
+
+  .post-item h2 {
+    font-size: 1.5rem;
+  }
+
+  .pagination {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+/* ================================================
    Blog Post (Individual Post Pages)
    ================================================ */
 
