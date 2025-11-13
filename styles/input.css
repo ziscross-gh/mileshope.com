@@ -481,8 +481,20 @@ html.dark .post-excerpt {
   margin-bottom: 1rem;
 }
 
+.post-meta time,
+.post-meta .reading-time {
+  background: transparent;
+  color: inherit;
+}
+
 html.dark .post-meta {
   color: #e2e8f0;
+}
+
+html.dark .post-meta time,
+html.dark .post-meta .reading-time {
+  background: transparent;
+  color: inherit;
 }
 
 .post-tags {
