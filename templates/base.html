@@ -21,12 +21,17 @@
     <meta name="twitter:title" content="{% block twitter_title %}{{ config.title }}{% endblock %}">
     <meta name="twitter:description" content="{% block twitter_description %}{{ config.description }}{% endblock %}">
 
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="{{ get_url(path='css/tailwind.css') }}">
+    <!-- Preconnect to external resources -->
+    <link rel="preconnect" href="https://unpkg.com">
+    <link rel="dns-prefetch" href="https://unpkg.com">
+
+    <!-- Stylesheets - Non-blocking load -->
+    <link rel="preload" href="{{ get_url(path='css/tailwind.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ get_url(path='css/tailwind.css') }}"></noscript>
     {% block extra_css %}{% endblock %}
 
-    <!-- Search Library -->
-    <script src="https://unpkg.com/elasticlunr@0.9.5/elasticlunr.min.js"></script>
+    <!-- Search Library - Deferred -->
+    <script src="https://unpkg.com/elasticlunr@0.9.5/elasticlunr.min.js" defer></script>
 
     <!-- RSS Feed -->
     <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ get_url(path='rss.xml') }}">
