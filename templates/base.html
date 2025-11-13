@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="{{ get_url(path='css/tailwind.css') }}">
     {% block extra_css %}{% endblock %}
 
-    <!-- Search Index -->
+    <!-- Search Library -->
     <script src="https://unpkg.com/elasticlunr@0.9.5/elasticlunr.min.js"></script>
 
     <!-- RSS Feed -->
@@ -182,13 +182,18 @@
             const searchResults = document.getElementById('searchResults');
             let searchIndex = null;
 
-            // Load search index
-            fetch('{{ get_url(path="search_index.en.json") }}')
-                .then(response => response.json())
-                .then(data => {
-                    searchIndex = elasticlunr.Index.load(data);
-                })
-                .catch(err => console.error('Failed to load search index:', err));
+            // Load search index from Zola-generated JS file
+            const script = document.createElement('script');
+            script.src = '{{ get_url(path="search_index.en.js") }}';
+            script.onload = function() {
+                if (window.searchIndex) {
+                    searchIndex = elasticlunr.Index.load(window.searchIndex);
+                }
+            };
+            script.onerror = function() {
+                console.error('Failed to load search index');
+            };
+            document.head.appendChild(script);
 
             // Open search modal
             searchToggle.addEventListener('click', function() {
