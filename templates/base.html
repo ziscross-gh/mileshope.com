@@ -256,9 +256,12 @@
                     // Get the document from the index using the ref
                     const doc = searchIndex.documentStore.getDoc(result.ref);
                     const excerpt = doc.body ? doc.body.substring(0, 150) + '...' : '';
+                    // Extract relative URL from absolute URL (works for both dev and production)
+                    const url = new URL(doc.id);
+                    const relativeUrl = url.pathname;
                     html += `
                         <div class="search-result-item">
-                            <h3><a href="${doc.id}">${doc.title}</a></h3>
+                            <h3><a href="${relativeUrl}">${doc.title}</a></h3>
                             <p class="search-result-excerpt">${excerpt}</p>
                         </div>
                     `;
