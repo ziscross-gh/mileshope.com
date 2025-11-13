@@ -97,7 +97,11 @@ html.dark h6 {
   color: #f7fafc;
 }
 
-h1 { font-size: 2.5rem; }
+/* Explicit heading sizes to override deprecated browser behaviors */
+h1 {
+  font-size: 2.5rem;
+  font-size: 2.5rem !important; /* Override deprecated H1UserAgentFontSizeInSection */
+}
 h2 { font-size: 2rem; }
 h3 { font-size: 1.75rem; }
 h4 { font-size: 1.5rem; }
