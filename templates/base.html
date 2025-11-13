@@ -37,8 +37,8 @@
     <link rel="stylesheet" href="{{ get_url(path='css/tailwind.css') }}">
     {% block extra_css %}{% endblock %}
 
-    <!-- Search Library -->
-    <script src="https://unpkg.com/elasticlunr@0.9.5/elasticlunr.min.js"></script>
+    <!-- Search Library - Async loading -->
+    <script src="https://unpkg.com/elasticlunr@0.9.5/elasticlunr.min.js" async></script>
 
     <!-- RSS Feed -->
     <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ get_url(path='rss.xml') }}">
@@ -202,7 +202,7 @@
             }
         })();
 
-        // Search Functionality
+        // Search Functionality - Wait for elasticlunr to load
         (function() {
             const searchToggle = document.getElementById('searchToggle');
             const searchModal = document.getElementById('searchModal');
@@ -211,18 +211,30 @@
             const searchResults = document.getElementById('searchResults');
             let searchIndex = null;
 
-            // Load search index from Zola-generated JS file
-            const script = document.createElement('script');
-            script.src = '{{ get_url(path="search_index.en.js") }}';
-            script.onload = function() {
-                if (window.searchIndex) {
-                    searchIndex = elasticlunr.Index.load(window.searchIndex);
+            // Function to initialize search after elasticlunr is loaded
+            function initSearch() {
+                if (typeof elasticlunr === 'undefined') {
+                    // Wait for elasticlunr to load
+                    setTimeout(initSearch, 50);
+                    return;
                 }
-            };
-            script.onerror = function() {
-                console.error('Failed to load search index');
-            };
-            document.head.appendChild(script);
+
+                // Load search index from Zola-generated JS file
+                const script = document.createElement('script');
+                script.src = '{{ get_url(path="search_index.en.js") }}';
+                script.onload = function() {
+                    if (window.searchIndex) {
+                        searchIndex = elasticlunr.Index.load(window.searchIndex);
+                    }
+                };
+                script.onerror = function() {
+                    console.error('Failed to load search index');
+                };
+                document.head.appendChild(script);
+            }
+
+            // Start initialization
+            initSearch();
 
             // Open search modal
             searchToggle.addEventListener('click', function() {
