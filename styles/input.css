@@ -1067,7 +1067,18 @@ html.dark .post-title {
 
 .category:hover {
   background: #6b46c1;
+  color: white;
   transform: translateY(-2px);
+}
+
+html.dark .category {
+  background: #b794f4;
+  color: #1a202c;
+}
+
+html.dark .category:hover {
+  background: #d6bcfa;
+  color: #1a202c;
 }
 
 /* Post Content */
