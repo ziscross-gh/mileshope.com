@@ -393,6 +393,18 @@ body.menu-open {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
+html.dark .btn-primary {
+  background: #fbd38d;
+  color: #1a202c;
+  font-weight: 600;
+}
+
+html.dark .btn-primary:hover {
+  background: #f6ad55;
+  color: #1a202c;
+  box-shadow: 0 8px 16px rgba(251, 211, 141, 0.3);
+}
+
 .btn-secondary {
   background: transparent;
   color: white;
@@ -402,6 +414,17 @@ body.menu-open {
 .btn-secondary:hover {
   background: white;
   color: #805ad5;
+}
+
+html.dark .btn-secondary {
+  background: transparent;
+  color: #fbd38d;
+  border: 2px solid #fbd38d;
+}
+
+html.dark .btn-secondary:hover {
+  background: #fbd38d;
+  color: #1a202c;
 }
 
 /* Post Grid & Cards */
