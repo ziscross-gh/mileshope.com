@@ -253,11 +253,12 @@
 
                 let html = '';
                 results.slice(0, 10).forEach(result => {
-                    const item = result.doc;
-                    const excerpt = item.body ? item.body.substring(0, 150) + '...' : '';
+                    // Get the document from the index using the ref
+                    const doc = searchIndex.documentStore.getDoc(result.ref);
+                    const excerpt = doc.body ? doc.body.substring(0, 150) + '...' : '';
                     html += `
                         <div class="search-result-item">
-                            <h3><a href="${item.permalink}">${item.title}</a></h3>
+                            <h3><a href="${doc.id}">${doc.title}</a></h3>
                             <p class="search-result-excerpt">${excerpt}</p>
                         </div>
                     `;
