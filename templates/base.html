@@ -22,6 +22,9 @@
     <meta name="twitter:description" content="{% block twitter_description %}{{ config.description }}{% endblock %}">
 
     <!-- Stylesheets -->
+    <!-- Tailwind CSS (new) -->
+    <link rel="stylesheet" href="{{ get_url(path='css/tailwind.css') }}">
+    <!-- Legacy CSS (will be removed after migration) -->
     <link rel="stylesheet" href="{{ get_url(path='css/style.css') }}">
     {% block extra_css %}{% endblock %}
 

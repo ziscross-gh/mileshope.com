@@ -26,3 +26,7 @@ backup/
 
 # Notion sync tool (optional - may want to track these)
 # .notion-cache/
+
+# Tailwind CSS CLI binary
+tailwindcss
+tailwindcss-*
