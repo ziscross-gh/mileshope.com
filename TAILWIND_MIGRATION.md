@@ -251,8 +251,8 @@ Continue to Week 2: Typography & Base Styles
 - `FINAL_MIGRATION_REPORT.md` - Complete migration summary (850+ lines)
 
 **Final Performance:**
-- Tailwind CSS: 17KB (final size)
-- Total CSS: 17KB (vs 82KB initially - **79% reduction!**)
+- Tailwind CSS: 23KB (final size, all components included)
+- Total CSS: 23KB (vs 82KB initially - **72% reduction!**)
 - Build time: 11ms (Zola only, Tailwind pre-built)
 - Files: 1 CSS file (vs 2 files initially - **50% reduction!**)
 
