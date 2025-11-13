@@ -40,12 +40,24 @@
   background: linear-gradient(90deg, #805ad5, #d69e2e);
 }
 
+html.dark .reading-progress {
+  background: linear-gradient(90deg, #b794f4, #f6ad55);
+}
+
 .hero-gradient {
   background: linear-gradient(135deg, #805ad5 0%, #6b46c1 100%);
 }
 
+html.dark .hero-gradient {
+  background: linear-gradient(135deg, #9f7aea 0%, #805ad5 100%);
+}
+
 .avatar-gradient {
   background: linear-gradient(135deg, #805ad5, #d69e2e);
+}
+
+html.dark .avatar-gradient {
+  background: linear-gradient(135deg, #b794f4, #f6ad55);
 }
 
 /* Base Styles */
@@ -215,6 +227,11 @@ html.dark .nav-menu a:hover {
   background: rgba(128, 90, 213, 0.1);
 }
 
+html.dark .search-toggle:hover,
+html.dark .theme-toggle:hover {
+  background: rgba(183, 148, 244, 0.2);
+}
+
 /* Mobile Menu */
 .mobile-menu-toggle {
   display: none;
@@ -322,6 +339,11 @@ body.menu-open {
   text-decoration: underline;
 }
 
+html.dark .site-footer {
+  background: #2d3748;
+  border-top: 1px solid #4a5568;
+}
+
 /* Content Components */
 
 /* Main Content Area */
@@ -337,6 +359,10 @@ body.menu-open {
   background: linear-gradient(135deg, #805ad5 0%, #6b46c1 100%);
   color: white;
   margin-bottom: 3rem;
+}
+
+html.dark .hero {
+  background: linear-gradient(135deg, #9f7aea 0%, #805ad5 100%);
 }
 
 .hero-title {
@@ -464,6 +490,11 @@ html.dark .post-card {
   border-color: #805ad5;
 }
 
+html.dark .post-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  border-color: #b794f4;
+}
+
 .post-card h3 {
   margin-bottom: 1rem;
   font-size: 1.5rem;
@@ -538,13 +569,18 @@ html.dark .post-meta .reading-time {
 }
 
 html.dark .tag {
-  background: #2d3748;
+  background: #4a5568;
   color: #f7fafc;
 }
 
 .tag:hover {
   background: #805ad5;
   color: white;
+}
+
+html.dark .tag:hover {
+  background: #b794f4;
+  color: #1a202c;
 }
 
 .view-all {
@@ -1021,6 +1057,17 @@ html.dark .post-item .post-excerpt {
   box-shadow: 0 4px 12px rgba(128, 90, 213, 0.3);
 }
 
+html.dark .pagination-link {
+  background: #b794f4;
+  color: #1a202c;
+}
+
+html.dark .pagination-link:hover {
+  background: #d6bcfa;
+  color: #1a202c;
+  box-shadow: 0 4px 12px rgba(183, 148, 244, 0.4);
+}
+
 .pagination-info {
   color: #4a5568;
   font-size: 0.95rem;
@@ -1471,6 +1518,22 @@ html.dark .share-buttons h3 {
 
 .share-btn.copy.copied {
   background: #d69e2e;
+}
+
+html.dark .share-btn.copy {
+  background: #b794f4;
+  color: #1a202c;
+}
+
+html.dark .share-btn.copy:hover {
+  background: #d6bcfa;
+  color: #1a202c;
+  box-shadow: 0 4px 12px rgba(183, 148, 244, 0.4);
+}
+
+html.dark .share-btn.copy.copied {
+  background: #f6ad55;
+  color: #1a202c;
 }
 
 /* Post Navigation (Previous/Next) */
