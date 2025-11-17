@@ -1632,18 +1632,17 @@ html.dark .word-count {
 .table-of-contents {
   background: #f7fafc;
   border: 2px solid #e2e8f0;
+  border-left: 4px solid #805ad5;
   border-radius: 12px;
   padding: 1.5rem;
-  margin: 2rem 0;
-  position: sticky;
-  top: 80px;
-  max-height: calc(100vh - 100px);
-  overflow-y: auto;
+  margin: 2rem 0 3rem 0;
+  max-width: 100%;
 }
 
 html.dark .table-of-contents {
   background: #1a202c;
   border-color: #2d3748;
+  border-left-color: #b794f4;
 }
 
 .toc-header {
