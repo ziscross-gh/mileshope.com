@@ -4,6 +4,63 @@ description = "Get in touch with MilesHope for Bazi readings, Tarot consultation
 template = "page.html"
 +++
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How long does a reading take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Bazi readings: 60-90 minutes. Tarot readings: 30-60 minutes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are readings done via video call?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! All readings are conducted via Zoom, Google Meet, or your preferred platform."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What information do you need for a Bazi reading?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Your exact birth date, time (as accurate as possible), and location."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I record our session?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Absolutely! We encourage it for your reference."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you offer workshops or teaching?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Occasionally! Email us to be notified of upcoming sessions."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you recommend learning resources?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! Check our blog or email us for personalized recommendations."
+      }
+    }
+  ]
+}
+</script>
+
 # Get in Touch
 
 We'd love to hear from you! Whether you're interested in a reading, have questions about Bazi or Tarot, or just want to connect.
