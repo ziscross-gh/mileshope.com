@@ -1,14 +1,330 @@
 {% extends "base.html" %}
 
-{% block title %}404 - Page Not Found | {{ config.title }}{% endblock %}
+{% block title %}Page Not Found | {{ config.title }}{% endblock %}
+{% block description %}The page you're looking for doesn't exist. Explore our blog on Bazi, Tarot, and spiritual growth instead.{% endblock %}
 
 {% block content %}
 <div class="error-page">
     <div class="container">
-        <h1>404</h1>
-        <h2>Page Not Found</h2>
-        <p>Sorry, the page you're looking for doesn't exist.</p>
-        <a href="{{ config.base_url }}" class="btn btn-primary">Go Home</a>
+        <div class="error-content">
+            <!-- Error Code -->
+            <h1 class="error-code">404</h1>
+
+            <!-- Message -->
+            <h2 class="error-title">Page Not Found</h2>
+            <p class="error-message">
+                The path you're seeking doesn't exist in this realm. Perhaps the universe is redirecting you to something better?
+            </p>
+
+            <!-- Search -->
+            <div class="error-search">
+                <h3>🔍 Try searching instead:</h3>
+                <button class="btn btn-primary" id="openSearch">Search the Site</button>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="error-links">
+                <h3>📚 Or explore these paths:</h3>
+                <div class="error-links-grid">
+                    <a href="{{ get_url(path='@/blog/_index.md') }}" class="error-link-card">
+                        <span class="error-link-icon">📖</span>
+                        <span class="error-link-title">Blog</span>
+                        <span class="error-link-desc">Read our latest posts</span>
+                    </a>
+                    <a href="{{ get_url(path='@/about.md') }}" class="error-link-card">
+                        <span class="error-link-icon">👤</span>
+                        <span class="error-link-title">About</span>
+                        <span class="error-link-desc">Learn about Miles Hope</span>
+                    </a>
+                    <a href="{{ get_url(path='@/services.md') }}" class="error-link-card">
+                        <span class="error-link-icon">✨</span>
+                        <span class="error-link-title">Services</span>
+                        <span class="error-link-desc">Bazi & Tarot readings</span>
+                    </a>
+                    <a href="{{ config.base_url }}" class="error-link-card">
+                        <span class="error-link-icon">🏠</span>
+                        <span class="error-link-title">Home</span>
+                        <span class="error-link-desc">Back to the beginning</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Popular Posts -->
+            {% set blog_section = get_section(path="blog/_index.md") %}
+            {% if blog_section.pages %}
+            <div class="error-popular">
+                <h3>🌟 Popular Posts:</h3>
+                <ul class="error-popular-list">
+                    {% for page in blog_section.pages | slice(end=5) %}
+                    <li>
+                        <a href="{{ page.permalink }}">{{ page.title }}</a>
+                        {% if page.reading_time %}
+                        <span class="reading-time">📖 {{ page.reading_time }} min</span>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            <!-- Wisdom Quote -->
+            <div class="error-wisdom">
+                <p class="error-quote">"Not all who wander are lost... but this page definitely is."</p>
+                <p class="error-quote-author">— The Cards (probably)</p>
+            </div>
+        </div>
     </div>
 </div>
+
+<style>
+.error-page {
+    min-height: calc(100vh - 200px);
+    display: flex;
+    align-items: center;
+    padding: 4rem 0;
+}
+
+.error-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.error-code {
+    font-size: 8rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #805ad5 0%, #d69e2e 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0 0 1rem 0;
+    line-height: 1;
+}
+
+html.dark .error-code {
+    background: linear-gradient(135deg, #b794f4 0%, #fbd38d 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.error-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin: 0 0 1rem 0;
+}
+
+html.dark .error-title {
+    color: #f7fafc;
+}
+
+.error-message {
+    font-size: 1.25rem;
+    color: #4a5568;
+    margin-bottom: 3rem;
+    line-height: 1.6;
+}
+
+html.dark .error-message {
+    color: #cbd5e0;
+}
+
+.error-search,
+.error-links,
+.error-popular {
+    margin: 3rem 0;
+}
+
+.error-search h3,
+.error-links h3,
+.error-popular h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: #2d3748;
+}
+
+html.dark .error-search h3,
+html.dark .error-links h3,
+html.dark .error-popular h3 {
+    color: #f7fafc;
+}
+
+.error-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.error-link-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1.5rem;
+    background: #f7fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+html.dark .error-link-card {
+    background: #2d3748;
+    border-color: #4a5568;
+}
+
+.error-link-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(128, 90, 213, 0.15);
+    border-color: #805ad5;
+}
+
+html.dark .error-link-card:hover {
+    border-color: #b794f4;
+}
+
+.error-link-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.error-link-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+}
+
+html.dark .error-link-title {
+    color: #f7fafc;
+}
+
+.error-link-desc {
+    font-size: 0.875rem;
+    color: #718096;
+}
+
+html.dark .error-link-desc {
+    color: #cbd5e0;
+}
+
+.error-popular-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.error-popular-list li {
+    padding: 1rem;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+html.dark .error-popular-list li {
+    border-bottom-color: #4a5568;
+}
+
+.error-popular-list a {
+    color: #2d3748;
+    text-decoration: none;
+    font-weight: 600;
+    flex: 1;
+    transition: color 0.2s ease;
+}
+
+html.dark .error-popular-list a {
+    color: #f7fafc;
+}
+
+.error-popular-list a:hover {
+    color: #805ad5;
+}
+
+html.dark .error-popular-list a:hover {
+    color: #b794f4;
+}
+
+.error-popular-list .reading-time {
+    font-size: 0.875rem;
+    color: #718096;
+    white-space: nowrap;
+}
+
+html.dark .error-popular-list .reading-time {
+    color: #cbd5e0;
+}
+
+.error-wisdom {
+    margin-top: 4rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, rgba(128, 90, 213, 0.1) 0%, rgba(214, 158, 46, 0.1) 100%);
+    border-radius: 12px;
+}
+
+html.dark .error-wisdom {
+    background: linear-gradient(135deg, rgba(183, 148, 244, 0.1) 0%, rgba(251, 211, 141, 0.1) 100%);
+}
+
+.error-quote {
+    font-size: 1.25rem;
+    font-style: italic;
+    color: #4a5568;
+    margin: 0 0 0.5rem 0;
+}
+
+html.dark .error-quote {
+    color: #cbd5e0;
+}
+
+.error-quote-author {
+    font-size: 1rem;
+    color: #718096;
+    margin: 0;
+}
+
+html.dark .error-quote-author {
+    color: #a0aec0;
+}
+
+@media (max-width: 768px) {
+    .error-code {
+        font-size: 5rem;
+    }
+
+    .error-title {
+        font-size: 2rem;
+    }
+
+    .error-message {
+        font-size: 1.125rem;
+    }
+
+    .error-links-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .error-links-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<script>
+// Open search modal when button is clicked
+document.getElementById('openSearch').addEventListener('click', function() {
+    const searchToggle = document.getElementById('searchToggle');
+    if (searchToggle) {
+        searchToggle.click();
+    }
+});
+</script>
 {% endblock %}

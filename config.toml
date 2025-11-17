@@ -54,5 +54,6 @@ author = "Miles Hope"
 # github = ""
 # email = ""
 
-# Google Analytics or Plausible (add later)
-# analytics_id = ""
+# Google Analytics 4 - Replace with your actual GA4 Measurement ID (format: G-XXXXXXXXXX)
+# To enable analytics, uncomment the line below and add your Measurement ID
+# google_analytics_id = ""
