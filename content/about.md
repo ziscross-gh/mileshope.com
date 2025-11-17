@@ -1,16 +1,16 @@
 +++
 title = "About"
-description = "Learn about Miles Hope and the journey of exploring spirituality, technology, and personal growth"
+description = "Learn about Hope and the journey of exploring spirituality, technology, and personal growth"
 template = "page.html"
 +++
 
-# About Miles Hope
+# About Hope
 
 Welcome to MilesHope.com – a space where ancient wisdom meets modern insight.
 
 ## Who I Am
 
-I'm Miles, a practitioner and student of traditional divination arts, particularly **Bazi** (Chinese astrology) and **Tarot**. My journey began at the intersection of technology and spirituality, where I discovered that ancient practices offer profound guidance for navigating our modern world.
+I'm Hope, a practitioner and student of traditional divination arts, particularly **Bazi** (Chinese astrology) and **Tarot**. My journey began at the intersection of technology and spirituality, where I discovered that ancient practices offer profound guidance for navigating our modern world.
 
 ## My Approach
 
