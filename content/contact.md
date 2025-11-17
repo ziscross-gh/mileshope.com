@@ -1,6 +1,6 @@
 +++
 title = "Contact"
-description = "Get in touch with Miles Hope for Bazi readings, Tarot consultations, or general inquiries"
+description = "Get in touch with Hope for Bazi readings, Tarot consultations, or general inquiries"
 template = "page.html"
 +++
 
@@ -63,4 +63,4 @@ Found a bug or broken link? Email me at [hello@mileshope.com](mailto:hello@miles
 I look forward to connecting with you on your journey.
 
 *With gratitude,*
-**Miles**
+**Hope**
