@@ -114,6 +114,11 @@
         {% block content %}{% endblock %}
     </main>
 
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <span class="back-to-top-icon">↑</span>
+    </button>
+
     <!-- Footer -->
     <footer class="site-footer">
         <div class="container">
@@ -327,6 +332,45 @@
                     `;
                 });
                 searchResults.innerHTML = html;
+            });
+        })();
+
+        // Back to Top Button
+        (function() {
+            const backToTopButton = document.getElementById('backToTop');
+            let isVisible = false;
+
+            function toggleBackToTop() {
+                const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+                const shouldShow = scrollPosition > 300;
+
+                if (shouldShow && !isVisible) {
+                    backToTopButton.classList.add('visible');
+                    isVisible = true;
+                } else if (!shouldShow && isVisible) {
+                    backToTopButton.classList.remove('visible');
+                    isVisible = false;
+                }
+            }
+
+            // Throttle scroll events
+            let ticking = false;
+            window.addEventListener('scroll', function() {
+                if (!ticking) {
+                    window.requestAnimationFrame(function() {
+                        toggleBackToTop();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }, { passive: true });
+
+            // Smooth scroll to top
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
             });
         })();
     </script>
