@@ -10,7 +10,96 @@
 {% block twitter_title %}{{ page.title }}{% endblock %}
 {% block twitter_description %}{{ page.description | default(value=page.summary) }}{% endblock %}
 
+{% block extra_meta %}
+<!-- JSON-LD Structured Data for Person (About page) -->
+{% if page.title == "About" %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "{{ config.extra.author }}",
+  "url": "{{ page.permalink }}",
+  "description": "{{ page.description }}",
+  "knowsAbout": ["Bazi", "Four Pillars of Destiny", "Tarot", "Chinese Astrology", "Divination", "Spirituality"],
+  "hasOccupation": {
+    "@type": "Occupation",
+    "name": "Spiritual Practitioner & Consultant",
+    "description": "Bazi and Tarot reader providing consultations and insights"
+  }
+}
+</script>
+{% endif %}
+
+<!-- JSON-LD Structured Data for Articles -->
+{% if page.date %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{ page.title }}",
+  "description": "{{ page.description | default(value=page.summary) | default(value='') }}",
+  "datePublished": "{{ page.date }}",
+  "dateModified": "{{ page.updated | default(value=page.date) }}",
+  "author": {
+    "@type": "Person",
+    "name": "{{ config.extra.author }}",
+    "url": "{{ config.base_url }}/about/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ config.title }}",
+    "url": "{{ config.base_url }}"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ page.permalink }}"
+  },
+  "url": "{{ page.permalink }}",
+  {% if page.taxonomies.categories %}
+  "articleSection": "{{ page.taxonomies.categories | first }}",
+  {% endif %}
+  {% if page.taxonomies.tags %}
+  "keywords": [
+    {% for tag in page.taxonomies.tags %}"{{ tag }}"{% if not loop.last %}, {% endif %}{% endfor %}
+  ],
+  {% endif %}
+  "inLanguage": "en-US"
+}
+</script>
+
+<!-- Breadcrumb Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "{{ config.base_url }}"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "{{ config.base_url }}/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "{{ page.title }}",
+      "item": "{{ page.permalink }}"
+    }
+  ]
+}
+</script>
+{% endif %}
+{% endblock %}
+
 {% block content %}
+{% import "macros/newsletter.html" as newsletter %}
+
 <article class="blog-post">
     <div class="container">
         <!-- Post Header -->
@@ -84,6 +173,14 @@
                 </div>
             </div>
         </aside>
+        {% endif %}
+
+        <!-- Newsletter Signup -->
+        {% if page.date %}
+        {{ newsletter::post_end(
+            title="Enjoyed this post?",
+            description="Get more insights like this delivered to your inbox. Join readers exploring Bazi, Tarot, and mindful living."
+        ) }}
         {% endif %}
 
         <!-- Post Footer -->

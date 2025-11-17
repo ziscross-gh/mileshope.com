@@ -1,0 +1,93 @@
+{# Newsletter Signup Component Macro #}
+
+{% macro inline(title="Stay Connected", description="Get insights on Bazi, Tarot, and spiritual growth delivered to your inbox.") %}
+<div class="newsletter-signup newsletter-inline">
+    <div class="newsletter-content">
+        <h3 class="newsletter-title">{{ title }}</h3>
+        <p class="newsletter-description">{{ description }}</p>
+
+        {#
+        SETUP INSTRUCTIONS:
+        Replace the form action URL below with your email service provider's endpoint:
+
+        - ConvertKit: https://app.convertkit.com/forms/YOUR_FORM_ID/subscriptions
+        - Mailchimp: https://YOUR_USERNAME.usX.list-manage.com/subscribe/post?u=USER_ID&id=LIST_ID
+        - Substack: https://YOUR_PUBLICATION.substack.com/api/v1/free?nojs=true
+        - EmailOctopus: https://emailoctopus.com/lists/YOUR_LIST_ID/members
+
+        Update the hidden field names to match your provider's requirements.
+        #}
+
+        <form class="newsletter-form" method="post" action="#newsletter-form" id="newsletterForm">
+            <div class="newsletter-form-group">
+                <input
+                    type="email"
+                    name="email"
+                    id="newsletter-email-inline"
+                    placeholder="Enter your email"
+                    required
+                    class="newsletter-input"
+                    aria-label="Email address"
+                >
+                <button type="submit" class="newsletter-submit">Subscribe</button>
+            </div>
+            <p class="newsletter-privacy">No spam. Unsubscribe anytime.</p>
+            <div class="newsletter-response" id="newsletter-response-inline" role="alert"></div>
+        </form>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro popup(title="Join the Journey", description="Receive weekly insights on ancient wisdom for modern life.") %}
+<div class="newsletter-signup newsletter-popup">
+    <div class="newsletter-content">
+        <button class="newsletter-close" aria-label="Close">&times;</button>
+        <h3 class="newsletter-title">{{ title }}</h3>
+        <p class="newsletter-description">{{ description }}</p>
+
+        <form class="newsletter-form" method="post" action="#newsletter-form" id="newsletterFormPopup">
+            <div class="newsletter-form-group">
+                <input
+                    type="email"
+                    name="email"
+                    id="newsletter-email-popup"
+                    placeholder="Enter your email"
+                    required
+                    class="newsletter-input"
+                    aria-label="Email address"
+                >
+                <button type="submit" class="newsletter-submit">Subscribe</button>
+            </div>
+            <p class="newsletter-privacy">We respect your privacy. Unsubscribe anytime.</p>
+            <div class="newsletter-response" id="newsletter-response-popup" role="alert"></div>
+        </form>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro post_end(title="Enjoyed this post?", description="Get more insights like this delivered to your inbox. Join readers exploring Bazi, Tarot, and mindful living.") %}
+<div class="newsletter-signup newsletter-post-end">
+    <div class="newsletter-content">
+        <div class="newsletter-icon">✉️</div>
+        <h3 class="newsletter-title">{{ title }}</h3>
+        <p class="newsletter-description">{{ description }}</p>
+
+        <form class="newsletter-form" method="post" action="#newsletter-form" id="newsletterFormPost">
+            <div class="newsletter-form-group">
+                <input
+                    type="email"
+                    name="email"
+                    id="newsletter-email-post"
+                    placeholder="your.email@example.com"
+                    required
+                    class="newsletter-input"
+                    aria-label="Email address"
+                >
+                <button type="submit" class="newsletter-submit">Join Now</button>
+            </div>
+            <p class="newsletter-privacy">Quality over quantity. One email per week, tops.</p>
+            <div class="newsletter-response" id="newsletter-response-post" role="alert"></div>
+        </form>
+    </div>
+</div>
+{% endmacro %}

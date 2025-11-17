@@ -1,6 +1,46 @@
 {% extends "base.html" %}
 
+{% block extra_meta %}
+<!-- JSON-LD Structured Data for Website/Organization -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "{{ config.title }}",
+  "url": "{{ config.base_url }}",
+  "description": "{{ config.description }}",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "{{ config.base_url }}/blog/?search={search_term_string}"
+    },
+    "query-input": "required name=search_term_string"
+  },
+  "inLanguage": "en-US"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "{{ config.title }}",
+  "url": "{{ config.base_url }}",
+  "logo": "{{ config.base_url }}/logo.png",
+  "description": "{{ config.description }}",
+  "founder": {
+    "@type": "Person",
+    "name": "{{ config.extra.author }}"
+  },
+  "sameAs": []
+}
+</script>
+{% endblock %}
+
 {% block content %}
+{% import "macros/newsletter.html" as newsletter %}
+
 <div class="homepage">
     <!-- Hero Section -->
     <section class="hero">
@@ -11,6 +51,16 @@
                 <a href="{{ get_url(path='@/blog/_index.md') }}" class="btn btn-primary">Read the Blog</a>
                 <a href="{{ get_url(path='@/services.md') }}" class="btn btn-secondary">Explore Services</a>
             </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Signup -->
+    <section class="newsletter-section">
+        <div class="container">
+            {{ newsletter::inline(
+                title="Ancient Wisdom for Modern Life",
+                description="Join readers exploring Bazi, Tarot, and spiritual growth. Receive insights, guides, and reflections delivered weekly."
+            ) }}
         </div>
     </section>
 
