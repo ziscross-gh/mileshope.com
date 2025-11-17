@@ -2079,3 +2079,249 @@ html.dark .back-to-top:hover {
     font-size: 1.25rem;
   }
 }
+
+/* ============================================
+   Active TOC Link Highlighting
+   ============================================ */
+
+.toc-nav a.active {
+  color: #805ad5;
+  font-weight: 700;
+  border-left: 3px solid #805ad5;
+  padding-left: 0.75rem;
+  margin-left: -0.75rem;
+  background: rgba(128, 90, 213, 0.1);
+}
+
+html.dark .toc-nav a.active {
+  color: #b794f4;
+  border-left-color: #b794f4;
+  background: rgba(183, 148, 244, 0.1);
+}
+
+/* ============================================
+   Copy Code Buttons
+   ============================================ */
+
+.code-block-wrapper {
+  position: relative;
+  margin: 1.5rem 0;
+}
+
+.code-block-wrapper pre {
+  margin: 0;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+.copy-code-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  padding: 0.375rem 0.75rem;
+  background: rgba(255, 255, 255, 0.9);
+  color: #2d3748;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+  opacity: 0;
+}
+
+.code-block-wrapper:hover .copy-code-btn {
+  opacity: 1;
+}
+
+.copy-code-btn:hover {
+  background: #805ad5;
+  color: white;
+  border-color: #805ad5;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(128, 90, 213, 0.3);
+}
+
+.copy-code-btn:active {
+  transform: translateY(0);
+}
+
+.copy-code-btn.copied {
+  background: #48bb78;
+  color: white;
+  border-color: #48bb78;
+}
+
+html.dark .copy-code-btn {
+  background: rgba(45, 55, 72, 0.95);
+  color: #f7fafc;
+  border-color: #4a5568;
+}
+
+html.dark .copy-code-btn:hover {
+  background: #b794f4;
+  border-color: #b794f4;
+}
+
+html.dark .copy-code-btn.copied {
+  background: #48bb78;
+  border-color: #48bb78;
+}
+
+/* Mobile: Always show copy button */
+@media (max-width: 768px) {
+  .copy-code-btn {
+    opacity: 1;
+  }
+}
+
+/* ============================================
+   Enhanced Focus States (Accessibility)
+   ============================================ */
+
+/* Remove default outline and add custom focus styles */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid #805ad5;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+html.dark a:focus-visible,
+html.dark button:focus-visible,
+html.dark input:focus-visible,
+html.dark textarea:focus-visible,
+html.dark select:focus-visible {
+  outline-color: #b794f4;
+}
+
+/* Skip link for keyboard navigation (hidden by default, visible on focus) */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #805ad5;
+  color: white;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  z-index: 10000;
+  border-radius: 0 0 4px 0;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+
+@media print {
+  /* Hide navigation elements */
+  .site-header,
+  .site-footer,
+  .back-to-top,
+  .search-modal,
+  .reading-progress,
+  .toc-toggle,
+  .social-share,
+  .related-posts,
+  .author-bio {
+    display: none !important;
+  }
+
+  /* Show only essential content */
+  body {
+    background: white;
+    color: black;
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+
+  .container {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  /* Optimize headings for print */
+  h1 {
+    font-size: 24pt;
+    margin-top: 0;
+    page-break-after: avoid;
+  }
+
+  h2 {
+    font-size: 18pt;
+    page-break-after: avoid;
+  }
+
+  h3 {
+    font-size: 14pt;
+    page-break-after: avoid;
+  }
+
+  /* Avoid breaking inside elements */
+  p, blockquote, pre, ul, ol {
+    page-break-inside: avoid;
+  }
+
+  /* Show URLs for links */
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 10pt;
+    color: #666;
+  }
+
+  /* Don't show URLs for internal links */
+  a[href^="#"]:after,
+  a[href^="/"]:after {
+    content: "";
+  }
+
+  /* Optimize code blocks for print */
+  pre {
+    border: 1px solid #ddd;
+    page-break-inside: avoid;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  /* Breadcrumbs styling for print */
+  .breadcrumbs {
+    font-size: 10pt;
+    color: #666;
+    margin-bottom: 1rem;
+    padding-top: 0;
+  }
+
+  /* Table of contents for print */
+  .table-of-contents {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    margin: 1rem 0;
+    page-break-inside: avoid;
+    background: #f7fafc;
+  }
+
+  .toc-nav a {
+    color: black;
+    text-decoration: none;
+  }
+
+  /* Post meta */
+  .post-meta {
+    font-size: 10pt;
+    color: #666;
+    margin-bottom: 1rem;
+  }
+
+  /* Images */
+  img {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+  }
+}

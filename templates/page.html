@@ -356,7 +356,7 @@
     }
 })();
 
-// Table of Contents Toggle
+// Table of Contents Toggle & Active Highlighting
 (function() {
     const tocToggle = document.getElementById('tocToggle');
     const tocNav = document.getElementById('tocNav');
@@ -369,7 +369,8 @@
         });
 
         // Smooth scroll for TOC links
-        tocNav.querySelectorAll('a').forEach(link => {
+        const tocLinks = tocNav.querySelectorAll('a');
+        tocLinks.forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
@@ -387,7 +388,116 @@
                 }
             });
         });
+
+        // Active TOC Highlighting on Scroll
+        const headings = document.querySelectorAll('.post-content h1[id], .post-content h2[id], .post-content h3[id]');
+
+        if (headings.length > 0) {
+            let ticking = false;
+
+            function updateActiveTocLink() {
+                const scrollPosition = window.scrollY + 100; // Offset for header
+                let currentHeading = null;
+
+                // Find the current heading based on scroll position
+                headings.forEach(heading => {
+                    const headingTop = heading.offsetTop;
+                    if (scrollPosition >= headingTop) {
+                        currentHeading = heading;
+                    }
+                });
+
+                // Update active state in TOC
+                tocLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (currentHeading && link.getAttribute('href') === '#' + currentHeading.id) {
+                        link.classList.add('active');
+                    }
+                });
+
+                ticking = false;
+            }
+
+            window.addEventListener('scroll', function() {
+                if (!ticking) {
+                    window.requestAnimationFrame(updateActiveTocLink);
+                    ticking = true;
+                }
+            }, { passive: true });
+
+            // Initial highlight
+            updateActiveTocLink();
+        }
     }
+})();
+
+// Copy Code Buttons
+(function() {
+    const codeBlocks = document.querySelectorAll('pre code');
+
+    codeBlocks.forEach((codeBlock) => {
+        const pre = codeBlock.parentElement;
+
+        // Create wrapper div
+        const wrapper = document.createElement('div');
+        wrapper.className = 'code-block-wrapper';
+        pre.parentNode.insertBefore(wrapper, pre);
+        wrapper.appendChild(pre);
+
+        // Create copy button
+        const copyButton = document.createElement('button');
+        copyButton.className = 'copy-code-btn';
+        copyButton.setAttribute('aria-label', 'Copy code to clipboard');
+        copyButton.innerHTML = '<span class="copy-code-text">Copy</span>';
+
+        wrapper.appendChild(copyButton);
+
+        // Copy functionality
+        copyButton.addEventListener('click', async function() {
+            const code = codeBlock.textContent;
+            const copyText = this.querySelector('.copy-code-text');
+
+            try {
+                await navigator.clipboard.writeText(code);
+                copyText.textContent = 'Copied!';
+                this.classList.add('copied');
+
+                setTimeout(() => {
+                    copyText.textContent = 'Copy';
+                    this.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                console.error('Failed to copy code:', err);
+                copyText.textContent = 'Failed';
+                setTimeout(() => {
+                    copyText.textContent = 'Copy';
+                }, 2000);
+            }
+        });
+    });
+})();
+
+// Smooth Scrolling for All Internal Links
+(function() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href === '#') return; // Skip empty anchors
+
+            const targetElement = document.querySelector(href);
+            if (targetElement) {
+                e.preventDefault();
+                const offset = 80;
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
 })();
 </script>
 {% endblock %}
