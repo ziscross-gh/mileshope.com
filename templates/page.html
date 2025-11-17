@@ -213,6 +213,14 @@
         </aside>
         {% endif %}
 
+        <!-- Reading Progress Tracker -->
+        {% if page.date and page.reading_time %}
+        <div class="reading-progress-tracker" id="readingTracker">
+            <span class="reading-tracker-icon">📖</span>
+            <span class="reading-tracker-text" id="trackerText">{{ page.reading_time }} min left</span>
+        </div>
+        {% endif %}
+
         <!-- Post Content -->
         <div class="post-content">
             {{ page.content | safe }}
@@ -498,6 +506,65 @@
             }
         });
     });
+})();
+
+// Reading Progress Tracker (Time Remaining)
+(function() {
+    const tracker = document.getElementById('readingTracker');
+    const trackerText = document.getElementById('trackerText');
+
+    if (tracker && trackerText) {
+        const postContent = document.querySelector('.post-content');
+        if (!postContent) return;
+
+        // Extract reading time from initial text (e.g., "5 min left")
+        const initialText = trackerText.textContent;
+        const totalMinutes = parseInt(initialText.match(/\d+/)?.[0] || 0);
+
+        if (totalMinutes === 0) return;
+
+        function updateReadingProgress() {
+            const contentHeight = postContent.offsetHeight;
+            const contentTop = postContent.offsetTop;
+            const scrolled = window.pageYOffset + window.innerHeight;
+            const progress = Math.min(Math.max((scrolled - contentTop) / contentHeight, 0), 1);
+
+            const minutesRemaining = Math.ceil(totalMinutes * (1 - progress));
+
+            if (minutesRemaining <= 0) {
+                trackerText.textContent = 'Finished!';
+                setTimeout(() => {
+                    tracker.classList.add('fade-out');
+                }, 1000);
+            } else if (minutesRemaining === 1) {
+                trackerText.textContent = '1 min left';
+            } else {
+                trackerText.textContent = minutesRemaining + ' min left';
+            }
+
+            // Show tracker after scrolling a bit
+            if (progress > 0.05) {
+                tracker.classList.add('visible');
+            } else {
+                tracker.classList.remove('visible');
+            }
+        }
+
+        // Throttled scroll listener
+        let ticking = false;
+        window.addEventListener('scroll', function() {
+            if (!ticking) {
+                window.requestAnimationFrame(function() {
+                    updateReadingProgress();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
+
+        // Initial check
+        updateReadingProgress();
+    }
 })();
 </script>
 {% endblock %}
