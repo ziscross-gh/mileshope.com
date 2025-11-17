@@ -63,4 +63,4 @@ Found a bug or broken link? Email us at [hello@mileshope.com](mailto:hello@miles
 We look forward to connecting with you on your journey.
 
 *With gratitude,*
-**MilesHope Representative**
+**MilesHope**
