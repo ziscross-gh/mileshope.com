@@ -98,8 +98,6 @@
 {% endblock %}
 
 {% block content %}
-{% import "macros/newsletter.html" as newsletter %}
-
 <article class="blog-post">
     <div class="container">
         <!-- Post Header -->
@@ -173,14 +171,6 @@
                 </div>
             </div>
         </aside>
-        {% endif %}
-
-        <!-- Newsletter Signup -->
-        {% if page.date %}
-        {{ newsletter::post_end(
-            title="Enjoyed this post?",
-            description="Get more insights like this delivered to your inbox. Join readers exploring Bazi, Tarot, and mindful living."
-        ) }}
         {% endif %}
 
         <!-- Post Footer -->
