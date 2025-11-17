@@ -1,24 +1,24 @@
 +++
 title = "Contact"
-description = "Get in touch with Hope for Bazi readings, Tarot consultations, or general inquiries"
+description = "Get in touch with MilesHope for Bazi readings, Tarot consultations, or general inquiries"
 template = "page.html"
 +++
 
 # Get in Touch
 
-I'd love to hear from you! Whether you're interested in a reading, have questions about Bazi or Tarot, or just want to connect.
+We'd love to hear from you! Whether you're interested in a reading, have questions about Bazi or Tarot, or just want to connect.
 
 ## Email
 
 **[hello@mileshope.com](mailto:hello@mileshope.com)**
 
-I typically respond within 24-48 hours (Monday-Friday).
+Our team typically responds within 24-48 hours (Monday-Friday).
 
-*Note: I take digital sabbaths on weekends, so messages received Friday evening through Sunday may be answered on Monday.*
+*Note: We observe digital sabbaths on weekends, so messages received Friday evening through Sunday may be answered on Monday.*
 
 ## Book a Reading
 
-Ready to explore your Bazi chart or book a Tarot reading? Visit my [Services](/services/) page for details and booking.
+Ready to explore your Bazi chart or book a Tarot reading? Visit our [Services](/services/) page for details and booking.
 
 ## Connect on Social Media
 
@@ -26,7 +26,7 @@ Stay updated with daily insights and spiritual reflections:
 
 - **Instagram**: [@mileshope.readings](#) - Daily card pulls and Bazi insights
 - **Twitter/X**: [@mileshope](#) - Quick wisdom and conversations
-- **YouTube**: [Miles Hope](#) - Long-form content and tutorials
+- **YouTube**: [MilesHope](#) - Long-form content and tutorials
 
 ## Frequently Asked Questions
 
@@ -40,13 +40,13 @@ A: Yes! All readings are conducted via Zoom, Google Meet, or your preferred plat
 A: Your exact birth date, time (as accurate as possible), and location.
 
 **Q: Can I record our session?**
-A: Absolutely! I encourage it for your reference.
+A: Absolutely! We encourage it for your reference.
 
 **Q: Do you offer workshops or teaching?**
-A: Occasionally! Email me to be notified of upcoming sessions.
+A: Occasionally! Email us to be notified of upcoming sessions.
 
 **Q: Can you recommend learning resources?**
-A: Yes! Check my [blog](/blog/) or email me for personalized recommendations.
+A: Yes! Check our [blog](/blog/) or email us for personalized recommendations.
 
 ## Privacy & Confidentiality
 
@@ -56,11 +56,11 @@ A: Yes! Check my [blog](/blog/) or email me for personalized recommendations.
 
 ## Website Issues?
 
-Found a bug or broken link? Email me at [hello@mileshope.com](mailto:hello@mileshope.com) with details. I appreciate your help!
+Found a bug or broken link? Email us at [hello@mileshope.com](mailto:hello@mileshope.com) with details. We appreciate your help!
 
 ---
 
-I look forward to connecting with you on your journey.
+We look forward to connecting with you on your journey.
 
 *With gratitude,*
-**Hope**
+**MilesHope Representative**
