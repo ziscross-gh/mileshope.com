@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% block canonical %}{{ config.base_url }}{% endblock %}
+
 {% block extra_meta %}
 <!-- JSON-LD Structured Data for Website/Organization -->
 <script type="application/ld+json">
