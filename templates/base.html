@@ -542,6 +542,60 @@
                 });
             });
         })();
+
+        // Copy Code Button
+        (function() {
+            const codeBlocks = document.querySelectorAll('pre');
+
+            codeBlocks.forEach((pre) => {
+                // Create wrapper for positioning
+                const wrapper = document.createElement('div');
+                wrapper.className = 'code-block-wrapper';
+                pre.parentNode.insertBefore(wrapper, pre);
+                wrapper.appendChild(pre);
+
+                // Create copy button
+                const copyButton = document.createElement('button');
+                copyButton.className = 'copy-code-btn';
+                copyButton.innerHTML = '<span class="copy-icon">📋</span><span class="copy-text">Copy</span>';
+                copyButton.setAttribute('aria-label', 'Copy code to clipboard');
+
+                wrapper.appendChild(copyButton);
+
+                // Copy functionality
+                copyButton.addEventListener('click', async function() {
+                    const code = pre.querySelector('code') || pre;
+                    const text = code.textContent;
+
+                    try {
+                        await navigator.clipboard.writeText(text);
+
+                        // Success feedback
+                        copyButton.innerHTML = '<span class="copy-icon">✓</span><span class="copy-text">Copied!</span>';
+                        copyButton.classList.add('copied');
+
+                        // Track copy event
+                        if (typeof gtag === 'function') {
+                            gtag('event', 'copy_code', {
+                                'event_category': 'engagement',
+                                'event_label': window.location.pathname
+                            });
+                        }
+
+                        setTimeout(() => {
+                            copyButton.innerHTML = '<span class="copy-icon">📋</span><span class="copy-text">Copy</span>';
+                            copyButton.classList.remove('copied');
+                        }, 2000);
+                    } catch (err) {
+                        // Fallback for older browsers
+                        copyButton.innerHTML = '<span class="copy-icon">✗</span><span class="copy-text">Failed</span>';
+                        setTimeout(() => {
+                            copyButton.innerHTML = '<span class="copy-icon">📋</span><span class="copy-text">Copy</span>';
+                        }, 2000);
+                    }
+                });
+            });
+        })();
     </script>
     {% block extra_js %}{% endblock %}
 </body>
