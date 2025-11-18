@@ -7,9 +7,17 @@
 {% block og_title %}{{ page.title }} | {{ config.title }}{% endblock %}
 {% block og_description %}{{ page.description | default(value=page.summary) | default(value=config.description) }}{% endblock %}
 {% block og_type %}article{% endblock %}
+{% if page.extra.featured_image %}
+{% block og_image %}{{ config.base_url }}{{ page.extra.featured_image }}{% endblock %}
+{% block og_image_alt %}{{ page.extra.featured_image_alt | default(value=page.title) }}{% endblock %}
+{% endif %}
 
 {% block twitter_title %}{{ page.title }}{% endblock %}
 {% block twitter_description %}{{ page.description | default(value=page.summary) | default(value=config.description) }}{% endblock %}
+{% if page.extra.featured_image %}
+{% block twitter_image %}{{ config.base_url }}{{ page.extra.featured_image }}{% endblock %}
+{% block twitter_image_alt %}{{ page.extra.featured_image_alt | default(value=page.title) }}{% endblock %}
+{% endif %}
 
 {% block extra_meta %}
 <!-- Enhanced Open Graph for Articles -->
@@ -184,6 +192,13 @@
             </div>
             {% endif %}
         </header>
+
+        <!-- Featured Image -->
+        {% if page.extra.featured_image %}
+        <div class="featured-image">
+            <img src="{{ page.extra.featured_image }}" alt="{{ page.extra.featured_image_alt | default(value=page.title) }}" loading="eager" decoding="async">
+        </div>
+        {% endif %}
 
         <!-- Table of Contents (for long posts) -->
         {% if page.toc and page.toc | length > 0 %}

@@ -23,10 +23,18 @@
             {% endif %}
             {% for page in pages %}
             <article class="post-item">
-                <h2><a href="{{ page.permalink }}">{{ page.title }}</a></h2>
-                {% if page.summary %}
-                <p class="post-excerpt">{{ page.summary }}</p>
+                {% if page.extra.featured_image %}
+                <div class="post-item-image">
+                    <a href="{{ page.permalink }}">
+                        <img src="{{ page.extra.featured_image }}" alt="{{ page.extra.featured_image_alt | default(value=page.title) }}" loading="lazy" decoding="async">
+                    </a>
+                </div>
                 {% endif %}
+                <div class="post-item-content">
+                    <h2><a href="{{ page.permalink }}">{{ page.title }}</a></h2>
+                    {% if page.summary %}
+                    <p class="post-excerpt">{{ page.summary }}</p>
+                    {% endif %}
                 <div class="post-meta">
                     <time datetime="{{ page.date }}">{{ page.date | date(format="%B %d, %Y") }}</time>
                     {% if page.reading_time %}
@@ -47,6 +55,7 @@
                     {% endfor %}
                 </div>
                 {% endif %}
+                </div><!-- .post-item-content -->
             </article>
             {% endfor %}
         </div>
