@@ -6,6 +6,10 @@ description = "Feeling stuck or uncertain about your path? Discover the telltale
 [taxonomies]
 categories = ["Bazi", "Personal Growth"]
 tags = ["bazi", "self-discovery", "life-guidance", "four-pillars"]
+
+[extra]
+featured_image = "/images/10-signs-bazi.svg"
+featured_image_alt = "10 Signs You Need a Bazi Reading - checklist for clarity and guidance"
 +++
 
 Are you at a crossroads in life, feeling like you're swimming upstream, or simply curious about your untapped potential? A Bazi reading—also known as Four Pillars of Destiny—might be exactly what you need. This ancient Chinese metaphysical system reveals your energetic blueprint and can provide profound insights into your life path, timing, and natural strengths.

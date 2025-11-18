@@ -6,6 +6,10 @@ description = "Start your tarot journey with confidence. Learn what tarot really
 [taxonomies]
 categories = ["Tarot", "Divination"]
 tags = ["tarot", "tarot-for-beginners", "divination", "self-discovery", "oracle-cards"]
+
+[extra]
+featured_image = "/images/tarot-beginners.svg"
+featured_image_alt = "Understanding Tarot - A Beginner's Guide with tarot cards"
 +++
 
 The first time I picked up a tarot deck, I was both intrigued and intimidated. Seventy-eight cards filled with rich symbolism, each supposedly holding profound meaning. Where do you even begin?

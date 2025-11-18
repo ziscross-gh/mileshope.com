@@ -6,6 +6,10 @@ description = "Explore the two main approaches to tarot reading - intuitive and 
 [taxonomies]
 categories = ["Tarot", "Divination"]
 tags = ["tarot", "intuition", "tarot-reading-methods", "learning-tarot", "divination-practice"]
+
+[extra]
+featured_image = "/images/tarot-intuitive.svg"
+featured_image_alt = "Reading Tarot Intuitively vs By the Book - finding balance"
 +++
 
 Every tarot reader eventually faces this question: Should I read intuitively, trusting what I see and feel in the cards? Or should I learn the traditional meanings and interpretations built over centuries?

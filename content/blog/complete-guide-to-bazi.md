@@ -6,6 +6,10 @@ description = "Discover Bazi, the ancient Chinese system of destiny analysis. Le
 [taxonomies]
 categories = ["Bazi", "Chinese Metaphysics"]
 tags = ["bazi", "four-pillars", "chinese-astrology", "destiny-analysis", "beginners-guide"]
+
+[extra]
+featured_image = "/images/bazi-guide.svg"
+featured_image_alt = "The Complete Guide to Bazi - Understanding Your Four Pillars of Destiny"
 +++
 
 Bazi, known in English as the "Four Pillars of Destiny," is one of the most sophisticated and accurate systems of Chinese metaphysics. Unlike Western astrology which focuses primarily on planetary positions, Bazi examines the intricate dance of elements, stems, and branches present at the moment of your birth to reveal your energetic blueprint.

@@ -6,6 +6,10 @@ description = "Explore the unexpected intersection of technology and spiritualit
 [taxonomies]
 categories = ["Spirituality", "Technology"]
 tags = ["technology", "spirituality", "digital-mindfulness", "modern-practice", "innovation"]
+
+[extra]
+featured_image = "/images/tech-spirituality.svg"
+featured_image_alt = "Technology and Spirituality - finding balance between digital and spiritual life"
 +++
 
 There's a common narrative that spirituality and technology exist in opposition - that to be truly spiritual, one must retreat from screens, disconnect from the digital, and return to simpler, analog ways of being.

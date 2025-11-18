@@ -6,6 +6,10 @@ description = "Torn between Tarot and Bazi? Discover the key differences, streng
 [taxonomies]
 categories = ["Tarot", "Bazi", "Divination"]
 tags = ["tarot", "bazi", "divination", "guidance", "comparison"]
+
+[extra]
+featured_image = "/images/tarot-vs-bazi.svg"
+featured_image_alt = "How to Choose Between Tarot and Bazi - comparison guide"
 +++
 
 You're seeking guidance, clarity, or insight into your life—but should you turn to Tarot or Bazi? Both are powerful divination systems with ancient roots, yet they work in fundamentally different ways. Understanding their unique strengths and approaches will help you choose the method (or combination) that best serves your needs.

@@ -6,6 +6,10 @@ description = "Discover season-specific spiritual practices that honor nature's 
 [taxonomies]
 categories = ["Spiritual Practice", "Personal Growth"]
 tags = ["spiritual-practices", "self-care", "seasonal-living", "rituals", "mindfulness"]
+
+[extra]
+featured_image = "/images/seasonal-rituals.svg"
+featured_image_alt = "Spiritual Self-Care Rituals for Each Season - spring, summer, autumn, winter"
 +++
 
 Living in modern, climate-controlled environments, we've become disconnected from the natural rhythms that once guided human life. Yet our bodies, minds, and spirits still respond to seasonal shifts—the waxing and waning of light, the changing energy of the earth, the different qualities each season brings.
