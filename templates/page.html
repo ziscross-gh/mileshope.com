@@ -860,5 +860,192 @@
     // Initial UI update
     updateReactionUI();
 })();
+
+// Advanced Analytics Tracking
+(function() {
+    if (typeof gtag !== 'function') return;
+
+    const postUrl = window.location.pathname;
+    const postTitle = document.querySelector('.post-title')?.textContent || '';
+
+    // 1. Scroll Depth Tracking
+    const scrollDepths = [25, 50, 75, 100];
+    const trackedDepths = new Set();
+
+    function trackScrollDepth() {
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+        const scrollTop = window.scrollY;
+        const scrollPercent = Math.round((scrollTop / (documentHeight - windowHeight)) * 100);
+
+        scrollDepths.forEach(depth => {
+            if (scrollPercent >= depth && !trackedDepths.has(depth)) {
+                trackedDepths.add(depth);
+                gtag('event', 'scroll_depth', {
+                    'event_category': 'engagement',
+                    'event_label': postUrl,
+                    'value': depth
+                });
+            }
+        });
+    }
+
+    let scrollTicking = false;
+    window.addEventListener('scroll', function() {
+        if (!scrollTicking) {
+            window.requestAnimationFrame(function() {
+                trackScrollDepth();
+                scrollTicking = false;
+            });
+            scrollTicking = true;
+        }
+    }, { passive: true });
+
+    // 2. Time on Page Tracking (Active Time)
+    let startTime = Date.now();
+    let activeTime = 0;
+    let lastActiveTime = Date.now();
+    let isActive = true;
+    let timeTracked = false;
+
+    // Track when user is active
+    function updateActiveTime() {
+        if (isActive) {
+            const now = Date.now();
+            activeTime += now - lastActiveTime;
+            lastActiveTime = now;
+        }
+    }
+
+    // Reset activity timer on user interaction
+    const activityEvents = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'];
+    activityEvents.forEach(event => {
+        document.addEventListener(event, function() {
+            if (!isActive) {
+                lastActiveTime = Date.now();
+                isActive = true;
+            }
+        }, { passive: true });
+    });
+
+    // Mark as inactive after 30 seconds of no activity
+    let inactivityTimer;
+    function resetInactivityTimer() {
+        clearTimeout(inactivityTimer);
+        inactivityTimer = setTimeout(() => {
+            updateActiveTime();
+            isActive = false;
+        }, 30000); // 30 seconds
+    }
+
+    activityEvents.forEach(event => {
+        document.addEventListener(event, resetInactivityTimer, { passive: true });
+    });
+    resetInactivityTimer();
+
+    // Send time on page when user leaves
+    function sendTimeOnPage() {
+        if (timeTracked) return;
+        timeTracked = true;
+
+        updateActiveTime();
+        const timeInSeconds = Math.round(activeTime / 1000);
+        const timeInMinutes = Math.round(timeInSeconds / 60);
+
+        gtag('event', 'time_on_page', {
+            'event_category': 'engagement',
+            'event_label': postUrl,
+            'value': timeInSeconds
+        });
+
+        // Also track in buckets for easier analysis
+        let timeBucket;
+        if (timeInSeconds < 30) timeBucket = '0-30s';
+        else if (timeInSeconds < 60) timeBucket = '30-60s';
+        else if (timeInSeconds < 180) timeBucket = '1-3min';
+        else if (timeInSeconds < 300) timeBucket = '3-5min';
+        else timeBucket = '5min+';
+
+        gtag('event', 'time_bucket', {
+            'event_category': 'engagement',
+            'event_label': timeBucket,
+            'value': timeInMinutes
+        });
+    }
+
+    // 3. Exit Intent Detection
+    let exitIntentTracked = false;
+
+    document.addEventListener('mouseleave', function(e) {
+        // Only track if mouse leaves from top of page (typical exit behavior)
+        if (e.clientY < 0 && !exitIntentTracked) {
+            exitIntentTracked = true;
+
+            const scrollPercent = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+
+            gtag('event', 'exit_intent', {
+                'event_category': 'engagement',
+                'event_label': postUrl,
+                'value': scrollPercent
+            });
+        }
+    });
+
+    // Track page visibility changes
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            updateActiveTime();
+            isActive = false;
+        } else {
+            lastActiveTime = Date.now();
+            isActive = true;
+        }
+    });
+
+    // Send analytics before page unload
+    window.addEventListener('beforeunload', sendTimeOnPage);
+    window.addEventListener('pagehide', sendTimeOnPage);
+
+    // 4. Popular Posts Tracking
+    (function() {
+        const postData = {
+            url: postUrl,
+            title: postTitle,
+            timestamp: Date.now()
+        };
+
+        // Get post views from localStorage
+        function getPostViews() {
+            const views = localStorage.getItem('postViews');
+            return views ? JSON.parse(views) : {};
+        }
+
+        // Save post views to localStorage
+        function savePostViews(views) {
+            localStorage.setItem('postViews', JSON.stringify(views));
+        }
+
+        // Track this page view
+        const views = getPostViews();
+        if (!views[postUrl]) {
+            views[postUrl] = {
+                title: postTitle,
+                count: 0,
+                lastViewed: null
+            };
+        }
+        views[postUrl].count += 1;
+        views[postUrl].lastViewed = Date.now();
+
+        savePostViews(views);
+
+        // Also send to GA4
+        gtag('event', 'page_view_tracked', {
+            'event_category': 'engagement',
+            'event_label': postUrl,
+            'value': views[postUrl].count
+        });
+    })();
+})();
 </script>
 {% endblock %}

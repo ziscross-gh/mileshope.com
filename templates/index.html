@@ -96,5 +96,93 @@
             </div>
         </div>
     </section>
+
+    <!-- Popular Posts Section (Based on Your Reading History) -->
+    <section class="popular-posts" id="popularPostsSection" style="display: none;">
+        <div class="container">
+            <h2>📈 Your Most Read Posts</h2>
+            <p class="popular-posts-subtitle">Based on your reading history</p>
+            <div class="popular-posts-grid" id="popularPostsGrid">
+                <!-- Populated by JavaScript -->
+            </div>
+        </div>
+    </section>
 </div>
+
+<script>
+// Popular Posts Widget
+(function() {
+    const popularPostsSection = document.getElementById('popularPostsSection');
+    const popularPostsGrid = document.getElementById('popularPostsGrid');
+
+    if (!popularPostsSection || !popularPostsGrid) return;
+
+    // Get post views from localStorage
+    function getPostViews() {
+        const views = localStorage.getItem('postViews');
+        return views ? JSON.parse(views) : {};
+    }
+
+    const postViews = getPostViews();
+    const postArray = Object.entries(postViews).map(([url, data]) => ({
+        url,
+        title: data.title,
+        count: data.count,
+        lastViewed: data.lastViewed
+    }));
+
+    // Only show if user has viewed at least 2 posts
+    if (postArray.length < 2) return;
+
+    // Sort by view count (descending)
+    postArray.sort((a, b) => b.count - a.count);
+
+    // Take top 3
+    const topPosts = postArray.slice(0, 3);
+
+    // Create HTML for popular posts
+    topPosts.forEach(post => {
+        const card = document.createElement('article');
+        card.className = 'popular-post-card';
+
+        const viewBadge = post.count > 1 ? `<span class="view-badge">${post.count} views</span>` : `<span class="view-badge">1 view</span>`;
+
+        card.innerHTML = `
+            <a href="${post.url}" class="popular-post-link">
+                <div class="popular-post-rank">${topPosts.indexOf(post) + 1}</div>
+                <div class="popular-post-content">
+                    <h3>${post.title}</h3>
+                    ${viewBadge}
+                </div>
+            </a>
+        `;
+
+        popularPostsGrid.appendChild(card);
+    });
+
+    // Show the section
+    popularPostsSection.style.display = 'block';
+
+    // Track analytics for popular posts section view
+    if (typeof gtag === 'function') {
+        gtag('event', 'popular_posts_shown', {
+            'event_category': 'engagement',
+            'event_label': 'homepage',
+            'value': topPosts.length
+        });
+    }
+
+    // Track clicks on popular posts
+    popularPostsGrid.addEventListener('click', function(e) {
+        const link = e.target.closest('.popular-post-link');
+        if (link && typeof gtag === 'function') {
+            const url = link.getAttribute('href');
+            gtag('event', 'popular_post_click', {
+                'event_category': 'engagement',
+                'event_label': url
+            });
+        }
+    });
+})();
+</script>
 {% endblock %}
