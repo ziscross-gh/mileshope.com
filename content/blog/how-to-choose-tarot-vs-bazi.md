@@ -10,6 +10,30 @@ tags = ["tarot", "bazi", "divination", "guidance", "comparison"]
 [extra]
 featured_image = "/images/tarot-vs-bazi.svg"
 featured_image_alt = "How to Choose Between Tarot and Bazi - comparison guide"
+
+[[extra.faq]]
+question = "What's the main difference between Tarot and Bazi?"
+answer = "The main difference is their approach: Bazi is a fixed system based on your birth date and time that reveals your inherent energetic blueprint and life patterns, while Tarot is a flexible divination tool that responds to specific questions and current energies. Bazi gives you a comprehensive life map that doesn't change, whereas Tarot provides guidance for specific situations and can be consulted repeatedly as circumstances evolve."
+
+[[extra.faq]]
+question = "Which is more accurate, Tarot or Bazi?"
+answer = "Both can be highly accurate when practiced skillfully, but they measure different things. Bazi's accuracy comes from its mathematical precision in analyzing your birth chart and timing cycles - it's consistent and reproducible. Tarot's accuracy depends more on the reader's intuition and the querent's openness, making it more subjective but also more responsive to immediate situations. They complement rather than compete with each other."
+
+[[extra.faq]]
+question = "Can I use both Tarot and Bazi together?"
+answer = "Absolutely! Many practitioners use both systems as they complement each other beautifully. Use Bazi for understanding your overall life blueprint, inherent strengths and challenges, and timing of major life cycles. Use Tarot for specific decisions, emotional guidance, understanding current situations, and exploring options within the framework that Bazi reveals. Together, they provide both the big picture and detailed navigation."
+
+[[extra.faq]]
+question = "Which should I choose for career guidance?"
+answer = "For comprehensive career analysis including your natural talents, suitable industries, and timing of career opportunities, Bazi is ideal. It reveals your wealth and career elements and when they're strongest in your life. For specific career decisions like whether to take a job offer, how to navigate office politics, or choosing between opportunities, Tarot excels at providing immediate, actionable guidance. For best results, use Bazi for strategy and Tarot for tactics."
+
+[[extra.faq]]
+question = "Is Tarot or Bazi better for relationship questions?"
+answer = "Bazi excels at revealing compatibility patterns, relationship timing, and the type of partner that complements your energy. It can show when you're likely to meet significant partners and long-term relationship dynamics. Tarot is better for understanding current relationship issues, communication problems, and making decisions about specific relationship situations. For relationships, consider Bazi for the foundation and Tarot for navigating day-to-day dynamics."
+
+[[extra.faq]]
+question = "Which is easier to learn as a beginner?"
+answer = "Tarot is generally more accessible for beginners. You can start reading Tarot cards with just the cards and a guidebook, and many people find the visual symbolism intuitive. Bazi has a steeper learning curve, requiring understanding of Chinese metaphysics, the Five Elements, Heavenly Stems, and Earthly Branches. However, Bazi's systematic nature means once you grasp the fundamentals, readings become more formulaic, while Tarot requires ongoing intuition development."
 +++
 
 You're seeking guidance, clarity, or insight into your life—but should you turn to Tarot or Bazi? Both are powerful divination systems with ancient roots, yet they work in fundamentally different ways. Understanding their unique strengths and approaches will help you choose the method (or combination) that best serves your needs.

@@ -10,6 +10,30 @@ tags = ["tarot", "tarot-for-beginners", "divination", "self-discovery", "oracle-
 [extra]
 featured_image = "/images/tarot-beginners.svg"
 featured_image_alt = "Understanding Tarot - A Beginner's Guide with tarot cards"
+
+[[extra.faq]]
+question = "What is tarot and how does it work?"
+answer = "Tarot is a deck of 78 cards used for divination, self-reflection, and spiritual guidance. It works through a combination of symbolism, intuition, and synchronicity. The cards act as mirrors reflecting your subconscious mind and the energies surrounding your situation. Rather than predicting a fixed future, tarot reveals patterns, possibilities, and insights to help you make empowered decisions."
+
+[[extra.faq]]
+question = "Do I need to be psychic to read tarot cards?"
+answer = "No, you don't need to be psychic to read tarot cards. While intuition plays a role, tarot reading is a skill that can be learned and developed by anyone. It involves understanding card meanings, recognizing patterns, and interpreting symbolism in context. With practice, you'll naturally develop your intuitive abilities as you work with the cards regularly."
+
+[[extra.faq]]
+question = "How do I choose my first tarot deck?"
+answer = "Choose a deck whose artwork resonates with you emotionally and visually. The Rider-Waite-Smith deck is recommended for beginners because it has clear, symbolic imagery and most tarot books reference it. However, the most important factor is that you feel connected to the deck. Browse different decks online or in stores, and pick one that speaks to you intuitively."
+
+[[extra.faq]]
+question = "Do tarot cards predict the future?"
+answer = "Tarot cards reveal probable outcomes based on current energies and patterns, not fixed predictions. They show where you're headed if you continue on your current path, but you always have free will to change direction. Think of tarot as a GPS for life - it shows possible routes and potential obstacles, helping you navigate more consciously."
+
+[[extra.faq]]
+question = "Is tarot dangerous or evil?"
+answer = "No, tarot is simply a tool for self-reflection and guidance, like journaling or meditation. The cards themselves have no inherent power - they're pieces of cardboard with symbolic images. Any power they have comes from your intention and interpretation. Tarot has been used for centuries as a positive spiritual practice for personal growth and insight."
+
+[[extra.faq]]
+question = "How often should I do tarot readings for myself?"
+answer = "There's no strict rule, but daily or weekly readings work well for most people. Daily single-card pulls help develop your skills and provide daily guidance, while weekly spreads offer deeper insights. Avoid repeatedly asking the same question in a short time period, as this can create confusion. Trust the first reading you receive and give yourself time to reflect on and integrate the guidance."
 +++
 
 The first time I picked up a tarot deck, I was both intrigued and intimidated. Seventy-eight cards filled with rich symbolism, each supposedly holding profound meaning. Where do you even begin?
