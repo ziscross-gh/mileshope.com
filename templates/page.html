@@ -230,16 +230,13 @@
         </div>
         {% endif %}
 
-        <!-- Table of Contents (for long posts) -->
+        <!-- Table of Contents (sticky expandable overlay) -->
         {% if page.toc and page.toc | length > 0 %}
-        <aside class="table-of-contents">
-            <div class="toc-header">
-                <h3>📑 Table of Contents</h3>
-                <button class="toc-toggle" id="tocToggle" aria-label="Toggle table of contents">
-                    <span class="toc-toggle-icon">−</span>
-                </button>
+        <aside class="table-of-contents" id="tocContainer">
+            <div class="toc-header" id="tocHeader">
+                <span>📑</span>
             </div>
-            <nav class="toc-nav" id="tocNav">
+            <div class="toc-content" id="tocContent">
                 <ul>
                 {% for h1 in page.toc %}
                     <li>
@@ -254,7 +251,7 @@
                     </li>
                 {% endfor %}
                 </ul>
-            </nav>
+            </div>
         </aside>
         {% endif %}
 
@@ -440,23 +437,31 @@
 
 // Table of Contents Toggle & Active Highlighting
 (function() {
-    const tocToggle = document.getElementById('tocToggle');
-    const tocNav = document.getElementById('tocNav');
+    const tocContainer = document.getElementById('tocContainer');
+    const tocHeader = document.getElementById('tocHeader');
+    const tocContent = document.getElementById('tocContent');
 
-    if (tocToggle && tocNav) {
-        tocToggle.addEventListener('click', function() {
-            const isCollapsed = tocNav.classList.toggle('collapsed');
-            const icon = this.querySelector('.toc-toggle-icon');
-            icon.textContent = isCollapsed ? '+' : '−';
+    if (tocHeader && tocContainer) {
+        // Toggle expand/collapse on icon click
+        tocHeader.addEventListener('click', function() {
+            tocContainer.classList.toggle('expanded');
+        });
+
+        // Close TOC when clicking outside
+        document.addEventListener('click', function(e) {
+            if (tocContainer && !tocContainer.contains(e.target)) {
+                tocContainer.classList.remove('expanded');
+            }
         });
 
         // Smooth scroll for TOC links
-        const tocLinks = tocNav.querySelectorAll('a');
-        tocLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
+        if (tocContent) {
+            const tocLinks = tocContent.querySelectorAll('a');
+            tocLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
 
                 if (targetElement) {
                     const offset = 80; // Account for fixed header
@@ -467,9 +472,10 @@
                         top: offsetPosition,
                         behavior: 'smooth'
                     });
-                }
+                    }
+                });
             });
-        });
+        }
 
         // Active TOC Highlighting on Scroll
         const headings = document.querySelectorAll('.post-content h1[id], .post-content h2[id], .post-content h3[id]');

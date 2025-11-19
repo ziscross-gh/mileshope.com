@@ -1297,32 +1297,32 @@ html.dark .post-content blockquote {
   right: -280px;
   z-index: 40;
   transition: right 0.3s ease;
-  width: 280px;
-  background: rgba(250, 250, 250, 0.95);
-  backdrop-filter: blur(10px);
-  border: 1px solid #e9d8fd;
-  border-right: none;
-  border-radius: 20px 0 0 20px;
-}
-
-html.dark .table-of-contents {
-  background: rgba(26, 32, 44, 0.95);
-  border-color: #4a5568;
+  display: flex;
+  flex-direction: column;
 }
 
 .table-of-contents.expanded {
   right: 0;
 }
 
-/* Header/Tab - Icon at top left inside panel */
+/* Header/Tab - Icon notch at top left */
 .toc-header {
+  position: absolute;
+  left: -50px;
+  top: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.75rem;
+  width: 50px;
+  height: 50px;
   cursor: pointer;
   font-size: 1.5rem;
-  border-bottom: 1px solid #e9d8fd;
+  background: rgba(250, 250, 250, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid #e9d8fd;
+  border-right: none;
+  border-radius: 20px 0 0 0;
+  transition: background 0.3s ease;
 }
 
 .toc-header:hover {
@@ -1330,7 +1330,8 @@ html.dark .table-of-contents {
 }
 
 html.dark .toc-header {
-  border-color: rgba(183, 148, 244, 0.2);
+  background: rgba(26, 32, 44, 0.95);
+  border-color: #4a5568;
 }
 
 html.dark .toc-header:hover {
@@ -1339,10 +1340,21 @@ html.dark .toc-header:hover {
 
 /* Content Panel - Wrapper for the list */
 .toc-content {
+  width: 280px;
   max-height: 60vh;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: #cbd5e0 transparent;
+  background: rgba(250, 250, 250, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid #e9d8fd;
+  border-right: none;
+  border-radius: 0 0 0 20px;
+}
+
+html.dark .toc-content {
+  background: rgba(26, 32, 44, 0.95);
+  border-color: #4a5568;
 }
 
 .toc-content > ul {
