@@ -161,12 +161,6 @@
         <!-- Table of Contents (for long posts) -->
         {% if page.toc and page.toc | length > 0 %}
         <aside class="table-of-contents">
-            <div class="toc-header">
-                <h3>📑 Table of Contents</h3>
-                <button class="toc-toggle" id="tocToggle" aria-label="Toggle table of contents">
-                    <span class="toc-toggle-icon">−</span>
-                </button>
-            </div>
             <nav class="toc-nav" id="tocNav">
                 <ul>
                 {% for h1 in page.toc %}
@@ -329,18 +323,11 @@
     }
 })();
 
-// Table of Contents Toggle
+// Table of Contents Smooth Scroll
 (function() {
-    const tocToggle = document.getElementById('tocToggle');
     const tocNav = document.getElementById('tocNav');
 
-    if (tocToggle && tocNav) {
-        tocToggle.addEventListener('click', function() {
-            const isCollapsed = tocNav.classList.toggle('collapsed');
-            const icon = this.querySelector('.toc-toggle-icon');
-            icon.textContent = isCollapsed ? '+' : '−';
-        });
-
+    if (tocNav) {
         // Smooth scroll for TOC links
         tocNav.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', function(e) {
