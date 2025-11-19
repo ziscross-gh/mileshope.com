@@ -6,6 +6,34 @@ description = "Discover Bazi, the ancient Chinese system of destiny analysis. Le
 [taxonomies]
 categories = ["Bazi", "Chinese Metaphysics"]
 tags = ["bazi", "four-pillars", "chinese-astrology", "destiny-analysis", "beginners-guide"]
+
+[extra]
+featured_image = "/images/bazi-guide.svg"
+featured_image_alt = "The Complete Guide to Bazi - Understanding Your Four Pillars of Destiny"
+
+[[extra.faq]]
+question = "What is Bazi and how does it work?"
+answer = "Bazi, also known as the Four Pillars of Destiny, is an ancient Chinese system of destiny analysis that examines the energetic blueprint of your birth moment. It translates your birth date and time into four pillars, each containing a Heavenly Stem and Earthly Branch. These eight characters (Bazi means 'eight characters') reveal your personality traits, natural talents, challenges, and the timing of significant life events through the interplay of the Five Elements."
+
+[[extra.faq]]
+question = "Is Bazi the same as Chinese astrology?"
+answer = "Bazi is a specific branch of Chinese astrology that focuses on the Four Pillars of Destiny. While it shares the foundation of Chinese metaphysics with other systems like Zi Wei Dou Shu or Nine Star Ki, Bazi is unique in its emphasis on elemental interactions and the Ten Heavenly Stems and Twelve Earthly Branches derived from your birth data."
+
+[[extra.faq]]
+question = "Do I need my exact birth time for a Bazi reading?"
+answer = "Yes, your exact birth time is crucial for an accurate Bazi reading because it determines your Hour Pillar, one of the four pillars in your chart. The Hour Pillar reveals important information about your later life, children, and personal expression. Without it, the reading will be incomplete, though some insights can still be gained from the Year, Month, and Day Pillars."
+
+[[extra.faq]]
+question = "How is Bazi different from Western astrology?"
+answer = "While Western astrology focuses on planetary positions and zodiac signs, Bazi examines the elemental composition and energetic interactions present at your birth moment. Bazi uses the Five Elements (Wood, Fire, Earth, Metal, Water) and their cyclical relationships to understand your destiny, whereas Western astrology emphasizes planets, houses, and aspects. Bazi is also more deterministic in revealing timing and life patterns."
+
+[[extra.faq]]
+question = "Can Bazi predict my future?"
+answer = "Bazi reveals patterns, tendencies, and timing of opportunities and challenges rather than fixed predictions. It shows your energetic blueprint and how different life periods (Luck Pillars) will interact with it. Think of it as a weather forecast for your life - it helps you prepare and make informed decisions, but you still have free will in how you respond to the energies present."
+
+[[extra.faq]]
+question = "How often should I get a Bazi reading?"
+answer = "A comprehensive Bazi reading typically provides insights that remain relevant throughout your life, as your Four Pillars don't change. However, many people benefit from annual consultations to understand how the current year's energies interact with their chart, especially during major Luck Pillar transitions (which occur every 10 years) or before making significant life decisions."
 +++
 
 Bazi, known in English as the "Four Pillars of Destiny," is one of the most sophisticated and accurate systems of Chinese metaphysics. Unlike Western astrology which focuses primarily on planetary positions, Bazi examines the intricate dance of elements, stems, and branches present at the moment of your birth to reveal your energetic blueprint.

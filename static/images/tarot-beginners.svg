@@ -1,0 +1,27 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6b46c1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#805ad5;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg2)"/>
+
+  <!-- Card shapes -->
+  <rect x="200" y="150" width="200" height="320" fill="rgba(255,255,255,0.15)" rx="10" transform="rotate(-10 300 310)"/>
+  <rect x="400" y="140" width="200" height="320" fill="rgba(255,255,255,0.2)" rx="10"/>
+  <rect x="600" y="150" width="200" height="320" fill="rgba(255,255,255,0.15)" rx="10" transform="rotate(10 700 310)"/>
+
+  <!-- Star decorations -->
+  <text x="150" y="100" font-size="40" fill="rgba(214,158,46,0.6)">⭐</text>
+  <text x="1000" y="550" font-size="40" fill="rgba(214,158,46,0.6)">⭐</text>
+  <text x="900" y="120" font-size="30" fill="rgba(214,158,46,0.4)">✨</text>
+
+  <!-- Main content -->
+  <text x="600" y="540" font-family="Arial, sans-serif" font-size="64" font-weight="bold" fill="white" text-anchor="middle">
+    Understanding Tarot
+  </text>
+  <text x="600" y="595" font-family="Arial, sans-serif" font-size="28" fill="rgba(214,158,46,1)" text-anchor="middle">
+    A Beginner's Guide
+  </text>
+</svg>

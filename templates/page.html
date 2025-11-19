@@ -2,13 +2,22 @@
 
 {% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
 {% block description %}{{ page.description | default(value=page.summary) | default(value=config.description) }}{% endblock %}
+{% block canonical %}{{ page.permalink }}{% endblock %}
 
 {% block og_title %}{{ page.title }} | {{ config.title }}{% endblock %}
 {% block og_description %}{{ page.description | default(value=page.summary) | default(value=config.description) }}{% endblock %}
 {% block og_type %}article{% endblock %}
+{% if page.extra.featured_image %}
+{% block og_image %}{{ config.base_url }}{{ page.extra.featured_image }}{% endblock %}
+{% block og_image_alt %}{{ page.extra.featured_image_alt | default(value=page.title) }}{% endblock %}
+{% endif %}
 
 {% block twitter_title %}{{ page.title }}{% endblock %}
 {% block twitter_description %}{{ page.description | default(value=page.summary) | default(value=config.description) }}{% endblock %}
+{% if page.extra.featured_image %}
+{% block twitter_image %}{{ config.base_url }}{{ page.extra.featured_image }}{% endblock %}
+{% block twitter_image_alt %}{{ page.extra.featured_image_alt | default(value=page.title) }}{% endblock %}
+{% endif %}
 
 {% block extra_meta %}
 <!-- Enhanced Open Graph for Articles -->
@@ -122,12 +131,60 @@
   ]
 }
 </script>
+
+<!-- FAQ Structured Data -->
+{% if page.extra.faq %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {% for item in page.extra.faq %}
+    {
+      "@type": "Question",
+      "name": "{{ item.question | safe }}",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "{{ item.answer | safe }}"
+      }
+    }{% if not loop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
+</script>
+{% endif %}
 {% endif %}
 {% endblock %}
 
 {% block content %}
 <article class="blog-post">
     <div class="container">
+        <!-- Visual Breadcrumbs -->
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <ol class="breadcrumb-list">
+                <li class="breadcrumb-item">
+                    <a href="{{ config.base_url }}">🏠 Home</a>
+                </li>
+                {% if page.date %}
+                <!-- Blog post breadcrumb -->
+                <li class="breadcrumb-separator">›</li>
+                <li class="breadcrumb-item">
+                    <a href="{{ get_url(path='@/blog/_index.md') }}">Blog</a>
+                </li>
+                <li class="breadcrumb-separator">›</li>
+                <li class="breadcrumb-item breadcrumb-current" aria-current="page">
+                    {{ page.title }}
+                </li>
+                {% else %}
+                <!-- Static page breadcrumb -->
+                <li class="breadcrumb-separator">›</li>
+                <li class="breadcrumb-item breadcrumb-current" aria-current="page">
+                    {{ page.title }}
+                </li>
+                {% endif %}
+            </ol>
+        </nav>
+
         <!-- Post Header -->
         <header class="post-header">
             <h1 class="post-title">{{ page.title }}</h1>
@@ -140,6 +197,14 @@
                 {% if page.word_count %}
                 <span class="word-count">{{ page.word_count }} words</span>
                 {% endif %}
+                <button class="reading-list-btn" id="readingListBtn"
+                        data-title="{{ page.title }}"
+                        data-url="{{ page.permalink }}"
+                        data-reading-time="{{ page.reading_time }}"
+                        aria-label="Add to reading list">
+                    <span class="bookmark-icon">🔖</span>
+                    <span class="bookmark-text">Save</span>
+                </button>
             </div>
             {% endif %}
             {% if page.taxonomies.categories %}
@@ -158,9 +223,22 @@
             {% endif %}
         </header>
 
+        <!-- Featured Image -->
+        {% if page.extra.featured_image %}
+        <div class="featured-image">
+            <img src="{{ page.extra.featured_image }}" alt="{{ page.extra.featured_image_alt | default(value=page.title) }}" loading="eager" decoding="async">
+        </div>
+        {% endif %}
+
         <!-- Table of Contents (for long posts) -->
         {% if page.toc and page.toc | length > 0 %}
         <aside class="table-of-contents">
+            <div class="toc-header">
+                <h3>📑 Table of Contents</h3>
+                <button class="toc-toggle" id="tocToggle" aria-label="Toggle table of contents">
+                    <span class="toc-toggle-icon">−</span>
+                </button>
+            </div>
             <nav class="toc-nav" id="tocNav">
                 <ul>
                 {% for h1 in page.toc %}
@@ -180,6 +258,14 @@
         </aside>
         {% endif %}
 
+        <!-- Reading Progress Tracker -->
+        {% if page.date and page.reading_time %}
+        <div class="reading-progress-tracker" id="readingTracker">
+            <span class="reading-tracker-icon">📖</span>
+            <span class="reading-tracker-text" id="trackerText">{{ page.reading_time }} min left</span>
+        </div>
+        {% endif %}
+
         <!-- Post Content -->
         <div class="post-content">
             {{ page.content | safe }}
@@ -190,7 +276,7 @@
         <aside class="author-bio">
             <div class="author-bio-content">
                 <div class="author-avatar">
-                    <span class="avatar-placeholder">MH</span>
+                    <span class="avatar-placeholder">H</span>
                 </div>
                 <div class="author-info">
                     <h3 class="author-name">{{ config.extra.author }}</h3>
@@ -252,6 +338,35 @@
 
         <!-- Post Footer -->
         <footer class="post-footer">
+            <!-- Post Reactions -->
+            {% if page.date %}
+            <div class="post-reactions" id="postReactions" data-url="{{ page.permalink }}">
+                <h3>What did you think?</h3>
+                <div class="reactions-container">
+                    <button class="reaction-btn" data-reaction="helpful" aria-label="Helpful">
+                        <span class="reaction-emoji">👍</span>
+                        <span class="reaction-label">Helpful</span>
+                        <span class="reaction-count">0</span>
+                    </button>
+                    <button class="reaction-btn" data-reaction="insightful" aria-label="Insightful">
+                        <span class="reaction-emoji">✨</span>
+                        <span class="reaction-label">Insightful</span>
+                        <span class="reaction-count">0</span>
+                    </button>
+                    <button class="reaction-btn" data-reaction="love" aria-label="Love it">
+                        <span class="reaction-emoji">❤️</span>
+                        <span class="reaction-label">Love it</span>
+                        <span class="reaction-count">0</span>
+                    </button>
+                    <button class="reaction-btn" data-reaction="mindblown" aria-label="Mind blown">
+                        <span class="reaction-emoji">🤯</span>
+                        <span class="reaction-label">Mind blown</span>
+                        <span class="reaction-count">0</span>
+                    </button>
+                </div>
+            </div>
+            {% endif %}
+
             <!-- Social Sharing -->
             <div class="share-buttons">
                 <h3>Share this post</h3>
@@ -323,13 +438,21 @@
     }
 })();
 
-// Table of Contents Smooth Scroll
+// Table of Contents Toggle & Active Highlighting
 (function() {
+    const tocToggle = document.getElementById('tocToggle');
     const tocNav = document.getElementById('tocNav');
 
-    if (tocNav) {
+    if (tocToggle && tocNav) {
+        tocToggle.addEventListener('click', function() {
+            const isCollapsed = tocNav.classList.toggle('collapsed');
+            const icon = this.querySelector('.toc-toggle-icon');
+            icon.textContent = isCollapsed ? '+' : '−';
+        });
+
         // Smooth scroll for TOC links
-        tocNav.querySelectorAll('a').forEach(link => {
+        const tocLinks = tocNav.querySelectorAll('a');
+        tocLinks.forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
@@ -347,7 +470,582 @@
                 }
             });
         });
+
+        // Active TOC Highlighting on Scroll
+        const headings = document.querySelectorAll('.post-content h1[id], .post-content h2[id], .post-content h3[id]');
+
+        if (headings.length > 0) {
+            let ticking = false;
+
+            function updateActiveTocLink() {
+                const scrollPosition = window.scrollY + 100; // Offset for header
+                let currentHeading = null;
+
+                // Find the current heading based on scroll position
+                headings.forEach(heading => {
+                    const headingTop = heading.offsetTop;
+                    if (scrollPosition >= headingTop) {
+                        currentHeading = heading;
+                    }
+                });
+
+                // Update active state in TOC
+                tocLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (currentHeading && link.getAttribute('href') === '#' + currentHeading.id) {
+                        link.classList.add('active');
+                    }
+                });
+
+                ticking = false;
+            }
+
+            window.addEventListener('scroll', function() {
+                if (!ticking) {
+                    window.requestAnimationFrame(updateActiveTocLink);
+                    ticking = true;
+                }
+            }, { passive: true });
+
+            // Initial highlight
+            updateActiveTocLink();
+        }
     }
+})();
+
+// Copy Code Buttons
+(function() {
+    const codeBlocks = document.querySelectorAll('pre code');
+
+    codeBlocks.forEach((codeBlock) => {
+        const pre = codeBlock.parentElement;
+
+        // Create wrapper div
+        const wrapper = document.createElement('div');
+        wrapper.className = 'code-block-wrapper';
+        pre.parentNode.insertBefore(wrapper, pre);
+        wrapper.appendChild(pre);
+
+        // Create copy button
+        const copyButton = document.createElement('button');
+        copyButton.className = 'copy-code-btn';
+        copyButton.setAttribute('aria-label', 'Copy code to clipboard');
+        copyButton.innerHTML = '<span class="copy-code-text">Copy</span>';
+
+        wrapper.appendChild(copyButton);
+
+        // Copy functionality
+        copyButton.addEventListener('click', async function() {
+            const code = codeBlock.textContent;
+            const copyText = this.querySelector('.copy-code-text');
+
+            try {
+                await navigator.clipboard.writeText(code);
+                copyText.textContent = 'Copied!';
+                this.classList.add('copied');
+
+                setTimeout(() => {
+                    copyText.textContent = 'Copy';
+                    this.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                console.error('Failed to copy code:', err);
+                copyText.textContent = 'Failed';
+                setTimeout(() => {
+                    copyText.textContent = 'Copy';
+                }, 2000);
+            }
+        });
+    });
+})();
+
+// Smooth Scrolling for All Internal Links
+(function() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href === '#') return; // Skip empty anchors
+
+            const targetElement = document.querySelector(href);
+            if (targetElement) {
+                e.preventDefault();
+                const offset = 80;
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+})();
+
+// Reading Progress Tracker (Time Remaining)
+(function() {
+    const tracker = document.getElementById('readingTracker');
+    const trackerText = document.getElementById('trackerText');
+
+    if (tracker && trackerText) {
+        const postContent = document.querySelector('.post-content');
+        if (!postContent) return;
+
+        // Extract reading time from initial text (e.g., "5 min left")
+        const initialText = trackerText.textContent;
+        const totalMinutes = parseInt(initialText.match(/\d+/)?.[0] || 0);
+
+        if (totalMinutes === 0) return;
+
+        function updateReadingProgress() {
+            const contentHeight = postContent.offsetHeight;
+            const contentTop = postContent.offsetTop;
+            const scrolled = window.pageYOffset + window.innerHeight;
+            const progress = Math.min(Math.max((scrolled - contentTop) / contentHeight, 0), 1);
+
+            const minutesRemaining = Math.ceil(totalMinutes * (1 - progress));
+
+            if (minutesRemaining <= 0) {
+                trackerText.textContent = 'Finished!';
+                setTimeout(() => {
+                    tracker.classList.add('fade-out');
+                }, 1000);
+            } else if (minutesRemaining === 1) {
+                trackerText.textContent = '1 min left';
+            } else {
+                trackerText.textContent = minutesRemaining + ' min left';
+            }
+
+            // Show tracker after scrolling a bit
+            if (progress > 0.05) {
+                tracker.classList.add('visible');
+            } else {
+                tracker.classList.remove('visible');
+            }
+        }
+
+        // Throttled scroll listener
+        let ticking = false;
+        window.addEventListener('scroll', function() {
+            if (!ticking) {
+                window.requestAnimationFrame(function() {
+                    updateReadingProgress();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
+
+        // Initial check
+        updateReadingProgress();
+    }
+})();
+
+// Reading List / Bookmarks Feature
+(function() {
+    const readingListBtn = document.getElementById('readingListBtn');
+
+    if (!readingListBtn) return;
+
+    const postData = {
+        title: readingListBtn.getAttribute('data-title'),
+        url: readingListBtn.getAttribute('data-url'),
+        readingTime: readingListBtn.getAttribute('data-reading-time'),
+        savedAt: new Date().toISOString()
+    };
+
+    // Get reading list from localStorage
+    function getReadingList() {
+        const list = localStorage.getItem('readingList');
+        return list ? JSON.parse(list) : [];
+    }
+
+    // Save reading list to localStorage
+    function saveReadingList(list) {
+        localStorage.setItem('readingList', JSON.stringify(list));
+    }
+
+    // Check if current post is in reading list
+    function isInReadingList() {
+        const list = getReadingList();
+        return list.some(item => item.url === postData.url);
+    }
+
+    // Update button state
+    function updateButtonState() {
+        const isSaved = isInReadingList();
+        const icon = readingListBtn.querySelector('.bookmark-icon');
+        const text = readingListBtn.querySelector('.bookmark-text');
+
+        if (isSaved) {
+            icon.textContent = '✓';
+            text.textContent = 'Saved';
+            readingListBtn.classList.add('saved');
+            readingListBtn.setAttribute('aria-label', 'Remove from reading list');
+        } else {
+            icon.textContent = '🔖';
+            text.textContent = 'Save';
+            readingListBtn.classList.remove('saved');
+            readingListBtn.setAttribute('aria-label', 'Add to reading list');
+        }
+    }
+
+    // Toggle reading list
+    readingListBtn.addEventListener('click', function() {
+        const list = getReadingList();
+        const index = list.findIndex(item => item.url === postData.url);
+
+        if (index > -1) {
+            // Remove from list
+            list.splice(index, 1);
+            saveReadingList(list);
+            updateButtonState();
+
+            // Analytics
+            if (typeof gtag === 'function') {
+                gtag('event', 'remove_from_reading_list', {
+                    'event_category': 'engagement',
+                    'event_label': postData.url
+                });
+            }
+        } else {
+            // Add to list
+            list.unshift(postData);
+            saveReadingList(list);
+            updateButtonState();
+
+            // Show feedback
+            const originalText = this.querySelector('.bookmark-text').textContent;
+            this.querySelector('.bookmark-text').textContent = 'Added!';
+            setTimeout(() => {
+                updateButtonState();
+            }, 1500);
+
+            // Analytics
+            if (typeof gtag === 'function') {
+                gtag('event', 'add_to_reading_list', {
+                    'event_category': 'engagement',
+                    'event_label': postData.url
+                });
+            }
+        }
+    });
+
+    // Initial button state
+    updateButtonState();
+})();
+
+// Post Reactions Feature
+(function() {
+    const reactionsContainer = document.getElementById('postReactions');
+
+    if (!reactionsContainer) return;
+
+    const postUrl = reactionsContainer.getAttribute('data-url');
+    const reactionButtons = reactionsContainer.querySelectorAll('.reaction-btn');
+
+    // Get reactions from localStorage
+    function getReactions() {
+        const reactions = localStorage.getItem('postReactions');
+        return reactions ? JSON.parse(reactions) : {};
+    }
+
+    // Save reactions to localStorage
+    function saveReactions(reactions) {
+        localStorage.setItem('postReactions', JSON.stringify(reactions));
+    }
+
+    // Get user's reactions from localStorage
+    function getUserReactions() {
+        const userReactions = localStorage.getItem('userReactions');
+        return userReactions ? JSON.parse(userReactions) : {};
+    }
+
+    // Save user's reactions to localStorage
+    function saveUserReactions(userReactions) {
+        localStorage.setItem('userReactions', JSON.stringify(userReactions));
+    }
+
+    // Update reaction counts and button states
+    function updateReactionUI() {
+        const reactions = getReactions();
+        const userReactions = getUserReactions();
+        const postReactions = reactions[postUrl] || {};
+        const userPostReactions = userReactions[postUrl] || [];
+
+        reactionButtons.forEach(button => {
+            const reactionType = button.getAttribute('data-reaction');
+            const countSpan = button.querySelector('.reaction-count');
+            const count = postReactions[reactionType] || 0;
+
+            countSpan.textContent = count;
+
+            // Update button state if user has reacted
+            if (userPostReactions.includes(reactionType)) {
+                button.classList.add('active');
+            } else {
+                button.classList.remove('active');
+            }
+        });
+    }
+
+    // Handle reaction click
+    reactionButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const reactionType = this.getAttribute('data-reaction');
+            const reactions = getReactions();
+            const userReactions = getUserReactions();
+
+            // Initialize post reactions if not exists
+            if (!reactions[postUrl]) {
+                reactions[postUrl] = {};
+            }
+            if (!userReactions[postUrl]) {
+                userReactions[postUrl] = [];
+            }
+
+            const postReactions = reactions[postUrl];
+            const userPostReactions = userReactions[postUrl];
+            const hasReacted = userPostReactions.includes(reactionType);
+
+            if (hasReacted) {
+                // Remove reaction
+                postReactions[reactionType] = (postReactions[reactionType] || 1) - 1;
+                const index = userPostReactions.indexOf(reactionType);
+                userPostReactions.splice(index, 1);
+                this.classList.remove('active');
+
+                // Animation
+                this.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+
+                // Analytics
+                if (typeof gtag === 'function') {
+                    gtag('event', 'remove_reaction', {
+                        'event_category': 'engagement',
+                        'event_label': reactionType,
+                        'value': postUrl
+                    });
+                }
+            } else {
+                // Add reaction
+                postReactions[reactionType] = (postReactions[reactionType] || 0) + 1;
+                userPostReactions.push(reactionType);
+                this.classList.add('active');
+
+                // Animation
+                this.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+
+                // Analytics
+                if (typeof gtag === 'function') {
+                    gtag('event', 'add_reaction', {
+                        'event_category': 'engagement',
+                        'event_label': reactionType,
+                        'value': postUrl
+                    });
+                }
+            }
+
+            saveReactions(reactions);
+            saveUserReactions(userReactions);
+            updateReactionUI();
+        });
+    });
+
+    // Initial UI update
+    updateReactionUI();
+})();
+
+// Advanced Analytics Tracking
+(function() {
+    if (typeof gtag !== 'function') return;
+
+    const postUrl = window.location.pathname;
+    const postTitle = document.querySelector('.post-title')?.textContent || '';
+
+    // 1. Scroll Depth Tracking
+    const scrollDepths = [25, 50, 75, 100];
+    const trackedDepths = new Set();
+
+    function trackScrollDepth() {
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+        const scrollTop = window.scrollY;
+        const scrollPercent = Math.round((scrollTop / (documentHeight - windowHeight)) * 100);
+
+        scrollDepths.forEach(depth => {
+            if (scrollPercent >= depth && !trackedDepths.has(depth)) {
+                trackedDepths.add(depth);
+                gtag('event', 'scroll_depth', {
+                    'event_category': 'engagement',
+                    'event_label': postUrl,
+                    'value': depth
+                });
+            }
+        });
+    }
+
+    let scrollTicking = false;
+    window.addEventListener('scroll', function() {
+        if (!scrollTicking) {
+            window.requestAnimationFrame(function() {
+                trackScrollDepth();
+                scrollTicking = false;
+            });
+            scrollTicking = true;
+        }
+    }, { passive: true });
+
+    // 2. Time on Page Tracking (Active Time)
+    let startTime = Date.now();
+    let activeTime = 0;
+    let lastActiveTime = Date.now();
+    let isActive = true;
+    let timeTracked = false;
+
+    // Track when user is active
+    function updateActiveTime() {
+        if (isActive) {
+            const now = Date.now();
+            activeTime += now - lastActiveTime;
+            lastActiveTime = now;
+        }
+    }
+
+    // Reset activity timer on user interaction
+    const activityEvents = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'];
+    activityEvents.forEach(event => {
+        document.addEventListener(event, function() {
+            if (!isActive) {
+                lastActiveTime = Date.now();
+                isActive = true;
+            }
+        }, { passive: true });
+    });
+
+    // Mark as inactive after 30 seconds of no activity
+    let inactivityTimer;
+    function resetInactivityTimer() {
+        clearTimeout(inactivityTimer);
+        inactivityTimer = setTimeout(() => {
+            updateActiveTime();
+            isActive = false;
+        }, 30000); // 30 seconds
+    }
+
+    activityEvents.forEach(event => {
+        document.addEventListener(event, resetInactivityTimer, { passive: true });
+    });
+    resetInactivityTimer();
+
+    // Send time on page when user leaves
+    function sendTimeOnPage() {
+        if (timeTracked) return;
+        timeTracked = true;
+
+        updateActiveTime();
+        const timeInSeconds = Math.round(activeTime / 1000);
+        const timeInMinutes = Math.round(timeInSeconds / 60);
+
+        gtag('event', 'time_on_page', {
+            'event_category': 'engagement',
+            'event_label': postUrl,
+            'value': timeInSeconds
+        });
+
+        // Also track in buckets for easier analysis
+        let timeBucket;
+        if (timeInSeconds < 30) timeBucket = '0-30s';
+        else if (timeInSeconds < 60) timeBucket = '30-60s';
+        else if (timeInSeconds < 180) timeBucket = '1-3min';
+        else if (timeInSeconds < 300) timeBucket = '3-5min';
+        else timeBucket = '5min+';
+
+        gtag('event', 'time_bucket', {
+            'event_category': 'engagement',
+            'event_label': timeBucket,
+            'value': timeInMinutes
+        });
+    }
+
+    // 3. Exit Intent Detection
+    let exitIntentTracked = false;
+
+    document.addEventListener('mouseleave', function(e) {
+        // Only track if mouse leaves from top of page (typical exit behavior)
+        if (e.clientY < 0 && !exitIntentTracked) {
+            exitIntentTracked = true;
+
+            const scrollPercent = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+
+            gtag('event', 'exit_intent', {
+                'event_category': 'engagement',
+                'event_label': postUrl,
+                'value': scrollPercent
+            });
+        }
+    });
+
+    // Track page visibility changes
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            updateActiveTime();
+            isActive = false;
+        } else {
+            lastActiveTime = Date.now();
+            isActive = true;
+        }
+    });
+
+    // Send analytics before page unload
+    window.addEventListener('beforeunload', sendTimeOnPage);
+    window.addEventListener('pagehide', sendTimeOnPage);
+
+    // 4. Popular Posts Tracking
+    (function() {
+        const postData = {
+            url: postUrl,
+            title: postTitle,
+            timestamp: Date.now()
+        };
+
+        // Get post views from localStorage
+        function getPostViews() {
+            const views = localStorage.getItem('postViews');
+            return views ? JSON.parse(views) : {};
+        }
+
+        // Save post views to localStorage
+        function savePostViews(views) {
+            localStorage.setItem('postViews', JSON.stringify(views));
+        }
+
+        // Track this page view
+        const views = getPostViews();
+        if (!views[postUrl]) {
+            views[postUrl] = {
+                title: postTitle,
+                count: 0,
+                lastViewed: null
+            };
+        }
+        views[postUrl].count += 1;
+        views[postUrl].lastViewed = Date.now();
+
+        savePostViews(views);
+
+        // Also send to GA4
+        gtag('event', 'page_view_tracked', {
+            'event_category': 'engagement',
+            'event_label': postUrl,
+            'value': views[postUrl].count
+        });
+    })();
 })();
 </script>
 {% endblock %}

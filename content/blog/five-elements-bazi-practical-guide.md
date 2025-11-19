@@ -6,6 +6,10 @@ description = "Master the Five Elements (Wu Xing) - the foundation of Bazi astro
 [taxonomies]
 categories = ["Bazi", "Chinese Metaphysics"]
 tags = ["five-elements", "bazi", "wu-xing", "chinese-philosophy", "elemental-balance"]
+
+[extra]
+featured_image = "/images/five-elements.svg"
+featured_image_alt = "Five Elements in Bazi - Wood, Fire, Earth, Metal, Water cycle diagram"
 +++
 
 If you've explored your Bazi chart, you've encountered the Five Elements - Wood, Fire, Earth, Metal, and Water. But understanding these elements goes far beyond memorizing keywords. Each element represents a complete philosophy of energy, a way of being in the world.

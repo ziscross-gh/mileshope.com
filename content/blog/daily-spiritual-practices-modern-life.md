@@ -6,6 +6,10 @@ description = "Cultivate a meaningful spiritual practice without overhauling you
 [taxonomies]
 categories = ["Spirituality", "Personal Growth"]
 tags = ["spiritual-practice", "daily-rituals", "mindfulness", "modern-spirituality", "self-care"]
+
+[extra]
+featured_image = "/images/daily-practices.svg"
+featured_image_alt = "Daily Spiritual Practices for Modern Life - mandala and meditation"
 +++
 
 Here's the tension many of us face: we're drawn to spiritual practices - meditation, tarot, journaling, ritual - but our days are already packed with work, family, responsibilities, and the countless demands of modern life.

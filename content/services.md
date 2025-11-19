@@ -4,6 +4,47 @@ description = "Professional Bazi and Tarot consultations for clarity, guidance, 
 template = "page.html"
 +++
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do I need to believe in astrology or tarot for it to work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not at all. Approach with curiosity and openness, and see if the insights resonate with your experience."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you predict specific events?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "I focus on patterns, potentials, and timing of energies rather than specific predictions. The future is fluid and influenced by our choices."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I prepare for a reading?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Come with specific questions or areas you'd like to explore. The more clarity you have about what you're seeking, the more focused the reading can be."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if I don't know my exact birth time for Bazi?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We can still work with your chart, though some timing information may be less precise. I can guide you on methods to rectify your birth time if needed."
+      }
+    }
+  ]
+}
+</script>
+
 # Services
 
 I offer personalized consultations using **Bazi (Chinese Astrology)** and **Tarot** to provide clarity, insight, and guidance on your life journey.

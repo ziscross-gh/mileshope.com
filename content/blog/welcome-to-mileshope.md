@@ -1,7 +1,7 @@
 +++
 title = "Welcome to MilesHope.com"
 date = 2025-07-16
-description = "Welcome to MilesHope.com - Personal blog covering technology spirituality travel divination and personal development by Miles."
+description = "Welcome to MilesHope.com - Personal blog covering technology spirituality travel divination and personal development by Hope."
 
 [taxonomies]
 categories = ["Personal", "Development"]

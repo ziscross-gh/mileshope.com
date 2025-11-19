@@ -4,7 +4,7 @@
 base_url = "https://www.mileshope.com"
 
 # Site title
-title = "mileshope.com"
+title = "MilesHope.com"
 
 # Site description
 description = "Exploring the intersection of spirituality, technology, and personal growth through bazi, tarot, and mindful living."
@@ -47,7 +47,7 @@ render_emoji = true
 
 [extra]
 # Additional site metadata
-author = "Miles Hope"
+author = "Hope"
 
 # Social media links (add as needed)
 # twitter = ""

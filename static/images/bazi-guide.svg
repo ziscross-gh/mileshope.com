@@ -1,0 +1,33 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#805ad5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6b46c1;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg1)"/>
+
+  <!-- Decorative circles -->
+  <circle cx="100" cy="100" r="80" fill="rgba(255,255,255,0.1)"/>
+  <circle cx="1100" cy="530" r="100" fill="rgba(255,255,255,0.1)"/>
+  <circle cx="200" cy="500" r="60" fill="rgba(214,158,46,0.2)"/>
+  <circle cx="1000" cy="150" r="70" fill="rgba(214,158,46,0.2)"/>
+
+  <!-- Main content -->
+  <text x="600" y="250" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="white" text-anchor="middle">
+    The Complete Guide
+  </text>
+  <text x="600" y="330" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="white" text-anchor="middle">
+    to Bazi
+  </text>
+  <text x="600" y="420" font-family="Arial, sans-serif" font-size="32" fill="rgba(255,255,255,0.9)" text-anchor="middle">
+    Understanding Your Four Pillars of Destiny
+  </text>
+
+  <!-- Decorative elements -->
+  <rect x="400" y="470" width="400" height="4" fill="rgba(214,158,46,0.8)" rx="2"/>
+
+  <text x="600" y="540" font-family="Arial, sans-serif" font-size="24" fill="rgba(255,255,255,0.8)" text-anchor="middle">
+    MilesHope.com
+  </text>
+</svg>
