@@ -185,6 +185,13 @@
             </ol>
         </nav>
 
+        <!-- Featured Image at Top -->
+        {% if page.extra.featured_image %}
+        <div class="featured-image-hero">
+            <img src="{{ page.extra.featured_image }}" alt="{{ page.extra.featured_image_alt | default(value=page.title) }}" loading="eager" decoding="async">
+        </div>
+        {% endif %}
+
         <!-- Post Header -->
         <header class="post-header">
             <h1 class="post-title">{{ page.title }}</h1>
@@ -211,13 +218,6 @@
             </div>
             {% endif %}
         </header>
-
-        <!-- Featured Image -->
-        {% if page.extra.featured_image %}
-        <div class="featured-image">
-            <img src="{{ page.extra.featured_image }}" alt="{{ page.extra.featured_image_alt | default(value=page.title) }}" loading="eager" decoding="async">
-        </div>
-        {% endif %}
 
         <!-- Table of Contents (sticky expandable overlay) -->
         {% if page.toc and page.toc | length > 0 %}

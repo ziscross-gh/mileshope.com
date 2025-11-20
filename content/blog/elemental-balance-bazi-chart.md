@@ -6,6 +6,10 @@ description = "Learn how to identify elemental imbalances in your Bazi chart and
 [taxonomies]
 categories = ["Bazi", "Personal Growth"]
 tags = ["bazi", "five-elements", "elemental-balance", "self-improvement", "chinese-metaphysics"]
+
+[extra]
+featured_image = "/images/elemental-balance.svg"
+featured_image_alt = "Finding Balance - Working With Your Elemental Bazi Chart"
 +++
 
 Your Bazi chart is an elemental fingerprint - a unique combination of Wood, Fire, Earth, Metal, and Water that makes you, *you*. But here's what most people misunderstand: balance in Bazi doesn't mean having equal amounts of all five elements.

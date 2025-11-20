@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html lang="{{ lang }}">
+<html lang="{{ lang }}" class="no-js">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{{ config.title }}{% endblock %}</title>
     <meta name="description" content="{% block description %}{{ config.description }}{% endblock %}">
+
+    <!-- Prevent FOUC (Flash of Unstyled Content) -->
+    <style>
+        html.no-js { visibility: hidden; opacity: 0; }
+        html.js { visibility: visible; opacity: 1; transition: opacity 0.2s ease-in; }
+    </style>
+    <script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');</script>
 
     <!-- SEO Meta Tags -->
     <meta name="author" content="{{ config.extra.author }}">
@@ -52,9 +59,9 @@
         .recent-posts{padding:4rem 0;min-height:600px}
     </style>
 
-    <!-- Main Stylesheet with optimized loading -->
-    <link rel="stylesheet" href="{{ get_url(path='css/tailwind.css') }}" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="{{ get_url(path='css/tailwind.css') }}"></noscript>
+    <!-- Main Stylesheet - Preload for faster loading -->
+    <link rel="preload" href="{{ get_url(path='css/tailwind.css') }}" as="style">
+    <link rel="stylesheet" href="{{ get_url(path='css/tailwind.css') }}">
     {% block extra_css %}{% endblock %}
 
     <!-- Search Library - Async loading -->

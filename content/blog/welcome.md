@@ -6,6 +6,10 @@ description = "Welcome to the MilesHope.com blog - exploring spirituality, techn
 [taxonomies]
 categories = ["Announcements"]
 tags = ["welcome", "introduction"]
+
+[extra]
+featured_image = "/images/welcome-mileshope.svg"
+featured_image_alt = "Welcome to MilesHope - Spirituality, Technology, Personal Growth"
 +++
 
 # Welcome!

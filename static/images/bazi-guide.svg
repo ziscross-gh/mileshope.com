@@ -1,33 +1,30 @@
-<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
   <defs>
-    <linearGradient id="bg1" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:#805ad5;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#6b46c1;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#6b46c1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#553c9a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#d69e2e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fbd38d;stop-opacity:1" />
     </linearGradient>
   </defs>
-  <rect width="1200" height="630" fill="url(#bg1)"/>
-
-  <!-- Decorative circles -->
-  <circle cx="100" cy="100" r="80" fill="rgba(255,255,255,0.1)"/>
-  <circle cx="1100" cy="530" r="100" fill="rgba(255,255,255,0.1)"/>
-  <circle cx="200" cy="500" r="60" fill="rgba(214,158,46,0.2)"/>
-  <circle cx="1000" cy="150" r="70" fill="rgba(214,158,46,0.2)"/>
-
-  <!-- Main content -->
-  <text x="600" y="250" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="white" text-anchor="middle">
-    The Complete Guide
-  </text>
-  <text x="600" y="330" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="white" text-anchor="middle">
-    to Bazi
-  </text>
-  <text x="600" y="420" font-family="Arial, sans-serif" font-size="32" fill="rgba(255,255,255,0.9)" text-anchor="middle">
-    Understanding Your Four Pillars of Destiny
-  </text>
-
-  <!-- Decorative elements -->
-  <rect x="400" y="470" width="400" height="4" fill="rgba(214,158,46,0.8)" rx="2"/>
-
-  <text x="600" y="540" font-family="Arial, sans-serif" font-size="24" fill="rgba(255,255,255,0.8)" text-anchor="middle">
-    MilesHope.com
-  </text>
+  <rect width="800" height="450" fill="url(#bgGrad)"/>
+  <circle cx="100" cy="80" r="40" fill="rgba(255,255,255,0.1)"/>
+  <circle cx="700" cy="370" r="60" fill="rgba(255,255,255,0.08)"/>
+  <circle cx="650" cy="100" r="30" fill="rgba(255,255,255,0.12)"/>
+  <text x="180" y="120" font-size="24" fill="rgba(255,255,255,0.6)">☰</text>
+  <text x="620" y="180" font-size="20" fill="rgba(255,255,255,0.5)">☷</text>
+  <text x="400" y="140" text-anchor="middle" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white">The Complete Guide to</text>
+  <text x="400" y="210" text-anchor="middle" font-family="Georgia, serif" font-size="52" font-weight="bold" fill="url(#goldGrad)">Bazi</text>
+  <rect x="250" y="240" width="300" height="3" rx="1.5" fill="url(#goldGrad)" opacity="0.8"/>
+  <text x="400" y="295" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="rgba(255,255,255,0.9)">Understanding Your Four Pillars</text>
+  <text x="400" y="325" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="rgba(255,255,255,0.9)">of Destiny</text>
+  <g transform="translate(400, 390)">
+    <rect x="-45" y="-12" width="18" height="24" rx="2" fill="rgba(255,255,255,0.3)" stroke="#fbd38d" stroke-width="1"/>
+    <rect x="-21" y="-12" width="18" height="24" rx="2" fill="rgba(255,255,255,0.3)" stroke="#fbd38d" stroke-width="1"/>
+    <rect x="3" y="-12" width="18" height="24" rx="2" fill="rgba(255,255,255,0.3)" stroke="#fbd38d" stroke-width="1"/>
+    <rect x="27" y="-12" width="18" height="24" rx="2" fill="rgba(255,255,255,0.3)" stroke="#fbd38d" stroke-width="1"/>
+  </g>
 </svg>

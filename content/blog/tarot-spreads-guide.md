@@ -6,6 +6,10 @@ description = "Master the most effective tarot spreads for every situation. Lear
 [taxonomies]
 categories = ["Tarot", "Divination"]
 tags = ["tarot", "tarot-spreads", "divination-methods", "card-reading", "practical-tarot"]
+
+[extra]
+featured_image = "/images/tarot-spreads.svg"
+featured_image_alt = "Common Tarot Spreads - A Practical Guide"
 +++
 
 You've learned the card meanings. You can interpret symbols and trust your intuition. But when you sit down to do a reading, you face a crucial question: **Which spread should I use?**

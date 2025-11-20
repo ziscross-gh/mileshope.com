@@ -1,38 +1,24 @@
-<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
   <defs>
-    <linearGradient id="bg5" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:#9f7aea;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#805ad5;stop-opacity:1" />
       <stop offset="100%" style="stop-color:#6b46c1;stop-opacity:1" />
     </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#d69e2e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fbd38d;stop-opacity:1" />
+    </linearGradient>
   </defs>
-  <rect width="1200" height="630" fill="url(#bg5)"/>
-
-  <!-- Split design - two halves -->
-  <rect x="0" y="0" width="600" height="630" fill="rgba(255,255,255,0.05)"/>
-
-  <!-- Heart symbol (intuitive) -->
-  <text x="300" y="250" font-size="120" text-anchor="middle">💜</text>
-  <text x="300" y="350" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white" text-anchor="middle">
-    Intuitive
-  </text>
-
-  <!-- Book symbol (by the book) -->
-  <text x="900" y="250" font-size="120" text-anchor="middle">📖</text>
-  <text x="900" y="350" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white" text-anchor="middle">
-    By the Book
-  </text>
-
-  <!-- VS in the middle -->
-  <circle cx="600" cy="315" r="60" fill="rgba(214,158,46,1)"/>
-  <text x="600" y="335" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">
-    VS
-  </text>
-
-  <!-- Main title -->
-  <text x="600" y="520" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">
-    Reading Tarot
-  </text>
-  <text x="600" y="580" font-family="Arial, sans-serif" font-size="28" fill="rgba(214,158,46,1)" text-anchor="middle">
-    Finding Your Balance
-  </text>
+  <rect width="800" height="450" fill="url(#bgGrad)"/>
+  <rect x="0" y="0" width="400" height="450" fill="rgba(255,255,255,0.05)"/>
+  <text x="200" y="180" font-size="60" text-anchor="middle">💜</text>
+  <text x="200" y="240" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="white" text-anchor="middle">Intuitive</text>
+  <text x="600" y="180" font-size="60" text-anchor="middle">📖</text>
+  <text x="600" y="240" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="white" text-anchor="middle">By the Book</text>
+  <circle cx="400" cy="200" r="35" fill="rgba(214,158,46,1)"/>
+  <text x="400" y="215" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle">VS</text>
+  <text x="400" y="330" text-anchor="middle" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white">Reading Tarot</text>
+  <rect x="250" y="355" width="300" height="3" rx="1.5" fill="url(#goldGrad)" opacity="0.8"/>
+  <text x="400" y="405" text-anchor="middle" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="url(#goldGrad)">Finding Your Balance</text>
 </svg>

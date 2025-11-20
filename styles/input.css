@@ -495,11 +495,12 @@ html.dark .btn-secondary:hover {
 }
 
 .post-card {
-    padding: 2rem;
+    padding: 0;
     background: white;
     border: 1px solid #e2e8f0;
     border-radius: 12px;
     transition: all 0.3s ease;
+    overflow: hidden;
 }
 
 html.dark .post-card {
@@ -519,8 +520,9 @@ html.dark .post-card:hover {
 }
 
 .post-card h3 {
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.125rem;
+    line-height: 1.4;
 }
 
 .post-card h3 a {
@@ -636,9 +638,51 @@ html.dark .tag:hover {
     text-align: center;
 }
 
+/* Tablet breakpoint */
+@media (max-width: 1024px) {
+    .post-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+/* Mobile breakpoint */
 @media (max-width: 768px) {
     .post-grid {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .post-card-content {
+        padding: 0.875rem;
+    }
+
+    .post-card h3 {
+        font-size: 1.25rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .post-card-image {
+        aspect-ratio: 16 / 9;
+    }
+}
+
+/* Small mobile breakpoint */
+@media (max-width: 480px) {
+    .post-grid {
+        gap: 1rem;
+    }
+
+    .post-card-content {
+        padding: 0.75rem;
+    }
+
+    .post-card h3 {
+        font-size: 1.125rem;
+    }
+
+    .post-excerpt {
+        font-size: 0.875rem;
     }
 }
 
@@ -1326,6 +1370,13 @@ html.dark .post-content blockquote {
     transition: right 0.3s ease;
     display: flex;
     flex-direction: column;
+}
+
+/* Hide TOC on tablet and mobile */
+@media (max-width: 1024px) {
+    .table-of-contents {
+        display: none;
+    }
 }
 
 .table-of-contents.expanded {
@@ -2663,6 +2714,40 @@ html.dark .keyboard-shortcut span {
     max-height: 500px;
 }
 
+/* Hero featured image at top of article */
+.featured-image-hero {
+    width: 100%;
+    margin-bottom: 2rem;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.featured-image-hero img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+html.dark .featured-image-hero {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive hero image */
+@media (max-width: 768px) {
+    .featured-image-hero {
+        margin-bottom: 1.5rem;
+        border-radius: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .featured-image-hero {
+        margin-bottom: 1rem;
+        border-radius: 6px;
+    }
+}
+
 /* Featured images on post cards (homepage) */
 .post-card {
     display: flex;
@@ -2674,7 +2759,6 @@ html.dark .keyboard-shortcut span {
     width: 100%;
     aspect-ratio: 16 / 9;
     overflow: hidden;
-    border-radius: 8px 8px 0 0;
     background: #f7fafc;
 }
 
@@ -2700,7 +2784,7 @@ html.dark .post-card-image {
 }
 
 .post-card-content {
-    padding: 1.5rem;
+    padding: 1rem;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -2709,7 +2793,8 @@ html.dark .post-card-image {
 /* Featured images on blog listing page */
 .post-item {
     display: flex;
-    gap: 2rem;
+    flex-direction: column;
+    gap: 1rem;
     margin-bottom: 3rem;
     padding-bottom: 3rem;
     border-bottom: 1px solid #e2e8f0;
@@ -2720,8 +2805,8 @@ html.dark .post-item {
 }
 
 .post-item-image {
-    flex: 0 0 300px;
-    aspect-ratio: 4 / 3;
+    width: 100%;
+    aspect-ratio: 16 / 9;
     overflow: hidden;
     border-radius: 12px;
     background: #f7fafc;
@@ -2740,7 +2825,7 @@ html.dark .post-item-image {
 .post-item-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     transition: transform 0.3s ease;
 }
 
@@ -2763,11 +2848,7 @@ html.dark .post-item-image {
     }
 
     .post-item {
-        gap: 1.5rem;
-    }
-
-    .post-item-image {
-        flex: 0 0 250px;
+        gap: 1rem;
     }
 
     .featured-image img {
@@ -2787,14 +2868,7 @@ html.dark .post-item-image {
     }
 
     .post-item {
-        flex-direction: column;
-        gap: 1rem;
-    }
-
-    .post-item-image {
-        flex: 0 0 auto;
-        width: 100%;
-        aspect-ratio: 16 / 9;
+        gap: 0.75rem;
     }
 
     .reading-progress-tracker {

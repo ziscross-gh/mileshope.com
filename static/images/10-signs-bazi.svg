@@ -1,32 +1,24 @@
-<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
   <defs>
-    <linearGradient id="bg7" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:#805ad5;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#d69e2e;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#6b46c1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d69e2e;stop-opacity:0.8" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#d69e2e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fbd38d;stop-opacity:1" />
     </linearGradient>
   </defs>
-  <rect width="1200" height="630" fill="url(#bg7)"/>
-
-  <!-- Large "10" -->
-  <text x="200" y="400" font-family="Arial, sans-serif" font-size="280" font-weight="bold" fill="rgba(255,255,255,0.2)">
-    10
-  </text>
-
-  <!-- Checkmarks -->
-  <text x="700" y="180" font-size="50" fill="rgba(255,255,255,0.7)">✓</text>
-  <text x="850" y="240" font-size="50" fill="rgba(255,255,255,0.7)">✓</text>
-  <text x="1000" y="300" font-size="50" fill="rgba(255,255,255,0.7)">✓</text>
-  <text x="700" y="360" font-size="50" fill="rgba(255,255,255,0.7)">✓</text>
-  <text x="850" y="420" font-size="50" fill="rgba(255,255,255,0.7)">✓</text>
-
-  <!-- Main content -->
-  <text x="720" y="100" font-family="Arial, sans-serif" font-size="68" font-weight="bold" fill="white" text-anchor="start">
-    10 Signs You
-  </text>
-  <text x="720" y="530" font-family="Arial, sans-serif" font-size="68" font-weight="bold" fill="white" text-anchor="start">
-    Need a Bazi
-  </text>
-  <text x="720" y="595" font-family="Arial, sans-serif" font-size="68" font-weight="bold" fill="white" text-anchor="start">
-    Reading
-  </text>
+  <rect width="800" height="450" fill="url(#bgGrad)"/>
+  <text x="100" y="320" font-family="Arial, sans-serif" font-size="180" font-weight="bold" fill="rgba(255,255,255,0.15)">10</text>
+  <text x="480" y="140" font-size="28" fill="rgba(255,255,255,0.7)">✓</text>
+  <text x="560" y="180" font-size="28" fill="rgba(255,255,255,0.7)">✓</text>
+  <text x="640" y="220" font-size="28" fill="rgba(255,255,255,0.7)">✓</text>
+  <text x="480" y="260" font-size="28" fill="rgba(255,255,255,0.7)">✓</text>
+  <text x="560" y="300" font-size="28" fill="rgba(255,255,255,0.7)">✓</text>
+  <text x="400" y="100" text-anchor="middle" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white">10 Signs You Need a</text>
+  <text x="400" y="160" text-anchor="middle" font-family="Georgia, serif" font-size="48" font-weight="bold" fill="url(#goldGrad)">Bazi Reading</text>
+  <rect x="250" y="185" width="300" height="3" rx="1.5" fill="url(#goldGrad)" opacity="0.8"/>
+  <text x="400" y="400" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="rgba(255,255,255,0.9)">Discover When Chinese Astrology Can Help</text>
 </svg>

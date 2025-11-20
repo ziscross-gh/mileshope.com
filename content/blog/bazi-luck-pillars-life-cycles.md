@@ -6,6 +6,10 @@ description = "Discover how Luck Pillars reveal the changing energies throughout
 [taxonomies]
 categories = ["Bazi", "Chinese Metaphysics"]
 tags = ["bazi", "luck-pillars", "life-cycles", "timing", "destiny-analysis"]
+
+[extra]
+featured_image = "/images/luck-pillars.svg"
+featured_image_alt = "Bazi Luck Pillars - Understanding Your 10-Year Life Cycles"
 +++
 
 Your Bazi birth chart is like a snapshot of the energies present at the moment you were born. But life isn't static - and neither is your energetic environment. This is where Luck Pillars come in.
