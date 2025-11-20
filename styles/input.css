@@ -1335,36 +1335,36 @@ html.dark .post-content blockquote {
 /* Header/Tab - Icon notch at top left */
 .toc-header {
     position: absolute;
-    left: -49px;
+    left: -41px;
     top: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 50px;
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    padding: 10px;
     cursor: pointer;
-    font-size: 1.5rem;
-    line-height: 1;
+    color: #4a5568;
     background: white;
-    border-left: 1px solid #e2e8f0;
-    border-top: 1px solid #e2e8f0;
-    border-bottom: 1px solid #e2e8f0;
+    border: 1px solid #e2e8f0;
     border-right: none;
     border-radius: 8px 0 0 8px;
-    transition: background 0.2s ease;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
 }
 
-.toc-header:hover {
-    background: #f7fafc;
+.toc-header svg {
+    display: block;
+}
+
+/* When expanded, keep all borders with full left radius */
+.table-of-contents.expanded .toc-header {
+    border-radius: 8px 0 0 8px;
 }
 
 html.dark .toc-header {
     background: #2d3748;
     border-color: #4a5568;
-}
-
-html.dark .toc-header:hover {
-    background: #374151;
+    color: #e2e8f0;
 }
 
 /* Content Panel - Wrapper for the list */
@@ -1378,7 +1378,7 @@ html.dark .toc-header:hover {
     border-left: 1px solid #e2e8f0;
     border-bottom: 1px solid #e2e8f0;
     border-right: none;
-    border-top: none;
+    border-top: 1px solid #e2e8f0;
     border-radius: 0 0 0 8px;
 }
 
@@ -1419,22 +1419,11 @@ html.dark .toc-content::-webkit-scrollbar-thumb {
     padding: 0.75rem 1rem;
     color: #2d3748;
     text-decoration: none;
-    transition: all 0.2s ease;
     font-size: 0.875rem;
-}
-
-.table-of-contents a:hover {
-    background: rgba(128, 90, 213, 0.05);
-    color: #805ad5;
 }
 
 html.dark .table-of-contents a {
     color: #f7fafc;
-}
-
-html.dark .table-of-contents a:hover {
-    background: rgba(183, 148, 244, 0.05);
-    color: #b794f4;
 }
 
 .table-of-contents ul ul {
@@ -1444,10 +1433,6 @@ html.dark .table-of-contents a:hover {
 .table-of-contents ul ul a {
     padding-left: 2rem;
     font-size: 0.8125rem;
-}
-
-.table-of-contents ul ul a:hover {
-    padding-left: 2.25rem;
 }
 
 /* Author Bio */
