@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#805ad5;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#6b46c1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#553c9a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#d69e2e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fbd38d;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+
+  <!-- Decorative elements -->
+  <circle cx="100" cy="100" r="60" fill="rgba(255,255,255,0.05)"/>
+  <circle cx="1100" cy="530" r="80" fill="rgba(255,255,255,0.05)"/>
+  <circle cx="1050" cy="150" r="40" fill="rgba(255,255,255,0.03)"/>
+  <circle cx="150" cy="480" r="50" fill="rgba(255,255,255,0.03)"/>
+
+  <!-- Decorative stars -->
+  <text x="180" y="180" font-size="24" fill="rgba(214,158,46,0.4)">&#10022;</text>
+  <text x="1020" y="450" font-size="24" fill="rgba(214,158,46,0.4)">&#10022;</text>
+  <text x="900" y="120" font-size="18" fill="rgba(214,158,46,0.3)">&#10022;</text>
+
+  <!-- Main title -->
+  <text x="600" y="260" text-anchor="middle" font-family="Lora, Georgia, serif" font-size="72" font-weight="bold" fill="white">MilesHope</text>
+
+  <!-- Gold decorative line -->
+  <rect x="400" y="290" width="400" height="4" rx="2" fill="url(#goldGrad)" opacity="0.8"/>
+
+  <!-- Tagline -->
+  <text x="600" y="360" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="500" fill="rgba(255,255,255,0.9)">Spirituality, Technology &amp; Personal Growth</text>
+
+  <!-- Subtitle -->
+  <text x="600" y="420" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="400" fill="url(#goldGrad)">Bazi &amp; Tarot Insights for Modern Life</text>
+
+  <!-- URL -->
+  <text x="600" y="560" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="500" fill="rgba(255,255,255,0.6)">mileshope.com</text>
+</svg>

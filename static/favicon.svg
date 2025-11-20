@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#805ad5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6b46c1;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#d69e2e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fbd38d;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- Background circle -->
+  <circle cx="256" cy="256" r="256" fill="url(#bgGrad)"/>
+  <!-- Stylized "M" with spiritual touch -->
+  <path d="M 140 360 L 140 180 L 256 280 L 372 180 L 372 360"
+        fill="none"
+        stroke="url(#goldGrad)"
+        stroke-width="40"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+  <!-- Small star/sparkle above -->
+  <circle cx="256" cy="120" r="12" fill="#fbd38d"/>
+  <path d="M 256 100 L 256 140 M 236 120 L 276 120"
+        stroke="#fbd38d"
+        stroke-width="6"
+        stroke-linecap="round"/>
+</svg>
