@@ -1,0 +1,102 @@
+/* Layout Components */
+
+/* Container */
+.container {
+    max-width: var(--container-max-w);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+}
+
+/* Header & Navigation */
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #fff;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 1rem 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+html.dark .site-header {
+    background: #1a202c;
+    border-bottom-color: #4a5568;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3rem;
+}
+
+.site-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #4a5568;
+    text-decoration: none;
+    font-family: var(--font-serif);
+}
+
+.site-logo:hover {
+    color: #805ad5;
+}
+
+html.dark .site-logo {
+    color: #f7fafc;
+}
+
+html.dark .site-logo:hover {
+    color: #b794f4;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.nav-menu a {
+    color: #2d3748;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.nav-menu a:hover {
+    color: #805ad5;
+}
+
+html.dark .nav-menu a {
+    color: #f7fafc;
+}
+
+html.dark .nav-menu a:hover {
+    color: #b794f4;
+}
+
+/* Footer */
+.site-footer {
+    background: #4a5568;
+    color: white;
+    padding: 2rem 0;
+    margin-top: 4rem;
+    text-align: center;
+}
+
+.site-footer a {
+    color: white;
+    text-decoration: underline;
+}
+
+html.dark .site-footer {
+    background: #2d3748;
+    border-top: 1px solid #4a5568;
+}

@@ -8,7 +8,7 @@ MilesHope.com is deployed on **Cloudflare Pages** with automatic deployments fro
 
 **Deployment Flow:**
 ```
-Git Push → GitHub → Cloudflare Pages → Build → Deploy → CDN
+Git Push -> GitHub -> Cloudflare Pages -> Build -> Deploy -> CDN
 ```
 
 ## Prerequisites

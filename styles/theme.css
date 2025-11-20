@@ -1,0 +1,46 @@
+/* Tailwind v4 Theme Configuration */
+@theme {
+    /* Custom Color Palette - Spiritual colors */
+    --color-purple: #805ad5;
+    --color-purple-light: #b794f4;
+    --color-purple-dark: #6b46c1;
+    --color-purple-darker: #553c9a;
+    --color-gold: #d69e2e;
+    --color-gold-light: #fbd38d;
+    --color-gray-600: #4a5568;
+    --color-gray-700: #2d3748;
+    --color-gray-800: #1a202c;
+    --color-gray-100: #f7fafc;
+    --color-gray-200: #e2e8f0;
+    --color-gray-400: #cbd5e0;
+
+    /* Semantic color tokens */
+    --color-primary: var(--color-purple);
+    --color-accent: var(--color-gold);
+
+    /* Font families */
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-serif: 'Lora', Georgia, "Times New Roman", serif;
+
+    /* Container */
+    --container-max-w: 1200px;
+    --container-padding: 1rem;
+}
+
+/* Fluid Typography Scale */
+:root {
+    /* Base font size: 16px on mobile, 18px on desktop */
+    --font-size-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+
+    /* Heading sizes - fluid scaling */
+    --font-size-h1: clamp(2rem, 1.5rem + 2.5vw, 3rem);
+    --font-size-h2: clamp(1.5rem, 1.25rem + 1.25vw, 2.25rem);
+    --font-size-h3: clamp(1.25rem, 1.1rem + 0.75vw, 1.75rem);
+    --font-size-h4: clamp(1.125rem, 1rem + 0.5vw, 1.5rem);
+    --font-size-h5: clamp(1rem, 0.95rem + 0.25vw, 1.25rem);
+    --font-size-h6: clamp(0.875rem, 0.85rem + 0.125vw, 1rem);
+
+    /* Small text */
+    --font-size-sm: clamp(0.875rem, 0.85rem + 0.125vw, 0.9375rem);
+    --font-size-xs: clamp(0.75rem, 0.725rem + 0.125vw, 0.8125rem);
+}

@@ -1,0 +1,115 @@
+/* Interactive Components */
+
+.search-toggle,
+.theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
+    transition: all 0.2s ease;
+    border-radius: 6px;
+}
+
+.search-toggle:hover,
+.theme-toggle:hover {
+    background: rgba(128, 90, 213, 0.1);
+}
+
+html.dark .search-toggle:hover,
+html.dark .theme-toggle:hover {
+    background: rgba(183, 148, 244, 0.2);
+}
+
+/* Mobile Menu */
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1001;
+}
+
+.hamburger {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background: #2d3748;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+html.dark .hamburger {
+    background: #f7fafc;
+}
+
+.mobile-menu-toggle.active .hamburger:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.mobile-menu-toggle.active .hamburger:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-toggle.active .hamburger:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+body.menu-open {
+    overflow: hidden;
+}
+
+/* Responsive Mobile Menu */
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: flex;
+    }
+
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: #fff;
+        flex-direction: column;
+        padding: 80px 2rem 2rem;
+        box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+        transition: right 0.3s ease;
+        z-index: 1000;
+        overflow-y: auto;
+        gap: 0;
+    }
+
+    html.dark .nav-menu {
+        background: #1a202c;
+    }
+
+    .nav-menu.active {
+        right: 0;
+    }
+
+    .nav-menu li {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    .nav-menu a {
+        display: block;
+        width: 100%;
+        padding: 1rem;
+        font-size: 1.1rem;
+        border-radius: 8px;
+    }
+
+    .nav-menu a:hover {
+        background: #f7fafc;
+    }
+
+    html.dark .nav-menu a:hover {
+        background: #2d3748;
+    }
+}

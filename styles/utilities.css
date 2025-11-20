@@ -1,0 +1,31 @@
+/* Custom Utility Classes */
+
+.reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    z-index: 1000;
+    transition: all 0.1s;
+    background: linear-gradient(90deg, #805ad5, #d69e2e);
+}
+
+html.dark .reading-progress {
+    background: linear-gradient(90deg, #b794f4, #f6ad55);
+}
+
+.hero-gradient {
+    background: linear-gradient(135deg, #805ad5 0%, #6b46c1 100%);
+}
+
+html.dark .hero-gradient {
+    background: linear-gradient(135deg, #9f7aea 0%, #805ad5 100%);
+}
+
+.avatar-gradient {
+    background: linear-gradient(135deg, #805ad5, #d69e2e);
+}
+
+html.dark .avatar-gradient {
+    background: linear-gradient(135deg, #b794f4, #f6ad55);
+}

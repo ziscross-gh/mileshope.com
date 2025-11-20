@@ -1,402 +1,198 @@
-# Notion Sync Guide
+# Notion to Zola Sync Tool
 
-Guide for syncing blog posts from Notion to Zola using the custom Rust CLI tool.
+A simple Python script that syncs published blog posts from your Notion database to Zola markdown files.
 
-## Overview
+## Features
 
-The `notion-sync` tool automatically converts Notion database pages into Zola-compatible Markdown files with proper frontmatter.
+- Fetches only posts with Status = "Published"
+- Converts Notion blocks to Zola-compatible markdown
+- Generates proper TOML frontmatter
+- Supports rich text formatting (bold, italic, code, links)
+- Handles headings, lists, code blocks, quotes, callouts, images
+- Automatic slug generation from post titles
 
-**Features:**
-- Syncs only "Published" posts
-- Converts Notion blocks to Markdown
-- Generates proper Zola frontmatter
-- Preserves formatting (bold, italic, code, etc.)
-- Supports: headings, paragraphs, lists, code blocks, quotes
+## Setup
 
-## Prerequisites
-
-- Rust & Cargo installed
-- Notion account with API access
-- Notion integration created
-
-## Initial Setup
-
-### 1. Create Notion Integration
+### 1. Create a Notion Integration
 
 1. Go to https://www.notion.so/my-integrations
-2. Click "+ New integration"
-3. Name it "MilesHope Blog Sync"
-4. Select your workspace
-5. Click "Submit"
-6. Copy the "Internal Integration Token"
+2. Click "New integration"
+3. Name it (e.g., "Zola Blog Sync")
+4. Copy the "Internal Integration Token"
 
-### 2. Share Database with Integration
+### 2. Share Your Database
 
-1. Open your Notion database for blog posts
-2. Click "..." menu in top right
-3. Select "Add connections"
-4. Find and select your integration ("MilesHope Blog Sync")
-5. Click "Confirm"
+1. Open your Notion database
+2. Click the "..." menu in the top right
+3. Click "Add connections"
+4. Select your integration
 
-### 3. Get Database ID
+### 3. Get Your Database ID
 
-From your Notion database URL:
+Your database URL looks like:
 ```
-https://www.notion.so/workspace/DATABASE_ID?v=VIEW_ID
-                                 ^^^^^^^^^^^
+https://www.notion.so/your-workspace/DATABASE_ID?v=VIEW_ID
 ```
 
-Copy the `DATABASE_ID` part (32 characters, no dashes).
+Copy the `DATABASE_ID` part (32-character string).
 
-### 4. Configure Environment
+### 4. Configure Environment Variables
 
+Copy the example file:
 ```bash
-cd notion-sync
 cp .env.example .env
 ```
 
-Edit `.env`:
+Edit `.env` and add your credentials:
 ```bash
-NOTION_API_KEY=secret_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-NOTION_DATABASE_ID=your32characterdatabaseid
+NOTION_API_KEY=secret_your_api_key_here
+NOTION_DATABASE_ID=your_database_id_here
 ```
 
-**Important:** Never commit `.env` to git (it's in `.gitignore`)
+### 5. Install Dependencies
 
-## Notion Database Setup
+```bash
+pip3 install requests
+```
+
+Or with a virtual environment (recommended):
+```bash
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install requests
+```
+
+## Notion Database Structure
+
+Your Notion database should have these properties (matches MilesHope.com structure):
 
 ### Required Properties
+- **Title** (Title type) - The blog post title
+- **Status** (Text type) - Must be exactly "Published" to sync
+- **Publish Date** (Date type) - Publication date
+- **Content** (Text type) - The main blog post content
 
-Your Notion database **must** have these properties:
-
-| Property | Type | Required | Purpose |
-|----------|------|----------|---------|
-| Name or Title | Title | ✅ Yes | Post title |
-| Status | Status | ✅ Yes | Must include "Published" option |
-| Published or Date | Date | ✅ Yes | Publication date |
-| Tags | Multi-select | ❌ No | Post tags |
-| Categories | Multi-select | ❌ No | Post categories |
-| Description | Text | ❌ No | SEO description |
-
-### Example Database Schema
-
-```
-┌─────────────┬──────────┬────────────┬──────┬────────────┬─────────────┐
-│ Name (Title)│  Status  │ Published  │ Tags │ Categories │ Description │
-├─────────────┼──────────┼────────────┼──────┼────────────┼─────────────┤
-│ My First    │ Published│ 2025-01-13 │ rust │ Tech       │ A post      │
-│ Post        │          │            │ blog │            │ about...    │
-├─────────────┼──────────┼────────────┼──────┼────────────┼─────────────┤
-│ Draft Post  │ Draft    │ 2025-01-14 │ ...  │ ...        │ ...         │
-│ (Not synced)│          │            │      │            │             │
-└─────────────┴──────────┴────────────┴──────┴────────────┴─────────────┘
-```
-
-**Notes:**
-- Only pages with Status = "Published" are synced
-- Date can be named "Published", "Date", or "Publish Date"
-- Tags and Categories are optional
-- Description is used for SEO meta tags
+### Optional Properties
+- **SEO Description** (Text type) - Meta description for SEO
+- **Tags** (Text type) - Space or comma-separated tags (e.g., "tag1 tag2" or "tag1, tag2")
+- **Category** (Text type) - Space or comma-separated categories
+- **Slug** (Text type) - URL slug (auto-generated from title if empty)
+- **Excerpt** (Text type) - Short excerpt
+- **Featured Image**, **Notes**, etc. - Other fields for your reference
 
 ## Usage
 
-### Syncing Posts
-
+### Run the sync:
 ```bash
-cd notion-sync
-cargo run
+# If using .env file
+source .env  # On Windows: set commands or use dotenv
+python3 sync.py
+
+# Or set variables inline
+NOTION_API_KEY=secret_xxx NOTION_DATABASE_ID=xxx python3 sync.py
 ```
 
-**What happens:**
-1. Connects to Notion API
-2. Queries database for "Published" pages
-3. Converts each page to Markdown
-4. Generates Zola frontmatter
-5. Writes files to `../content/blog/`
-6. Shows summary of synced posts
-
-**Example output:**
-```
-✅ Synced 5 posts from Notion to Zola
-   - welcome-to-mileshope.md
-   - getting-started-with-bazi.md
-   - understanding-tarot.md
-   - spiritual-practices.md
-   - mindfulness-guide.md
-```
-
-### Viewing Generated Files
-
+### After syncing:
 ```bash
-ls -l content/blog/
-cat content/blog/welcome-to-mileshope.md
-```
-
-### Building Site After Sync
-
-```bash
-cd ..
-zola build
-# Or start dev server
+# Preview your site
 zola serve
+
+# Build for production
+zola build
 ```
 
-## Supported Notion Blocks
+## Supported Content
 
-### ✅ Fully Supported
+The tool converts these Notion blocks to Markdown:
 
-| Block Type | Markdown Output | Notes |
-|------------|----------------|-------|
-| Paragraph | Plain text | With formatting |
-| Heading 1 | `# Heading` | - |
-| Heading 2 | `## Heading` | - |
-| Heading 3 | `### Heading` | - |
-| Bulleted List | `- Item` | Nested lists supported |
-| Numbered List | `1. Item` | Nested lists supported |
-| Code Block | ` ```lang\ncode\n``` ` | Language preserved |
-| Quote | `> Quote text` | - |
-| Callout | `> 💡 Callout text` | Icon + text |
-| Divider | `---` | - |
-| Link | `[text](url)` | - |
+- **Paragraphs** with rich text (bold, italic, code, strikethrough, links)
+- **Headings** (H1, H2, H3)
+- **Lists** (bulleted and numbered)
+- **Code blocks** with syntax highlighting
+- **Quotes**
+- **Callouts** (converted to blockquotes with emoji)
+- **Dividers**
+- **Images** (external and uploaded)
 
-### ✅ Text Formatting
+## Output
 
-| Format | Markdown | Example |
-|--------|----------|---------|
-| Bold | `**text**` | **bold** |
-| Italic | `*text*` | *italic* |
-| Code | `` `code` `` | `code` |
-| Strikethrough | `~~text~~` | ~~strikethrough~~ |
-| Link | `[text](url)` | [link](url) |
+Posts are written to `content/blog/` with this structure:
 
-### ⚠️ Partially Supported
-
-| Block Type | Status | Workaround |
-|------------|--------|------------|
-| Images | Not synced | Upload separately to `static/` |
-| Files | Not synced | Upload separately |
-| Embeds | Not synced | Use HTML in Markdown |
-| Databases | Not synced | Export as tables |
-| Toggle | Converted to heading | Loses toggle functionality |
-
-### ❌ Not Supported
-
-- Synced blocks
-- Equations (LaTeX)
-- Bookmarks
-- Video embeds
-- PDF embeds
-- Advanced table formatting
-
-## Frontmatter Generation
-
-### Example Frontmatter
-
-```toml
+```markdown
 +++
-title = "Welcome to MilesHope"
-date = 2025-01-13
-description = "Exploring spirituality, technology, and personal growth"
+title = "Your Post Title"
+date = 2025-01-12
+description = "Optional description"
 
 [taxonomies]
-categories = ["Spirituality", "Tech"]
-tags = ["welcome", "intro", "bazi"]
+categories = ["Category 1", "Category 2"]
+tags = ["tag1", "tag2"]
 +++
+
+Your post content here...
 ```
 
-### Frontmatter Fields
-
-| Field | Source | Required |
-|-------|--------|----------|
-| `title` | Notion "Name" property | ✅ |
-| `date` | Notion "Published" property | ✅ |
-| `description` | Notion "Description" property | ❌ |
-| `categories` | Notion "Categories" property | ❌ |
-| `tags` | Notion "Tags" property | ❌ |
-
-## Workflow Recommendations
-
-### 1. Write in Notion First
-
-**Pros:**
-- Familiar interface
-- Real-time collaboration
-- Mobile app available
-- Version history
-
-### 2. Sync When Ready
-
-```bash
-cd notion-sync
-cargo run
-cd ..
-```
-
-### 3. Review Generated Markdown
-
-```bash
-# Check generated files
-cat content/blog/latest-post.md
-
-# Preview in dev server
-zola serve
-# Visit http://127.0.0.1:1111/blog/latest-post/
-```
-
-### 4. Make Adjustments
-
-If needed, edit Markdown directly:
-```bash
-# Edit the generated file
-vim content/blog/latest-post.md
-```
-
-**Note:** Manual edits will be overwritten on next sync!
-
-### 5. Commit and Deploy
-
-```bash
-git add content/blog/
-git commit -m "Add new blog post: Latest Post"
-git push origin main
-```
+Filenames are auto-generated from post titles (e.g., "My Post" -> "my-post.md").
 
 ## Troubleshooting
 
-### API Key Not Working
+### "Error communicating with Notion API"
+- Check your `NOTION_API_KEY` is correct
+- Verify your `NOTION_DATABASE_ID` is correct
+- Ensure your integration has access to the database (Step 2)
 
-**Error:** `Unauthorized (401)`
+### "No published posts found"
+- Verify your database has a "Status" property
+- Check at least one post has Status = "Published"
+- Make sure the status option is exactly "Published" (case-sensitive)
 
-**Solutions:**
-1. Verify API key in `.env` is correct
-2. Check integration hasn't been deleted
-3. Ensure database is shared with integration
+### Posts not appearing on site
+- Run `zola serve` to preview
+- Check the generated files in `content/blog/`
+- Ensure posts have valid frontmatter (especially `date` field)
 
-### Database Not Found
+## Automation
 
-**Error:** `Database not found`
+You can automate syncing with:
 
-**Solutions:**
-1. Verify DATABASE_ID in `.env` is correct (32 chars, no dashes)
-2. Check database is shared with integration
-3. Try re-sharing the database
-
-### No Posts Synced
-
-**Error:** `✅ Synced 0 posts`
-
-**Solutions:**
-1. Check posts have Status = "Published"
-2. Verify Status property exists
-3. Check "Published" option spelling (case-sensitive)
-
-### Compilation Errors
-
-**Error:** `cargo run` fails
-
-**Solutions:**
+### Cron job (Unix/Mac)
 ```bash
-# Update Rust
-rustup update
-
-# Clean build
-cargo clean
-cargo build
+# Run every hour
+0 * * * * cd /path/to/mileshope.com && source .env && python3 sync.py
 ```
 
-### Missing Properties
+### GitHub Actions (for auto-deploy)
+Create `.github/workflows/sync.yml`:
+```yaml
+name: Sync and Deploy
+on:
+  schedule:
+    - cron: '0 * * * *'  # Every hour
+  workflow_dispatch:  # Manual trigger
 
-**Error:** `Property 'X' not found`
-
-**Solutions:**
-1. Check property name spelling
-2. Verify property type is correct
-3. Add missing property to database
-
-## Advanced Usage
-
-### Custom Content Path
-
-Edit `notion-sync/src/main.rs`:
-```rust
-const OUTPUT_DIR: &str = "../content/custom-path/";
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Sync from Notion
+        env:
+          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+        run: |
+          pip install requests
+          python sync.py
+      - name: Build site
+        run: |
+          # Install Zola and build
+          # Deploy to your hosting
 ```
 
-### Filtering Posts
+## Development
 
-Edit query in `notion-sync/src/main.rs`:
-```rust
-// Only sync specific category
-.filter(
-    Property::new("Categories")
-        .select()
-        .equals("Tech")
-)
-```
+The script is a single file (`sync.py`) with no external dependencies except `requests`. Feel free to customize:
 
-### Custom Frontmatter
-
-Edit `notion-sync/src/frontmatter.rs` to add custom fields.
-
-## Best Practices
-
-### ✅ Do
-
-- Keep Notion database organized
-- Use consistent naming
-- Set Status to "Published" when ready
-- Add descriptions for SEO
-- Use tags and categories consistently
-- Sync regularly
-
-### ❌ Don't
-
-- Commit `.env` file
-- Edit synced Markdown directly (changes will be lost)
-- Use unsupported block types extensively
-- Forget to rebuild Zola after sync
-- Change database schema without updating code
-
-## API Rate Limits
-
-**Notion API Limits:**
-- 3 requests per second
-- The tool includes automatic rate limiting
-
-**If you hit limits:**
-- Wait a few seconds
-- Run sync again
-- Notion will return after cooldown
-
-## Debugging
-
-### Enable Verbose Logging
-
-```bash
-RUST_LOG=debug cargo run
-```
-
-### Check API Response
-
-Add to `notion-sync/src/main.rs`:
-```rust
-println!("API Response: {:?}", response);
-```
-
-### Test API Connection
-
-```bash
-curl -H "Authorization: Bearer $NOTION_API_KEY" \
-     -H "Notion-Version: 2022-06-28" \
-     "https://api.notion.com/v1/databases/$NOTION_DATABASE_ID"
-```
-
-## Resources
-
-- [Notion API Docs](https://developers.notion.com/)
-- [Notion Rust SDK](https://github.com/jakeswenson/notion)
-- [Tool Source Code](../notion-sync/)
-
----
-
-**Last Updated:** January 2025
+- Modify `block_to_markdown()` to add more block type support
+- Adjust `create_frontmatter()` for different property mappings
+- Change `slugify()` for different URL slug generation
+- Add error handling or logging as needed

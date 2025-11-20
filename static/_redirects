@@ -1,0 +1,13 @@
+# Redirects for MilesHope.com
+
+# Force HTTPS (Cloudflare does this automatically, but good to be explicit)
+# http://mileshope.com/* https://www.mileshope.com/:splat 301!
+
+# Redirect non-www to www (if using www as primary)
+# https://mileshope.com/* https://www.mileshope.com/:splat 301!
+
+# SPA fallback (not needed for Zola static site, but kept for reference)
+# /* /index.html 200
+
+# Custom redirects (examples)
+# /old-url /new-url 301
