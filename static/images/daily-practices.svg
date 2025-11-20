@@ -19,7 +19,7 @@
   <circle cx="500" cy="260" r="5" fill="white"/>
   <circle cx="400" cy="360" r="5" fill="white"/>
   <circle cx="300" cy="260" r="5" fill="white"/>
-  <text x="400" y="70" text-anchor="middle" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white">Daily Spiritual Practices</text>
+  <text x="400" y="70" text-anchor="middle" font-family="Lora, Georgia, serif" font-size="36" font-weight="bold" fill="white">Daily Spiritual Practices</text>
   <rect x="250" y="90" width="300" height="3" rx="1.5" fill="url(#goldGrad)" opacity="0.8"/>
-  <text x="400" y="420" text-anchor="middle" font-family="Georgia, serif" font-size="28" font-weight="bold" fill="url(#goldGrad)">for Modern Life</text>
+  <text x="400" y="420" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="600" fill="url(#goldGrad)">for Modern Life</text>
 </svg>

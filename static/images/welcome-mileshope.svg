@@ -27,8 +27,8 @@
   <text x="550" cy="350" font-size="22" fill="rgba(255,255,255,0.5)">✧</text>
 
   <!-- Main title -->
-  <text x="400" y="160" text-anchor="middle" font-family="Georgia, serif" font-size="48" font-weight="bold" fill="white">Welcome to</text>
-  <text x="400" y="230" text-anchor="middle" font-family="Georgia, serif" font-size="56" font-weight="bold" fill="url(#goldGrad)">MilesHope</text>
+  <text x="400" y="160" text-anchor="middle" font-family="Lora, Georgia, serif" font-size="48" font-weight="bold" fill="white">Welcome to</text>
+  <text x="400" y="230" text-anchor="middle" font-family="Lora, Georgia, serif" font-size="56" font-weight="bold" fill="url(#goldGrad)">MilesHope</text>
 
   <!-- Decorative line -->
   <rect x="250" y="260" width="300" height="3" rx="1.5" fill="url(#goldGrad)" opacity="0.8"/>

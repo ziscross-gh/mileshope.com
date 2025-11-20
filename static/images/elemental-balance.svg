@@ -15,10 +15,10 @@
   <circle cx="700" cy="370" r="60" fill="rgba(255,255,255,0.08)"/>
   <text x="150" y="370" font-size="22" fill="rgba(255,255,255,0.5)">☯</text>
   <text x="650" y="130" font-size="20" fill="rgba(255,255,255,0.4)">⚖</text>
-  <text x="400" y="130" text-anchor="middle" font-family="Georgia, serif" font-size="44" font-weight="bold" fill="white">Finding Balance</text>
+  <text x="400" y="130" text-anchor="middle" font-family="Lora, Georgia, serif" font-size="44" font-weight="bold" fill="white">Finding Balance</text>
   <rect x="250" y="155" width="300" height="3" rx="1.5" fill="url(#goldGrad)" opacity="0.8"/>
   <text x="400" y="210" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="rgba(255,255,255,0.9)">Working With Your</text>
-  <text x="400" y="255" text-anchor="middle" font-family="Georgia, serif" font-size="32" font-weight="bold" fill="url(#goldGrad)">Elemental Bazi Chart</text>
+  <text x="400" y="255" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="600" fill="url(#goldGrad)">Elemental Bazi Chart</text>
   <g transform="translate(400, 360)">
     <circle cx="-80" cy="0" r="20" fill="rgba(46,160,67,0.5)" stroke="#fbd38d" stroke-width="1"/>
     <circle cx="-40" cy="0" r="20" fill="rgba(229,62,62,0.5)" stroke="#fbd38d" stroke-width="1"/>

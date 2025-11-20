@@ -17,7 +17,7 @@
   <text x="120" y="80" font-size="28" fill="rgba(214,158,46,0.6)">⭐</text>
   <text x="680" y="400" font-size="28" fill="rgba(214,158,46,0.6)">⭐</text>
   <text x="620" y="100" font-size="20" fill="rgba(214,158,46,0.4)">✨</text>
-  <text x="400" y="280" text-anchor="middle" font-family="Georgia, serif" font-size="44" font-weight="bold" fill="white">Understanding Tarot</text>
+  <text x="400" y="280" text-anchor="middle" font-family="Lora, Georgia, serif" font-size="44" font-weight="bold" fill="white">Understanding Tarot</text>
   <rect x="250" y="305" width="300" height="3" rx="1.5" fill="url(#goldGrad)" opacity="0.8"/>
-  <text x="400" y="365" text-anchor="middle" font-family="Georgia, serif" font-size="28" font-weight="bold" fill="url(#goldGrad)">A Beginner's Guide</text>
+  <text x="400" y="365" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="600" fill="url(#goldGrad)">A Beginner's Guide</text>
 </svg>

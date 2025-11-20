@@ -21,14 +21,30 @@
     --color-accent: var(--color-gold);
 
     /* Font families */
-    --font-sans:
-        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
-        Arial, sans-serif;
-    --font-serif: Georgia, "Times New Roman", serif;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-serif: 'Lora', Georgia, "Times New Roman", serif;
 
     /* Container */
     --container-max-w: 1200px;
     --container-padding: 1rem;
+}
+
+/* Fluid Typography Scale */
+:root {
+    /* Base font size: 16px on mobile, 18px on desktop */
+    --font-size-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+
+    /* Heading sizes - fluid scaling */
+    --font-size-h1: clamp(2rem, 1.5rem + 2.5vw, 3rem);
+    --font-size-h2: clamp(1.5rem, 1.25rem + 1.25vw, 2.25rem);
+    --font-size-h3: clamp(1.25rem, 1.1rem + 0.75vw, 1.75rem);
+    --font-size-h4: clamp(1.125rem, 1rem + 0.5vw, 1.5rem);
+    --font-size-h5: clamp(1rem, 0.95rem + 0.25vw, 1.25rem);
+    --font-size-h6: clamp(0.875rem, 0.85rem + 0.125vw, 1rem);
+
+    /* Small text */
+    --font-size-sm: clamp(0.875rem, 0.85rem + 0.125vw, 0.9375rem);
+    --font-size-xs: clamp(0.75rem, 0.725rem + 0.125vw, 0.8125rem);
 }
 
 /* Custom component classes for complex patterns */
@@ -69,7 +85,8 @@ html {
 
 body {
     font-family: var(--font-sans);
-    line-height: 1.6;
+    font-size: var(--font-size-base);
+    line-height: 1.7;
     color: #2d3748;
     background-color: #fff;
     transition:
@@ -95,6 +112,7 @@ h6 {
     line-height: 1.3;
     margin-bottom: 1rem;
     color: #4a5568;
+    letter-spacing: 0.01em;
 }
 
 html.dark h1,
@@ -106,25 +124,25 @@ html.dark h6 {
     color: #f7fafc;
 }
 
-/* Explicit heading sizes to override deprecated browser behaviors */
+/* Fluid heading sizes */
 h1 {
-    font-size: 2.5rem;
-    font-size: 2.5rem !important; /* Override deprecated H1UserAgentFontSizeInSection */
+    font-size: var(--font-size-h1);
+    font-size: var(--font-size-h1) !important; /* Override deprecated H1UserAgentFontSizeInSection */
 }
 h2 {
-    font-size: 2rem;
+    font-size: var(--font-size-h2);
 }
 h3 {
-    font-size: 1.75rem;
+    font-size: var(--font-size-h3);
 }
 h4 {
-    font-size: 1.5rem;
+    font-size: var(--font-size-h4);
 }
 h5 {
-    font-size: 1.25rem;
+    font-size: var(--font-size-h5);
 }
 h6 {
-    font-size: 1rem;
+    font-size: var(--font-size-h6);
 }
 
 /* Typography - Paragraphs and links */
@@ -372,7 +390,11 @@ html.dark .site-footer {
 /* Main Content Area */
 .main-content {
     min-height: 60vh;
-    padding: 3rem 0;
+    padding: 0 0 3rem;
+}
+
+.main-content:has(.homepage) {
+    padding-top: 0;
 }
 
 /* Hero Section */
@@ -409,6 +431,112 @@ html.dark .hero {
     gap: 1rem;
     justify-content: center;
     flex-wrap: wrap;
+}
+
+/* Hero with quote overlay */
+.hero-with-quote {
+    position: relative;
+    padding: 0;
+    background: transparent;
+    margin-bottom: 3rem;
+    min-height: 400px;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 5rem 2rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 400px;
+}
+
+.hero-quote {
+    margin: 0 auto 2rem;
+    max-width: 700px;
+}
+
+.hero-with-quote .hero-quote p {
+    font-family: var(--font-serif);
+    font-size: 36px;
+    font-style: italic !important;
+    color: white;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+}
+
+.hero-quote p::after {
+    content: '';
+    display: block;
+    width: 300px;
+    height: 2px;
+    background: linear-gradient(90deg, #d69e2e 0%, #fbd38d 100%);
+    margin: 1.5rem auto 0;
+    opacity: 0.6;
+    border-radius: 1px;
+}
+
+.hero-quote cite {
+    font-family: var(--font-sans);
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    background: linear-gradient(90deg, #d69e2e 0%, #fbd38d 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .hero-quote p {
+        font-size: 24px;
+    }
+
+    .hero-quote p::after {
+        width: 200px;
+    }
+
+    .hero-quote cite {
+        font-size: 16px;
+    }
+}
+
+.hero-with-quote .hero-cta {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+    .hero-with-quote {
+        min-height: 350px;
+    }
+
+    .hero-content {
+        padding: 3rem 1.5rem;
+        min-height: 350px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -523,6 +651,7 @@ html.dark .post-card:hover {
     margin-bottom: 0.5rem;
     font-size: 1.125rem;
     line-height: 1.4;
+    letter-spacing: 0.01em;
 }
 
 .post-card h3 a {
@@ -1194,7 +1323,7 @@ html.dark .pagination-info {
    ================================================ */
 
 .blog-post {
-    padding: 3rem 0;
+    padding: 1rem 0 3rem;
 }
 
 .blog-post .container {

@@ -18,8 +18,8 @@
   <circle cx="670" cy="225" r="35" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
   <circle cx="670" cy="225" r="20" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
   <path d="M 300 225 Q 340 185, 380 225 T 460 225 Q 500 265, 540 225" fill="none" stroke="rgba(214,158,46,0.8)" stroke-width="3"/>
-  <text x="400" y="120" text-anchor="middle" font-family="Georgia, serif" font-size="40" font-weight="bold" fill="white">Technology &amp;</text>
-  <text x="400" y="175" text-anchor="middle" font-family="Georgia, serif" font-size="40" font-weight="bold" fill="white">Spirituality</text>
+  <text x="400" y="120" text-anchor="middle" font-family="Lora, Georgia, serif" font-size="40" font-weight="bold" fill="white">Technology &amp;</text>
+  <text x="400" y="175" text-anchor="middle" font-family="Lora, Georgia, serif" font-size="40" font-weight="bold" fill="white">Spirituality</text>
   <rect x="250" y="200" width="300" height="3" rx="1.5" fill="url(#goldGrad)" opacity="0.8"/>
-  <text x="400" y="390" text-anchor="middle" font-family="Georgia, serif" font-size="28" font-weight="bold" fill="url(#goldGrad)">Finding the Balance</text>
+  <text x="400" y="390" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="600" fill="url(#goldGrad)">Finding the Balance</text>
 </svg>

@@ -43,10 +43,15 @@
 {% block content %}
 <div class="homepage">
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1 class="hero-title">{{ config.title }}</h1>
-            <p class="hero-subtitle">{{ config.description }}</p>
+    <section class="hero hero-with-quote">
+        <div class="hero-bg">
+            <img src="/images/hero-bg.svg" alt="" aria-hidden="true">
+        </div>
+        <div class="hero-content">
+            <blockquote class="hero-quote">
+                <p>"The journey of a thousand miles begins with a single step."</p>
+                <cite>— Lao Tzu</cite>
+            </blockquote>
             <div class="hero-cta">
                 <a href="{{ get_url(path='@/blog/_index.md') }}" class="btn btn-primary">Read the Blog</a>
                 <a href="{{ get_url(path='@/services.md') }}" class="btn btn-secondary">Explore Services</a>

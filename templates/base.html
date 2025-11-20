@@ -16,9 +16,8 @@
     <!-- SEO Meta Tags -->
     <meta name="author" content="{{ config.extra.author }}">
 
-    <!-- Security Headers -->
+    <!-- Security Headers (X-Frame-Options must be set via HTTP header, not meta tag) -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
@@ -50,6 +49,11 @@
     <!-- Preconnect to external resources -->
     <link rel="preconnect" href="https://unpkg.com" crossorigin>
     <link rel="dns-prefetch" href="https://unpkg.com">
+
+    <!-- Google Fonts - Inter (body) + Lora (headings) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 
     <!-- Critical inline CSS to prevent layout shift -->
     <style>
