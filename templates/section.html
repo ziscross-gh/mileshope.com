@@ -32,8 +32,10 @@
                 {% endif %}
                 <div class="post-item-content">
                     <h2><a href="{{ page.permalink }}">{{ page.title }}</a></h2>
-                    {% if page.summary %}
-                    <p class="post-excerpt">{{ page.summary }}</p>
+                    {% if page.description %}
+                    <p class="post-excerpt">{{ page.description | truncate(length=180) }}</p>
+                    {% elif page.summary %}
+                    <p class="post-excerpt">{{ page.summary | striptags | truncate(length=180) }}</p>
                     {% endif %}
                 <div class="post-meta">
                     <time datetime="{{ page.date }}">{{ page.date | date(format="%B %d, %Y") }}</time>

@@ -49,6 +49,9 @@ render_emoji = true
 # Additional site metadata
 author = "Hope"
 
+# Enable table of contents for all pages by default
+generate_toc = true
+
 # Social media links (add as needed)
 # twitter = ""
 # github = ""

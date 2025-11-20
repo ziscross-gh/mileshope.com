@@ -1,38 +1,25 @@
-<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
   <defs>
-    <linearGradient id="bg9" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:#48bb78;stop-opacity:0.8" />
       <stop offset="25%" style="stop-color:#ed8936;stop-opacity:0.8" />
       <stop offset="50%" style="stop-color:#d69e2e;stop-opacity:0.8" />
       <stop offset="75%" style="stop-color:#4299e1;stop-opacity:0.8" />
       <stop offset="100%" style="stop-color:#805ad5;stop-opacity:1" />
     </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#fbd38d;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:1" />
+    </linearGradient>
   </defs>
-  <rect width="1200" height="630" fill="url(#bg9)"/>
-
-  <!-- Four seasons symbols in corners -->
-  <text x="150" y="120" font-size="60">🌸</text>  <!-- Spring -->
-  <text x="1050" y="120" font-size="60">☀️</text>  <!-- Summer -->
-  <text x="150" y="560" font-size="60">🍂</text>  <!-- Autumn -->
-  <text x="1050" y="560" font-size="60">❄️</text>  <!-- Winter -->
-
-  <!-- Circular flow arrows -->
-  <circle cx="600" cy="315" r="180" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="3" stroke-dasharray="10,10"/>
-
-  <!-- Main content -->
-  <text x="600" y="250" font-family="Arial, sans-serif" font-size="62" font-weight="bold" fill="white" text-anchor="middle">
-    Spiritual Self-Care
-  </text>
-  <text x="600" y="320" font-family="Arial, sans-serif" font-size="62" font-weight="bold" fill="white" text-anchor="middle">
-    Rituals for
-  </text>
-  <text x="600" y="390" font-family="Arial, sans-serif" font-size="62" font-weight="bold" fill="white" text-anchor="middle">
-    Each Season
-  </text>
-
-  <rect x="350" y="440" width="500" height="4" fill="rgba(255,255,255,0.6)" rx="2"/>
-
-  <text x="600" y="520" font-family="Arial, sans-serif" font-size="28" fill="white" text-anchor="middle">
-    Aligning with Nature's Rhythm
-  </text>
+  <rect width="800" height="450" fill="url(#bgGrad)"/>
+  <text x="100" y="80" font-size="36">🌸</text>
+  <text x="700" y="80" font-size="36">☀️</text>
+  <text x="100" y="400" font-size="36">🍂</text>
+  <text x="700" y="400" font-size="36">❄️</text>
+  <circle cx="400" cy="225" r="100" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-dasharray="8,8"/>
+  <text x="400" y="150" text-anchor="middle" font-family="Lora, Georgia, serif" font-size="32" font-weight="bold" fill="white">Spiritual Self-Care</text>
+  <text x="400" y="200" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="32" font-weight="600" fill="url(#goldGrad)">Rituals for Each Season</text>
+  <rect x="250" y="225" width="300" height="3" rx="1.5" fill="rgba(255,255,255,0.6)"/>
+  <text x="400" y="290" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="rgba(255,255,255,0.9)">Aligning with Nature's Rhythm</text>
 </svg>

@@ -1,31 +1,28 @@
-<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
   <defs>
-    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:#553c9a;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#6b46c1;stop-opacity:1" />
       <stop offset="100%" style="stop-color:#805ad5;stop-opacity:1" />
     </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#d69e2e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fbd38d;stop-opacity:1" />
+    </linearGradient>
   </defs>
-  <rect width="1200" height="630" fill="url(#bg3)"/>
-
-  <!-- Five circles representing elements -->
-  <circle cx="300" cy="200" r="60" fill="rgba(46,160,67,0.5)"/> <!-- Wood -->
-  <circle cx="900" cy="200" r="60" fill="rgba(229,62,62,0.5)"/> <!-- Fire -->
-  <circle cx="600" cy="315" r="70" fill="rgba(214,158,46,0.6)"/> <!-- Earth -->
-  <circle cx="300" cy="430" r="60" fill="rgba(160,174,192,0.5)"/> <!-- Metal -->
-  <circle cx="900" cy="430" r="60" fill="rgba(66,153,225,0.5)"/> <!-- Water -->
-
-  <!-- Lines connecting elements -->
-  <line x1="300" y1="200" x2="900" y2="200" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
-  <line x1="900" y1="200" x2="600" y2="315" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
-  <line x1="600" y1="315" x2="300" y2="430" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
-  <line x1="300" y1="430" x2="900" y2="430" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
-  <line x1="900" y1="430" x2="300" y2="200" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
-
-  <!-- Main content -->
-  <text x="600" y="80" font-family="Arial, sans-serif" font-size="56" font-weight="bold" fill="white" text-anchor="middle">
-    Five Elements in Bazi
-  </text>
-  <text x="600" y="580" font-family="Arial, sans-serif" font-size="28" fill="rgba(214,158,46,1)" text-anchor="middle">
-    A Practical Guide to Wu Xing
-  </text>
+  <rect width="800" height="450" fill="url(#bgGrad)"/>
+  <circle cx="200" cy="150" r="35" fill="rgba(46,160,67,0.5)"/>
+  <circle cx="600" cy="150" r="35" fill="rgba(229,62,62,0.5)"/>
+  <circle cx="400" cy="225" r="40" fill="rgba(214,158,46,0.6)"/>
+  <circle cx="200" cy="300" r="35" fill="rgba(160,174,192,0.5)"/>
+  <circle cx="600" cy="300" r="35" fill="rgba(66,153,225,0.5)"/>
+  <line x1="200" y1="150" x2="600" y2="150" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+  <line x1="600" y1="150" x2="400" y2="225" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+  <line x1="400" y1="225" x2="200" y2="300" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+  <line x1="200" y1="300" x2="600" y2="300" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+  <line x1="600" y1="300" x2="200" y2="150" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+  <text x="400" y="60" text-anchor="middle" font-family="Lora, Georgia, serif" font-size="36" font-weight="bold" fill="white">Five Elements in</text>
+  <text x="400" y="105" text-anchor="middle" font-family="Lora, Georgia, serif" font-size="48" font-weight="bold" fill="url(#goldGrad)">Bazi</text>
+  <rect x="280" y="360" width="240" height="3" rx="1.5" fill="url(#goldGrad)" opacity="0.8"/>
+  <text x="400" y="410" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="rgba(255,255,255,0.9)">A Practical Guide to Wu Xing</text>
 </svg>

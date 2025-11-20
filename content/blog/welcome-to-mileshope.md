@@ -6,6 +6,10 @@ description = "Welcome to MilesHope.com - Personal blog covering technology spir
 [taxonomies]
 categories = ["Personal", "Development"]
 tags = ["personal-growth", "welcome", "introduction"]
+
+[extra]
+featured_image = "/images/welcome-mileshope.svg"
+featured_image_alt = "Welcome to MilesHope - Spirituality, Technology, Personal Growth"
 +++
 
 Welcome to my personal blog! This is where I'll share my thoughts on technology spiritual practices travel adventures and insights from my journey in divination and personal development. I'm excited to connect with fellow travelers on the path of growth and discovery.

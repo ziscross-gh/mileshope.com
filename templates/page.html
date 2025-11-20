@@ -185,6 +185,13 @@
             </ol>
         </nav>
 
+        <!-- Featured Image at Top -->
+        {% if page.extra.featured_image %}
+        <div class="featured-image-hero">
+            <img src="{{ page.extra.featured_image }}" alt="{{ page.extra.featured_image_alt | default(value=page.title) }}" loading="eager" decoding="async">
+        </div>
+        {% endif %}
+
         <!-- Post Header -->
         <header class="post-header">
             <h1 class="post-title">{{ page.title }}</h1>
@@ -194,17 +201,6 @@
                 {% if page.reading_time %}
                 <span class="reading-time">📖 {{ page.reading_time }} min read</span>
                 {% endif %}
-                {% if page.word_count %}
-                <span class="word-count">{{ page.word_count }} words</span>
-                {% endif %}
-                <button class="reading-list-btn" id="readingListBtn"
-                        data-title="{{ page.title }}"
-                        data-url="{{ page.permalink }}"
-                        data-reading-time="{{ page.reading_time }}"
-                        aria-label="Add to reading list">
-                    <span class="bookmark-icon">🔖</span>
-                    <span class="bookmark-text">Save</span>
-                </button>
             </div>
             {% endif %}
             {% if page.taxonomies.categories %}
@@ -223,38 +219,32 @@
             {% endif %}
         </header>
 
-        <!-- Featured Image -->
-        {% if page.extra.featured_image %}
-        <div class="featured-image">
-            <img src="{{ page.extra.featured_image }}" alt="{{ page.extra.featured_image_alt | default(value=page.title) }}" loading="eager" decoding="async">
-        </div>
-        {% endif %}
-
-        <!-- Table of Contents (for long posts) -->
+        <!-- Table of Contents (sticky expandable overlay) -->
         {% if page.toc and page.toc | length > 0 %}
-        <aside class="table-of-contents">
-            <div class="toc-header">
-                <h3>📑 Table of Contents</h3>
-                <button class="toc-toggle" id="tocToggle" aria-label="Toggle table of contents">
-                    <span class="toc-toggle-icon">−</span>
-                </button>
+        <aside class="table-of-contents" id="tocContainer">
+            <div class="toc-header" id="tocHeader">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="12" x2="15" y2="12"></line>
+                    <line x1="3" y1="18" x2="18" y2="18"></line>
+                </svg>
             </div>
-            <nav class="toc-nav" id="tocNav">
+            <div class="toc-content" id="tocContent">
                 <ul>
                 {% for h1 in page.toc %}
                     <li>
-                        <a href="{{ h1.permalink | safe }}">{{ h1.title }}</a>
+                        <a href="#{{ h1.id }}">{{ h1.title }}</a>
                         {% if h1.children %}
                         <ul>
                         {% for h2 in h1.children %}
-                            <li><a href="{{ h2.permalink | safe }}">{{ h2.title }}</a></li>
+                            <li><a href="#{{ h2.id }}">{{ h2.title }}</a></li>
                         {% endfor %}
                         </ul>
                         {% endif %}
                     </li>
                 {% endfor %}
                 </ul>
-            </nav>
+            </div>
         </aside>
         {% endif %}
 
@@ -291,51 +281,6 @@
         </aside>
         {% endif %}
 
-        <!-- Related Posts -->
-        {% if page.date and page.taxonomies.tags %}
-        {% set_global related_posts = [] %}
-        {% set current_tags = page.taxonomies.tags %}
-        {% set blog_section = get_section(path="blog/_index.md") %}
-
-        {% for post in blog_section.pages %}
-            {% if post.permalink != page.permalink and post.taxonomies.tags %}
-                {% set_global match_count = 0 %}
-                {% for tag in post.taxonomies.tags %}
-                    {% if tag in current_tags %}
-                        {% set_global match_count = match_count + 1 %}
-                    {% endif %}
-                {% endfor %}
-                {% if match_count > 0 %}
-                    {% set_global related_posts = related_posts | concat(with=[post]) %}
-                {% endif %}
-            {% endif %}
-        {% endfor %}
-
-        {% if related_posts | length > 0 %}
-        <aside class="related-posts">
-            <h2>📚 Related Posts</h2>
-            <div class="related-posts-grid">
-                {% for post in related_posts | slice(end=3) %}
-                <article class="related-post-card">
-                    <h3><a href="{{ post.permalink }}">{{ post.title }}</a></h3>
-                    {% if post.description %}
-                    <p class="related-post-excerpt">{{ post.description | truncate(length=120) }}</p>
-                    {% endif %}
-                    <div class="related-post-meta">
-                        {% if post.reading_time %}
-                        <span class="reading-time">{{ post.reading_time }} min read</span>
-                        {% endif %}
-                        {% if post.taxonomies.categories %}
-                        <span class="category">{{ post.taxonomies.categories | first }}</span>
-                        {% endif %}
-                    </div>
-                </article>
-                {% endfor %}
-            </div>
-        </aside>
-        {% endif %}
-        {% endif %}
-
         <!-- Post Footer -->
         <footer class="post-footer">
             <!-- Post Reactions -->
@@ -365,6 +310,51 @@
                     </button>
                 </div>
             </div>
+            {% endif %}
+
+            <!-- Related Posts -->
+            {% if page.date and page.taxonomies.tags %}
+            {% set_global related_posts = [] %}
+            {% set current_tags = page.taxonomies.tags %}
+            {% set blog_section = get_section(path="blog/_index.md") %}
+
+            {% for post in blog_section.pages %}
+                {% if post.permalink != page.permalink and post.taxonomies.tags %}
+                    {% set_global match_count = 0 %}
+                    {% for tag in post.taxonomies.tags %}
+                        {% if tag in current_tags %}
+                            {% set_global match_count = match_count + 1 %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if match_count > 0 %}
+                        {% set_global related_posts = related_posts | concat(with=[post]) %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+
+            {% if related_posts | length > 0 %}
+            <aside class="related-posts">
+                <h2>📚 Related Posts</h2>
+                <div class="related-posts-grid">
+                    {% for post in related_posts | slice(end=3) %}
+                    <article class="related-post-card">
+                        <h3><a href="{{ post.permalink }}">{{ post.title }}</a></h3>
+                        {% if post.description %}
+                        <p class="related-post-excerpt">{{ post.description | truncate(length=120) }}</p>
+                        {% endif %}
+                        <div class="related-post-meta">
+                            {% if post.reading_time %}
+                            <span class="reading-time">{{ post.reading_time }} min read</span>
+                            {% endif %}
+                            {% if post.taxonomies.categories %}
+                            <span class="category">{{ post.taxonomies.categories | first }}</span>
+                            {% endif %}
+                        </div>
+                    </article>
+                    {% endfor %}
+                </div>
+            </aside>
+            {% endif %}
             {% endif %}
 
             <!-- Social Sharing -->
@@ -440,23 +430,31 @@
 
 // Table of Contents Toggle & Active Highlighting
 (function() {
-    const tocToggle = document.getElementById('tocToggle');
-    const tocNav = document.getElementById('tocNav');
+    const tocContainer = document.getElementById('tocContainer');
+    const tocHeader = document.getElementById('tocHeader');
+    const tocContent = document.getElementById('tocContent');
 
-    if (tocToggle && tocNav) {
-        tocToggle.addEventListener('click', function() {
-            const isCollapsed = tocNav.classList.toggle('collapsed');
-            const icon = this.querySelector('.toc-toggle-icon');
-            icon.textContent = isCollapsed ? '+' : '−';
+    if (tocHeader && tocContainer) {
+        // Toggle expand/collapse on icon click
+        tocHeader.addEventListener('click', function() {
+            tocContainer.classList.toggle('expanded');
+        });
+
+        // Close TOC when clicking outside
+        document.addEventListener('click', function(e) {
+            if (tocContainer && !tocContainer.contains(e.target)) {
+                tocContainer.classList.remove('expanded');
+            }
         });
 
         // Smooth scroll for TOC links
-        const tocLinks = tocNav.querySelectorAll('a');
-        tocLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
+        if (tocContent) {
+            const tocLinks = tocContent.querySelectorAll('a');
+            tocLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
 
                 if (targetElement) {
                     const offset = 80; // Account for fixed header
@@ -467,9 +465,10 @@
                         top: offsetPosition,
                         behavior: 'smooth'
                     });
-                }
+                    }
+                });
             });
-        });
+        }
 
         // Active TOC Highlighting on Scroll
         const headings = document.querySelectorAll('.post-content h1[id], .post-content h2[id], .post-content h3[id]');
