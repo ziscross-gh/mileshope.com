@@ -57,6 +57,5 @@ generate_toc = true
 # github = ""
 # email = ""
 
-# Google Analytics 4 - Replace with your actual GA4 Measurement ID (format: G-XXXXXXXXXX)
-# To enable analytics, uncomment the line below and add your Measurement ID
-# google_analytics_id = ""
+# Google Analytics 4
+google_analytics_id = "G-L162628GP4"
