@@ -1,33 +1,37 @@
 # MilesHope.com
 
-A modern static blog website exploring the intersection of spirituality, technology, and personal growth. Built with Zola and styled with Tailwind CSS v4.
+A modern static blog exploring spirituality, technology, and personal growth. Built with Zola and styled with Tailwind CSS v4.
 
-## 🚀 Tech Stack
+**Live site**: https://www.mileshope.com
+
+## Tech Stack
 
 - **Zola** - Fast static site generator written in Rust
-- **Tailwind CSS v4** - Modern utility-first CSS framework (standalone CLI)
+- **Tailwind CSS v4** - Utility-first CSS framework (standalone CLI)
 - **Notion** - Content management via Notion API
-- **Cloudflare Pages** - Deployment platform
-- **Rust** - Custom CLI tools for automation
+- **Cloudflare Pages** - Deployment and hosting
+- **Google Analytics 4** - Analytics and event tracking
 
-## ✨ Features
+## Features
 
-- **Modern Design** - Clean, responsive design with Tailwind CSS v4
+- **Modern Design** - Purple/gold color scheme with Lora serif headings
 - **Dark Mode** - Full dark mode support with smooth transitions
-- **Search** - Fast client-side search powered by elasticlunr.js
-- **Blog** - Full-featured blog with posts, tags, and categories
+- **Search** - Client-side search powered by elasticlunr.js
+- **Blog** - Posts with tags, categories, reading time, and table of contents
+- **Related Posts** - Smart post recommendations based on tags
 - **RSS Feeds** - Auto-generated feeds for blog and taxonomies
-- **SEO Optimized** - Meta tags, Open Graph, and Twitter Cards
-- **Mobile Responsive** - Works perfectly on all screen sizes
+- **SEO Optimized** - Meta tags, Open Graph, Twitter Cards, structured data
+- **Mobile Responsive** - Hamburger menu and responsive layouts
 - **Notion Sync** - Automated blog post syncing from Notion database
-- **Performance** - 26KB CSS, fast builds (~50ms), optimized assets
+- **Analytics** - GA4 with custom events (search, share, code copy)
+- **Performance** - Fast builds (~50ms), optimized CSS
 
-## 🏁 Quick Start
+## Quick Start
 
 ### Prerequisites
 
 - [Zola](https://www.getzola.org/documentation/getting-started/installation/) (v0.18.0+)
-- [Rust & Cargo](https://www.rust-lang.org/tools/install) (for Notion sync tool)
+- Python 3 (for Notion sync)
 
 ### Development
 
@@ -39,8 +43,8 @@ cd mileshope.com
 # Start development server with Tailwind watch mode
 ./dev.sh
 
-# Or manually start each process:
-# Terminal 1: Watch and compile Tailwind CSS
+# Or manually:
+# Terminal 1: Watch Tailwind CSS
 ./tailwindcss -i ./styles/input.css -o ./static/css/tailwind.css --watch
 
 # Terminal 2: Start Zola server
@@ -52,7 +56,7 @@ Visit `http://127.0.0.1:1111` to see the site locally.
 ### Production Build
 
 ```bash
-# Build everything (Tailwind + Zola)
+# Build everything
 ./build.sh
 
 # Or manually:
@@ -60,117 +64,76 @@ Visit `http://127.0.0.1:1111` to see the site locally.
 zola build
 ```
 
-The production site will be in the `public/` directory.
-
-## 📁 Project Structure
+## Project Structure
 
 ```
 mileshope.com/
 ├── content/              # Markdown content
-│   ├── blog/            # Blog posts (synced from Notion)
+│   ├── blog/            # Blog posts
 │   ├── about.md         # About page
+│   ├── contact.md       # Contact page
 │   └── services.md      # Services page
 ├── templates/           # Tera HTML templates
-│   ├── base.html        # Base layout
+│   ├── base.html        # Base layout with GA4
 │   ├── index.html       # Homepage
 │   ├── section.html     # Blog listing
 │   ├── page.html        # Individual posts
-│   ├── tags/            # Tag taxonomy templates
-│   └── categories/      # Category taxonomy templates
+│   └── 404.html         # Error page
 ├── static/              # Static assets
-│   └── css/
-│       └── tailwind.css # Compiled Tailwind CSS (26KB)
-├── styles/              # Tailwind source
-│   └── input.css        # Tailwind v4 source file
-├── notion-sync/         # Notion integration tool (Rust)
-├── docs/                # Documentation
-├── config.toml          # Zola configuration
-├── build.sh             # Production build script
-├── dev.sh               # Development script
-└── tailwindcss          # Tailwind CSS v4 CLI (65KB)
+│   ├── css/tailwind.css # Compiled CSS
+│   ├── favicon.svg      # Site favicon
+│   └── images/          # Images and OG image
+├── styles/input.css     # Tailwind v4 source
+├── config.toml          # Zola + GA4 configuration
+├── sync.py              # Notion sync script
+├── build.sh             # Production build
+└── dev.sh               # Development script
 ```
 
-## 📝 Documentation
+## Notion Sync
 
-All documentation is organized in the `docs/` directory:
-
-- **[Architecture Overview](docs/ARCHITECTURE.md)** - Project structure and design decisions
-- **[Development Guide](docs/DEVELOPMENT.md)** - Local development workflow
-- **[Notion Sync Guide](docs/NOTION_SYNC.md)** - Using the Notion integration
-- **[Tailwind Migration](docs/TAILWIND_MIGRATION.md)** - CSS migration history
-- **[Deployment Guide](docs/DEPLOYMENT.md)** - Cloudflare Pages setup
-
-### For Claude Code
-
-See [CLAUDE.md](CLAUDE.md) for AI assistant development instructions.
-
-## 🔄 Notion Integration
-
-Sync blog posts from Notion to Zola:
+Sync blog posts from Notion:
 
 ```bash
-cd notion-sync
+# Setup
+pip3 install requests
 cp .env.example .env
-# Edit .env with your NOTION_API_KEY and NOTION_DATABASE_ID
-cargo run
+# Edit .env with NOTION_API_KEY and NOTION_DATABASE_ID
+
+# Sync
+source .env
+python3 sync.py
 ```
 
-See [docs/NOTION_SYNC.md](docs/NOTION_SYNC.md) for detailed setup.
+See [SYNC_README.md](SYNC_README.md) for detailed setup.
 
-## 🎨 Styling
+## Styling
 
-This project uses **Tailwind CSS v4** with a custom design system:
+Custom design system with Tailwind CSS v4:
 
 - **Colors**: Purple (#805ad5) primary, Gold (#d69e2e) accent
-- **Typography**: Serif headings (Merriweather), Sans body (Inter)
-- **Dark Mode**: Class-based (`.dark` on `<html>`)
-- **Breakpoint**: Single mobile breakpoint at 768px
+- **Typography**: Lora (headings), Inter (body)
+- **Dark Mode**: Class-based toggle with localStorage persistence
 
-To modify styles, edit `styles/input.css` and rebuild with `./tailwindcss`.
+Edit `styles/input.css` and rebuild with `./tailwindcss`.
 
-## 🚢 Deployment
+## Deployment
 
-The site automatically deploys to Cloudflare Pages when pushed to `main`:
+Auto-deploys to Cloudflare Pages on push to `main`:
 
-1. Push to GitHub: `git push origin main`
-2. Cloudflare Pages runs `build.sh`
-3. Site deploys to https://www.mileshope.com
+1. Push: `git push origin main`
+2. Cloudflare runs `build.sh`
+3. Deploys to https://www.mileshope.com
 
-See [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) for manual deployment steps.
+## Analytics
 
-## 📊 Performance
+Google Analytics 4 is configured with custom event tracking:
+- Page views
+- Search queries
+- Share button clicks
+- Code block copies
+- Navigation clicks
 
-- **CSS Size**: 26KB (68% reduction from 82KB original)
-- **Build Time**: ~50ms (Tailwind) + 12ms (Zola) = 62ms total
-- **Lighthouse**: 100/100 (Performance, Accessibility, Best Practices, SEO)
+## License
 
-## 🗺️ Roadmap
-
-### ✅ Completed
-
-- [x] **Week 1**: Zola setup and basic templates
-- [x] **Week 2**: Notion integration with Rust CLI
-- [x] **Week 3**: Navigation, layout, and dark mode
-- [x] **Week 4**: Content components and styling
-- [x] **Week 5**: Search functionality and interactive features
-- [x] **Week 6**: Tailwind CSS v4 migration complete
-
-### 🔮 Future Enhancements
-
-- [ ] Newsletter subscription
-- [ ] Comment system
-- [ ] Image optimization and lazy loading
-- [ ] Advanced analytics
-- [ ] Multi-language support
-
-## 🤝 Contributing
-
-This is a personal project, but suggestions and feedback are welcome! Feel free to open an issue.
-
-## 📄 License
-
-Copyright © 2025 Miles Hope. All rights reserved.
-
----
-
-**Built with ❤️ using Zola, Tailwind CSS v4, and Rust**
+Copyright 2025 Miles Hope. All rights reserved.
