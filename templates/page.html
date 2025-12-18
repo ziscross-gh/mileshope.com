@@ -194,7 +194,9 @@
 
         <!-- Post Header -->
         <header class="post-header">
+            {% if page.date %}
             <h1 class="post-title">{{ page.title }}</h1>
+            {% endif %}
             {% if page.date %}
             <div class="post-meta">
                 <time datetime="{{ page.date }}">{{ page.date | date(format="%B %d, %Y") }}</time>
