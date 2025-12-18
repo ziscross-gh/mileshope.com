@@ -103,7 +103,7 @@
     </section>
 
     <!-- Popular Posts Section (Based on Your Reading History) -->
-    <section class="popular-posts" id="popularPostsSection" style="display: none;">
+    <section class="popular-posts hidden" id="popularPostsSection">
         <div class="container">
             <h2>📈 Your Most Read Posts</h2>
             <p class="popular-posts-subtitle">Based on your reading history</p>
@@ -166,7 +166,7 @@
     });
 
     // Show the section
-    popularPostsSection.style.display = 'block';
+    popularPostsSection.classList.remove('hidden');
 
     // Track analytics for popular posts section view
     if (typeof gtag === 'function') {

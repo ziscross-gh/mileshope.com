@@ -1,0 +1,157 @@
+/* Card Components */
+
+/* Post Card */
+.post-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    transition:
+        transform var(--transition-slow),
+        box-shadow var(--transition-slow),
+        border-color var(--transition-slow);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-shadow: var(--shadow-sm);
+}
+
+html.dark .post-card {
+    background: var(--color-gray-700);
+    border-color: var(--color-gray-600);
+}
+
+.post-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-purple);
+}
+
+html.dark .post-card:hover {
+    border-color: var(--color-purple-light);
+}
+
+/* Card Image */
+.post-card-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-4);
+}
+
+/* Card Content */
+.post-card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.post-card-title {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    display: block;
+    transition: color var(--transition-base);
+}
+
+.post-card-title:hover {
+    color: var(--color-primary);
+}
+
+html.dark .post-card-title {
+    color: var(--color-gray-100);
+}
+
+html.dark .post-card-title:hover {
+    color: var(--color-purple-light);
+}
+
+/* Card Meta */
+.post-card-meta {
+    display: flex;
+    gap: var(--space-4);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    margin-top: auto;
+}
+
+html.dark .post-card-meta {
+    color: var(--color-gray-400);
+}
+
+.post-card-excerpt {
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    font-size: var(--font-size-sm);
+}
+
+html.dark .post-card-excerpt {
+    color: var(--color-gray-400);
+}
+
+/* Reading Time Badge */
+.reading-time {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: var(--space-1) var(--space-2);
+    background: linear-gradient(
+        135deg,
+        rgba(213, 158, 46, 0.2),
+        rgba(251, 211, 141, 0.2)
+    );
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-xs);
+    color: var(--color-gold);
+    font-weight: 500;
+}
+
+html.dark .reading-time {
+    background: linear-gradient(
+        135deg,
+        rgba(213, 158, 46, 0.15),
+        rgba(251, 211, 141, 0.15)
+    );
+    color: var(--color-gold-light);
+}
+
+/* Tags */
+.tag {
+    display: inline-block;
+    padding: var(--space-1) var(--space-3);
+    background: var(--color-gray-100);
+    color: var(--color-text-secondary);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    text-decoration: none;
+    transition:
+        background var(--transition-base),
+        color var(--transition-base);
+}
+
+html.dark .tag {
+    background: var(--color-gray-700);
+    color: var(--color-gray-300);
+}
+
+.tag:hover {
+    background: var(--color-purple);
+    color: var(--color-white);
+}
+
+html.dark .tag:hover {
+    background: var(--color-purple-light);
+    color: var(--color-gray-900);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .post-card {
+        padding: var(--space-4);
+    }
+
+    .post-card-image {
+        height: 160px;
+    }
+}

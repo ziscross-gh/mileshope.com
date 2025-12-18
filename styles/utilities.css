@@ -1,31 +1,36 @@
 /* Custom Utility Classes */
 
+/* Visibility */
+.hidden {
+    display: none !important;
+}
+
 .reading-progress {
     position: fixed;
     top: 0;
     left: 0;
     height: 3px;
-    z-index: 1000;
-    transition: all 0.1s;
-    background: linear-gradient(90deg, #805ad5, #d69e2e);
+    z-index: var(--z-modal);
+    transition: all var(--transition-fast);
+    background: var(--gradient-purple-to-gold);
 }
 
 html.dark .reading-progress {
-    background: linear-gradient(90deg, #b794f4, #f6ad55);
+    background: var(--gradient-purple-to-gold-dark);
 }
 
 .hero-gradient {
-    background: linear-gradient(135deg, #805ad5 0%, #6b46c1 100%);
+    background: var(--gradient-purple);
 }
 
 html.dark .hero-gradient {
-    background: linear-gradient(135deg, #9f7aea 0%, #805ad5 100%);
+    background: var(--gradient-purple-dark);
 }
 
 .avatar-gradient {
-    background: linear-gradient(135deg, #805ad5, #d69e2e);
+    background: var(--gradient-purple-to-gold);
 }
 
 html.dark .avatar-gradient {
-    background: linear-gradient(135deg, #b794f4, #f6ad55);
+    background: var(--gradient-purple-to-gold-dark);
 }

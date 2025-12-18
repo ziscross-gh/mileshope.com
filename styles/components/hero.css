@@ -1,0 +1,132 @@
+/* Hero Components */
+
+/* Standard Hero Section */
+.hero {
+    text-align: center;
+    padding: var(--space-20) 0 var(--space-16);
+    background: var(--gradient-purple);
+    color: var(--color-white);
+    margin-bottom: var(--space-12);
+}
+
+html.dark .hero {
+    background: var(--gradient-purple-dark);
+}
+
+.hero-title {
+    font-size: var(--font-size-h1);
+    margin-bottom: var(--space-6);
+    color: var(--color-white);
+}
+
+.hero-subtitle {
+    font-size: clamp(1.125rem, 1rem + 0.5vw, 1.3rem);
+    margin-bottom: var(--space-8);
+    opacity: 0.95;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+.hero-cta {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Hero with quote overlay */
+.hero-with-quote {
+    position: relative;
+    padding: 0;
+    background: transparent;
+    margin-bottom: var(--space-12);
+    min-height: 400px;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: var(--z-0);
+    overflow: hidden;
+}
+
+.hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.hero-content {
+    position: relative;
+    z-index: var(--z-10);
+    padding: var(--space-20) var(--space-8);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 400px;
+}
+
+.hero-quote {
+    margin: 0 auto var(--space-8);
+    max-width: 700px;
+}
+
+.hero-with-quote .hero-quote p {
+    font-family: var(--font-serif);
+    font-size: clamp(1.5rem, 1.25rem + 1.25vw, 2.25rem);
+    font-style: italic;
+    color: var(--color-white);
+    line-height: 1.5;
+    margin-bottom: var(--space-6);
+}
+
+.hero-quote p::after {
+    content: '"';
+    font-size: 1.2em;
+    opacity: 0.7;
+}
+
+.hero-quote p::before {
+    content: '"';
+    font-size: 1.2em;
+    opacity: 0.7;
+}
+
+.hero-quote-author {
+    font-size: var(--font-size-sm);
+    color: var(--color-white);
+    opacity: 0.85;
+    font-family: var(--font-sans);
+    font-style: normal;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero {
+        padding: var(--space-12) 0 var(--space-8);
+    }
+
+    .hero-title {
+        font-size: var(--font-size-h2);
+    }
+
+    .hero-subtitle {
+        font-size: var(--font-size-base);
+    }
+
+    .hero-content {
+        padding: var(--space-12) var(--space-4);
+        min-height: 300px;
+    }
+
+    .hero-with-quote .hero-quote p {
+        font-size: var(--font-size-h3);
+    }
+}
