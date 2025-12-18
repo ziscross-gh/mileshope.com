@@ -8,18 +8,31 @@ MilesHope.com is a static blog website built with Zola (a fast static site gener
 
 **Tech Stack:**
 - **Zola**: Static site generator for fast, efficient blog generation
+- **Tailwind CSS v4**: Utility-first CSS framework (standalone CLI)
 - **Python**: Simple sync script for Notion integration
-- **Deployment**: Cloudflare Pages (planned for Week 5)
+- **Cloudflare Pages**: Live deployment at https://www.mileshope.com
+- **Google Analytics 4**: Analytics and event tracking (G-L162628GP4)
 - **Content Source**: Notion database (synced via Python script)
 
 ## Essential Commands
 
 ### Development
 ```bash
-# Start development server (auto-reload on changes)
+# Start development server with Tailwind watch mode
+./dev.sh
+
+# Or manually:
+# Terminal 1: Watch Tailwind CSS
+./tailwindcss -i ./styles/input.css -o ./static/css/tailwind.css --watch
+
+# Terminal 2: Start Zola server
 zola serve
 
 # Build site for production
+./build.sh
+
+# Or manually:
+./tailwindcss -i ./styles/input.css -o ./static/css/tailwind.css --minify
 zola build
 
 # Check site for errors (validates links, frontmatter, etc.)
@@ -48,30 +61,49 @@ mileshope.com/
 │   ├── blog/            # Blog posts (synced from Notion)
 │   │   └── _index.md    # Blog section configuration
 │   ├── about.md         # About page
-│   └── services.md      # Services page
+│   ├── services.md      # Services page
+│   └── contact.md       # Contact page
 ├── templates/           # Tera templates (HTML)
-│   ├── base.html        # Base layout (all pages extend this)
-│   ├── index.html       # Homepage template
-│   ├── section.html     # Blog listing template
-│   ├── page.html        # Individual blog post template
-│   ├── 404.html         # Error page
+│   ├── base.html        # Base layout with GA4, search, dark mode
+│   ├── index.html       # Homepage with featured posts
+│   ├── section.html     # Blog listing with pagination
+│   ├── page.html        # Individual posts with TOC, reactions, related posts
+│   ├── 404.html         # Custom error page
 │   ├── tags/            # Tag taxonomy templates
 │   └── categories/      # Category taxonomy templates
 ├── static/              # Static assets (copied as-is)
-│   └── css/
-│       └── style.css    # Main stylesheet
-├── sass/                # Sass files (compiled by Zola)
+│   ├── css/
+│   │   └── tailwind.css # Compiled Tailwind CSS
+│   ├── images/          # Featured images, OG image, hero graphics
+│   ├── favicon.svg      # Site favicon
+│   ├── _headers         # Cloudflare headers (cache, security)
+│   ├── _redirects       # Cloudflare redirects
+│   └── robots.txt       # SEO and AI bot blocking
+├── styles/              # Tailwind CSS v4 source files
+│   └── input.css        # Main Tailwind source
+├── docs/                # Project documentation
+├── build.sh             # Production build script
+├── dev.sh               # Development script
+├── sync.py              # Notion sync script
+├── tailwindcss          # Tailwind CLI binary
 └── public/              # Generated site (gitignored)
 ```
 
 ## Architecture Overview
 
 ### Template Hierarchy
-- **base.html**: Root template with header, footer, and navigation. All other templates extend this.
-- **index.html**: Homepage with hero section and recent posts grid
-- **section.html**: Used for blog listing pages with pagination
-- **page.html**: Individual blog post/page template with metadata, table of contents, and social sharing
-- **Taxonomy templates**: Handle tags and categories with list and single views
+- **base.html**: Root template with header, footer, navigation, search modal, dark mode toggle, and GA4 tracking
+- **index.html**: Homepage with hero section, featured posts with images, and recent posts grid
+- **section.html**: Blog listing pages with featured images, excerpts, and pagination
+- **page.html**: Individual posts with:
+  - Reading progress bar
+  - Expandable table of contents
+  - Post reactions (👍 ✨ ❤️ 🤯)
+  - Reading list bookmark
+  - Related posts widget
+  - Social sharing buttons
+  - FAQ schema for SEO
+- **Taxonomy templates**: Tag and category pages with counts and descriptions
 
 ### Content Flow
 1. Markdown files in `content/` define pages and posts
@@ -81,11 +113,11 @@ mileshope.com/
 
 ### Key Zola Features Used
 - **Taxonomies**: Automatic tag and category pages with RSS feeds
-- **Search**: Built-in elasticlunr.js search index
+- **Search**: Built-in elasticlunr.js search index with async loading
 - **RSS Feeds**: Auto-generated for main blog and taxonomies
-- **Syntax Highlighting**: Code blocks with `base16-ocean-dark` theme
-- **Sass Compilation**: CSS preprocessing support
-- **Image Processing**: Planned for future optimization
+- **Syntax Highlighting**: Code blocks with `base16-ocean-dark` theme and copy button
+- **Tailwind CSS**: Utility-first styling with custom design system
+- **Performance**: Optimized with preconnect, cache headers, and async loading
 
 ## Content Management
 
@@ -97,10 +129,14 @@ Blog posts are stored in `content/blog/` with this frontmatter structure:
 title = "Post Title"
 date = 2025-01-01
 description = "Brief description for SEO"
+featured_image = "/images/post-image.svg"  # Optional featured image
 
 [taxonomies]
 categories = ["Category Name"]
 tags = ["tag1", "tag2"]
+
+[extra]
+author = "Hope"  # Optional author override
 +++
 ```
 
@@ -161,11 +197,13 @@ See `SYNC_README.md` for detailed setup instructions and troubleshooting.
 
 ## Development Workflow
 
-1. **Adding a blog post manually**: Create a new `.md` file in `content/blog/` with proper frontmatter
-2. **Testing changes**: Run `zola serve` and visit `http://127.0.0.1:1111`
-3. **Building for production**: Run `zola build` to generate static files in `public/`
-4. **Template changes**: Modify files in `templates/` - changes auto-reload with `zola serve`
-5. **Styling**: Edit `static/css/style.css` for immediate CSS changes
+1. **Adding a blog post manually**: Create a new `.md` file in `content/blog/` with proper frontmatter, or use `python3 new_post.py`
+2. **Syncing from Notion**: Run `source .env && python3 sync.py` to pull published posts
+3. **Testing changes**: Run `./dev.sh` (or `zola serve` + Tailwind watch) and visit `http://127.0.0.1:1111`
+4. **Building for production**: Run `./build.sh` to compile Tailwind CSS and build Zola site
+5. **Template changes**: Modify files in `templates/` - changes auto-reload with `zola serve`
+6. **Styling changes**: Edit `styles/input.css` - Tailwind CLI auto-rebuilds with watch mode
+7. **Deploying**: Push to `main` branch - Cloudflare Pages auto-deploys
 
 ## Important Notes
 
@@ -176,86 +214,72 @@ See `SYNC_README.md` for detailed setup instructions and troubleshooting.
 - RSS feeds are auto-generated for blog and each taxonomy
 - Site rebuilds are extremely fast (typically <100ms for small sites)
 
-## Sprint Progress
+## Project Status
 
-**Week 1 Status**: ✅ Complete
-- Zola installed and project structured
-- Basic templates created (base, index, section, page, taxonomies, 404)
-- Configuration set up with RSS, search, and taxonomies
-- Sample blog post created
-- Git repository initialized
-- Site builds and serves successfully
+**Current State**: ✅ **LIVE IN PRODUCTION**
+- **URL**: https://www.mileshope.com
+- **Hosting**: Cloudflare Pages with auto-deploy from `main` branch
+- **Analytics**: Google Analytics 4 (G-L162628GP4) tracking page views and custom events
+- **Content**: 14+ blog posts synced from Notion, fully populated About/Services/Contact pages
 
-**Week 2 Status**: ✅ Complete (Revised with MCP)
-- Python sync script created (replaces Rust CLI for simplicity)
-- Direct Notion API integration with requests library
-- Notion-to-Markdown converter implemented (supports headings, paragraphs, lists, code, quotes, callouts, images)
-- TOML frontmatter generator for Zola compatibility
-- Automatic slug generation from post titles
-- Filters for "Published" status only
-- Environment-based configuration (.env file)
-- Comprehensive documentation (SYNC_README.md)
-- Tested and working with live Notion database
+**Completed Features**:
 
-**Week 3 Status**: ✅ Complete
-- Enhanced color scheme with spiritual purple/gold palette
-- Improved typography and spacing throughout
-- Dark mode toggle with localStorage persistence
-- Reading progress bar
-- Mobile responsive navigation with hamburger menu
-- Search functionality with elasticlunr.js
-- Enhanced social sharing buttons with copy link feature
-- Consistent styling across all pages
-- Professional design with smooth transitions
+### Core Infrastructure (Weeks 1-2)
+- ✅ Zola static site generator with Tailwind CSS v4
+- ✅ Notion API integration with Python sync script
+- ✅ Git repository with clean commit history
+- ✅ Cloudflare Pages deployment pipeline
+- ✅ Custom domain with SSL
 
-**Week 4 Status**: ✅ Complete
-- Content pages filled (About, Services)
-- Blog posts added
-- Site ready for production
+### Design & Styling (Week 3)
+- ✅ Purple/gold spiritual color scheme
+- ✅ Lora (headings) + Inter (body) typography
+- ✅ Dark mode with localStorage persistence
+- ✅ Mobile responsive with hamburger menu
+- ✅ Reading progress bar
+- ✅ Custom SVG featured images for all posts
 
-**Week 5 Status**: 🚀 Ready for Deployment
-- Deployment guide created (DEPLOYMENT_GUIDE.md)
-- Ready for Cloudflare Pages setup
-- All code committed and ready for GitHub push
+### Content & SEO (Week 4)
+- ✅ 14+ comprehensive blog posts on bazi, tarot, and spirituality
+- ✅ Fully populated About, Services, and Contact pages
+- ✅ Open Graph and Twitter Card meta tags
+- ✅ FAQ Schema for rich snippets (Google Rich Results eligible)
+- ✅ Favicon and OG image
+- ✅ robots.txt with AI bot blocking
 
-**Next Steps**: Follow DEPLOYMENT_GUIDE.md to deploy to Cloudflare Pages
-
-**Advanced Features Enhancement**: ✅ Complete
-- **Quick Wins & UX**:
-  - Copy code button with one-click copying
-  - Active TOC highlighting while scrolling
-  - Print-optimized styles for blog posts
-  - Enhanced keyboard focus states (WCAG 2.1)
-- **Engagement Boosters**:
-  - Reading list/bookmarks with localStorage
-  - Post reactions (👍 ✨ ❤️ 🤯) with persistence
-  - Related posts widget (tag-based)
-  - Author bio section
-  - Callout boxes (6 types: note, tip, warning, danger, success, quote)
-- **SEO & Schema**:
-  - FAQ Schema (FAQPage) for rich snippets
-  - 18 FAQ entries across 3 blog posts
-  - Google Rich Results eligible
-- **Analytics & Tracking**:
-  - Scroll depth tracking (25%, 50%, 75%, 100%)
-  - Active time on page tracking
+### Advanced Features (Week 5+)
+- ✅ **Search**: Client-side elasticlunr.js with async loading
+- ✅ **Blog Features**:
+  - Expandable table of contents
+  - Post reactions (👍 ✨ ❤️ 🤯)
+  - Reading list bookmarks
+  - Related posts widget
+  - Copy code button
+  - Social sharing
+- ✅ **Analytics**:
+  - Scroll depth tracking
+  - Active time on page
   - Exit intent detection
-  - Popular posts tracking with homepage widget
-  - 14+ GA4 custom events
-- **Performance & Accessibility**:
+  - 14+ custom GA4 events
+- ✅ **Performance**:
+  - Async resource loading
+  - Cache control headers
+  - Security headers (CSP, X-Frame-Options, etc.)
+  - Layout shift fixes
   - requestAnimationFrame optimizations
-  - Passive event listeners
-  - Full dark mode support
-  - Mobile responsive across all breakpoints
-  - Privacy-friendly (localStorage only, no cookies)
 
-**Documentation Created**:
-- `TESTING.md` - Comprehensive testing guide with manual checklists
-- `SESSION_SUMMARY.md` - Complete feature documentation and implementation details
+### Documentation
+- ✅ `docs/DEPLOYMENT.md` - Deployment guide
+- ✅ `docs/NOTION_SYNC.md` - Notion sync documentation
+- ✅ `docs/TESTING.md` - Testing guide
+- ✅ `docs/GA4_SETUP.md` - Analytics setup
+- ✅ `docs/ARCHITECTURE.md` - Technical architecture
+- ✅ Project README with quick start guide
 
-**Total Impact**:
-- 15+ major features implemented
-- ~3,584 lines of code added
-- 10 files modified
-- Full test coverage documentation
-- Production-ready with enterprise-level features
+**Metrics**:
+- ~70+ commits with clean history
+- 14+ live blog posts
+- Fast builds (~50-100ms with Zola)
+- Mobile responsive across all breakpoints
+- WCAG 2.1 accessibility compliant
+- Privacy-friendly (localStorage only, no cookies)
