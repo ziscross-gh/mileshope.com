@@ -6,20 +6,19 @@
     background: none;
     border: none;
     cursor: pointer;
-    padding: var(--space-2) var(--space-4);
+    padding-block: var(--space-2);
+    padding-inline: var(--space-4);
     font-size: var(--font-size-h5);
     transition: background var(--transition-base);
     border-radius: var(--radius-md);
-}
 
-.search-toggle:hover,
-.theme-toggle:hover {
-    background: rgba(128, 90, 213, 0.1);
-}
+    &:hover {
+        background: color-mix(in srgb, var(--color-purple) var(--alpha-10), transparent);
+    }
 
-html.dark .search-toggle:hover,
-html.dark .theme-toggle:hover {
-    background: rgba(183, 148, 244, 0.2);
+    .dark &:hover {
+        background: color-mix(in srgb, var(--color-purple-light) var(--alpha-20), transparent);
+    }
 }
 
 /* Mobile Menu Toggle */
@@ -36,15 +35,15 @@ html.dark .theme-toggle:hover {
 
 .hamburger {
     display: block;
-    width: 25px;
-    height: 2px;
+    inline-size: 25px;
+    block-size: 2px;
     background: var(--color-text-primary);
     transition: all var(--transition-slow);
     border-radius: var(--radius-sm);
-}
 
-html.dark .hamburger {
-    background: var(--color-gray-100);
+    .dark & {
+        background: var(--color-gray-100);
+    }
 }
 
 .mobile-menu-toggle.active .hamburger:nth-child(1) {
@@ -66,33 +65,30 @@ body.menu-open {
 /* Search Modal */
 .search-modal {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    inset: 0;
+    background: color-mix(in srgb, var(--color-black) var(--alpha-50), transparent);
     z-index: var(--z-modal);
     display: none;
     align-items: flex-start;
     justify-content: center;
-    padding-top: var(--space-20);
-}
+    padding-block-start: var(--space-20);
 
-.search-modal.active {
-    display: flex;
+    &.active {
+        display: flex;
+    }
 }
 
 .search-content {
     background: var(--color-white);
     padding: var(--space-8);
     border-radius: var(--radius-lg);
-    max-width: 600px;
-    width: 90%;
+    max-inline-size: var(--modal-max-w);
+    inline-size: 90%;
     box-shadow: var(--shadow-2xl);
-}
 
-html.dark .search-content {
-    background: var(--color-gray-700);
+    .dark & {
+        background: var(--color-gray-700);
+    }
 }
 
 /* Responsive Mobile Menu */
@@ -103,46 +99,48 @@ html.dark .search-content {
 
     .nav-menu {
         position: fixed;
-        top: 0;
-        right: -100%;
-        width: 280px;
-        height: 100vh;
+        inset-block: 0;
+        inset-inline-end: -100%;
+        inline-size: var(--mobile-menu-w);
+        block-size: 100vh;
         background: var(--color-white);
         flex-direction: column;
-        padding: var(--space-20) var(--space-8) var(--space-8);
+        padding-block-start: var(--space-20);
+        padding-block-end: var(--space-8);
+        padding-inline: var(--space-8);
         box-shadow: var(--shadow-lg);
-        transition: right var(--transition-slow);
+        transition: inset-inline-end var(--transition-slow);
         z-index: var(--z-modal);
         overflow-y: auto;
         gap: 0;
-    }
 
-    html.dark .nav-menu {
-        background: var(--color-gray-800);
-    }
+        .dark & {
+            background: var(--color-gray-800);
+        }
 
-    .nav-menu.active {
-        right: 0;
-    }
+        &.active {
+            inset-inline-end: 0;
+        }
 
-    .nav-menu li {
-        width: 100%;
-        margin-bottom: var(--space-2);
-    }
+        & li {
+            inline-size: 100%;
+            margin-block-end: var(--space-2);
+        }
 
-    .nav-menu a {
-        display: block;
-        width: 100%;
-        padding: var(--space-4);
-        font-size: var(--font-size-h5);
-        border-radius: var(--radius-lg);
-    }
+        & a {
+            display: block;
+            inline-size: 100%;
+            padding: var(--space-4);
+            font-size: var(--font-size-h5);
+            border-radius: var(--radius-lg);
 
-    .nav-menu a:hover {
-        background: var(--color-gray-50);
-    }
+            &:hover {
+                background: var(--color-gray-50);
+            }
 
-    html.dark .nav-menu a:hover {
-        background: var(--color-gray-700);
+            .dark &:hover {
+                background: var(--color-gray-700);
+            }
+        }
     }
 }
