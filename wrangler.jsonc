@@ -15,6 +15,13 @@
 	// Image uploads: enable R2 in the Cloudflare dashboard, then uncomment this
 	// and turn on `storage` in astro.config.mjs.
 	// "r2_buckets": [{ "binding": "MEDIA", "bucket_name": "mileshope-media" }],
+	// Logs and traces in the Cloudflare dashboard, for finding errors and
+	// slow requests after a deploy.
+	"observability": {
+		"enabled": true,
+		"logs": { "enabled": true, "head_sampling_rate": 1 },
+		"traces": { "enabled": true, "head_sampling_rate": 0.01 },
+	},
 	// Runs scheduled publishing and maintenance.
 	"triggers": {
 		"crons": ["* * * * *"],
