@@ -13,10 +13,29 @@ pnpm install
 pnpm dev
 ```
 
-1. Open http://localhost:4321/_emdash/admin and finish the short setup. You register your own passkey there. Setup creates the database and loads the starting content from `seed/seed.json`.
+1. Open http://localhost:4321/_emdash/admin and finish the short setup. You register your own passkey there. Keep the option to include the starting content switched on, so the pages are filled from `seed/seed.json`.
 2. Open http://localhost:4321 to see the site.
 
-To start again from the original content, stop the server, delete `data.db`, and run `npx emdash seed seed/seed.json`.
+`pnpm dev` runs a local copy of the Cloudflare runtime. Its database lives in the `.wrangler` folder. To start again from the original content, stop the server, delete `.wrangler`, and run setup again.
+
+## Cloudflare
+
+The site runs as a Cloudflare Worker named `mileshope`, set up in `wrangler.jsonc`:
+
+- **Database:** the D1 database `mileshope` (already created, Asia-Pacific).
+- **Sessions:** a KV namespace that Cloudflare creates on the first deploy.
+- **Images:** not set up yet. Uploads need an R2 bucket, and R2 has to be enabled on the account first. The steps are in the comments in `wrangler.jsonc` and `astro.config.mjs`.
+
+To deploy from your computer:
+
+```bash
+pnpm wrangler login
+pnpm deploy
+```
+
+Or connect this branch in the Cloudflare dashboard (Workers & Pages, Create application, Import a repository) with the project name `mileshope`, branch `emdash`, build command `pnpm build` and deploy command `npx wrangler deploy`.
+
+After the first deploy, open `/_emdash/admin` on the Worker's address and run setup there, with the starting content included. A passkey registered on the `workers.dev` address only works on that address, so setup needs revisiting when the site moves to `www.mileshope.com`.
 
 ## What you can edit in the admin
 
@@ -46,11 +65,13 @@ Search the admin for square brackets. These are waiting for real details:
 
 - Thai versions of the pages (planned under `/th/`)
 - A contact form
-- Deployment to Cloudflare
+- Image uploads (needs R2 enabled on the Cloudflare account)
+- Moving `www.mileshope.com` over from the old site
 
 ## Where things are
 
 - `seed/seed.json`: the content model and starting content
+- `wrangler.jsonc`, `astro.config.mjs`: Cloudflare and EmDash setup
 - `src/pages/`: one file per page type
 - `src/layouts/Base.astro`: header and footer
 - `src/styles/theme.css`: brand colours, type and shared styles

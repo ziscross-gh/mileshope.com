@@ -1,0 +1,22 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	// The Worker name. It must match the Worker's name in the Cloudflare dashboard.
+	"name": "mileshope",
+	"main": "./src/worker.ts",
+	"compatibility_date": "2026-02-24",
+	"compatibility_flags": ["nodejs_compat"],
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "mileshope",
+			"database_id": "2a039a9e-636f-4c61-ae92-b1791ff4b1da",
+		},
+	],
+	// Image uploads: enable R2 in the Cloudflare dashboard, then uncomment this
+	// and turn on `storage` in astro.config.mjs.
+	// "r2_buckets": [{ "binding": "MEDIA", "bucket_name": "mileshope-media" }],
+	// Runs scheduled publishing and maintenance.
+	"triggers": {
+		"crons": ["* * * * *"],
+	},
+}

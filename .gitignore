@@ -4,8 +4,11 @@ dist
 .emdash/migrations.json
 uploads
 data.db*
+.wrangler
 
 # Environment
 .env
 .env.*
 !.env.example
+.dev.vars
+.dev.vars.*
