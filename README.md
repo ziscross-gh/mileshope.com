@@ -2,7 +2,9 @@
 
 The new MilesHope.com: Thai tarot (Promayarn cards) and Thai astrology consultations, with articles under Understand, Build and Apply. Built with [EmDash](https://emdashcms.com) on Astro.
 
-This is a review build on the `emdash` branch. It is not deployed anywhere. The live Zola site stays on `main`, which Cloudflare Pages deploys automatically, so do not merge this branch into `main` until the Cloudflare setup for EmDash is done.
+This is the `main` branch. The previous Zola site, with its posts and Notion sync script, is kept on the `zola-archive` branch.
+
+The new site is not live yet. `www.mileshope.com` still serves the last build of the old site from Cloudflare Pages, and stays that way until the domain is moved to the new Worker.
 
 ## Run it on your computer
 
@@ -38,11 +40,11 @@ Or let Cloudflare build it from GitHub. In the Cloudflare dashboard go to Worker
 | Setting | Value |
 |---|---|
 | Project name | `mileshope` (must match `name` in `wrangler.jsonc`) |
-| Branch | `emdash` |
+| Branch | `main` |
 | Build command | `pnpm build` |
 | Deploy command | `npx wrangler deploy` |
 
-Then turn off builds for other branches on that Worker, so pushes to `main` (the old Zola site) do not start builds there. Node.js is pinned to version 22 by `.node-version`, and pnpm picks its own version from `package.json`.
+Then turn off builds for other branches on that Worker, so pushes to `zola-archive` (the old Zola site) do not start builds there. Node.js is pinned to version 22 by `.node-version`, and pnpm picks its own version from `package.json`.
 
 After the first deploy, open `/_emdash/admin` on the Worker's address and run setup there, with the starting content included. A passkey registered on the `workers.dev` address only works on that address, so setup needs revisiting when the site moves to `www.mileshope.com`.
 
