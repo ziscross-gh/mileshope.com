@@ -1,33 +1,11 @@
-# Zola build output
-public/
+node_modules
+dist
+.astro
+.emdash/migrations.json
+uploads
+data.db*
 
-# macOS
-.DS_Store
-
-# Editor directories
-.vscode/
-.idea/
-
-# Rust
-target/
-Cargo.lock
-
-# Environment variables
+# Environment
 .env
-.env.local
-
-# Python
-venv/
-__pycache__/
-*.pyc
-
-# Backups
-backup/
-
-# Notion sync tool (optional - may want to track these)
-# .notion-cache/
-
-# Tailwind CSS CLI binary
-tailwindcss
-tailwindcss-*
-
+.env.*
+!.env.example

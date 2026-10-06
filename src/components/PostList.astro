@@ -1,0 +1,46 @@
+---
+/** A plain list of posts with their Section label, used by every archive page. */
+interface Props {
+	posts: any[];
+	/** Section (category) terms by entry id, from getTermsForEntries. */
+	sections?: Map<string, { slug: string; label: string }[]>;
+	empty?: string;
+}
+const { posts, sections, empty = "Nothing here yet." } = Astro.props;
+---
+
+{
+	posts.length === 0 ? (
+		<p class="muted">{empty}</p>
+	) : (
+		<div class="postlist">
+			{posts.map((post) => {
+				const section = sections?.get(post.data.id)?.[0];
+				return (
+					<a class="postlink" href={`/posts/${post.id}`}>
+						{section && <span class="label">{section.label}</span>}
+						<span class="h3" {...post.edit.title}>
+							{post.data.title}
+						</span>
+						{post.data.excerpt && (
+							<span class="excerpt" {...post.edit.excerpt}>
+								{post.data.excerpt}
+							</span>
+						)}
+					</a>
+				);
+			})}
+		</div>
+	)
+}
+
+<style>
+	.postlist {
+		display: flex;
+		flex-direction: column;
+		max-width: 760px;
+	}
+	.excerpt {
+		color: var(--ink);
+	}
+</style>

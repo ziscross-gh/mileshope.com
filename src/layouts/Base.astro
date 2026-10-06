@@ -1,0 +1,156 @@
+---
+import { getMenuWithCacheHint, getSiteSettingsWithCacheHint } from "emdash";
+import { EmDashHead, EmDashBodyStart, EmDashBodyEnd } from "emdash/ui";
+import { createPublicPageContext } from "emdash/page";
+import { resolveStarterSiteIdentity } from "../utils/site-identity";
+import "../styles/theme.css";
+
+interface Props {
+	title: string;
+	pageTitle?: string | null;
+	description?: string | null;
+	image?: string | null;
+	canonical?: string | null;
+	/** Pass content reference for plugin page contributions on content pages */
+	content?: { collection: string; id: string; slug?: string | null };
+}
+
+const { title, pageTitle, description, image, canonical, content } = Astro.props;
+const [settingsResult, menuResult, footerResult] = await Promise.all([
+	getSiteSettingsWithCacheHint(),
+	getMenuWithCacheHint("primary"),
+	getMenuWithCacheHint("footer"),
+]);
+if (Astro.cache?.enabled) {
+	Astro.cache.set(settingsResult.cacheHint);
+	Astro.cache.set(menuResult.cacheHint);
+	Astro.cache.set(footerResult.cacheHint);
+}
+
+const { siteTitle, siteTagline } = resolveStarterSiteIdentity(settingsResult.data);
+const titleIncludesSiteName =
+	title === siteTitle || title.endsWith(` | ${siteTitle}`) || title.endsWith(` — ${siteTitle}`);
+const fullTitle = titleIncludesSiteName ? title : `${title} — ${siteTitle}`;
+const pageDescription = description ?? siteTagline;
+const menu = menuResult.data;
+const footerMenu = footerResult.data;
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+
+const pageCtx = createPublicPageContext({
+	Astro,
+	kind: content ? "content" : "custom",
+	pageType: "website",
+	title: fullTitle,
+	pageTitle: pageTitle ?? title,
+	description: pageDescription,
+	canonical,
+	image,
+	content,
+	siteName: siteTitle,
+});
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>{fullTitle}</title>
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link
+			rel="preload"
+			href="/fonts/IBMPlexSansThaiLooped-Regular.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin
+		/>
+		<script is:inline>
+			document.documentElement.classList.add("js");
+		</script>
+		<EmDashHead page={pageCtx} />
+	</head>
+	<body>
+		<EmDashBodyStart page={pageCtx} />
+
+		<header class="wrap site-header">
+			<a class="logo" href="/">
+				<img src="/brand/mileshope-lockup-horizontal.svg" alt={siteTitle} width="225" height="56" />
+			</a>
+			<a class="btn btn-book header-book" href="/consultations#book" aria-label="Book a consultation">
+				<span class="long">Book a consultation</span>
+				<span class="short">Book</span>
+			</a>
+			<button
+				class="menu-toggle"
+				type="button"
+				aria-label="Menu"
+				aria-expanded="false"
+				aria-controls="site-nav"
+			>
+				<span></span>
+				<span></span>
+			</button>
+			<nav class="site-nav" id="site-nav" aria-label="Main">
+				{
+					menu?.items.map((item) => (
+						<a
+							class="navlink"
+							href={item.url}
+							target={item.target}
+							rel={item.target === "_blank" ? "noopener noreferrer" : undefined}
+							aria-current={item.url === path ? "page" : undefined}
+						>
+							{item.label}
+						</a>
+					))
+				}
+			</nav>
+		</header>
+		<script is:inline>
+			// Phone menu: the button opens and closes the list of links.
+			(function () {
+				var header = document.querySelector(".site-header");
+				var button = header && header.querySelector(".menu-toggle");
+				if (!button) return;
+				function setOpen(open) {
+					header.toggleAttribute("data-open", open);
+					button.setAttribute("aria-expanded", String(open));
+				}
+				button.addEventListener("click", function () {
+					setOpen(!header.hasAttribute("data-open"));
+				});
+				document.addEventListener("keydown", function (e) {
+					if (e.key === "Escape" && header.hasAttribute("data-open")) {
+						setOpen(false);
+						button.focus();
+					}
+				});
+			})();
+		</script>
+
+		<main>
+			<slot />
+		</main>
+
+		<footer class="site-footer">
+			<div class="wrap inner">
+				<div class="stack-sm">
+					<a class="logo" href="/">
+						<img
+							src="/brand/mileshope-lockup-horizontal-reversed.svg"
+							alt={siteTitle}
+							width="257"
+							height="64"
+						/>
+					</a>
+					<p class="label">{siteTagline}</p>
+				</div>
+				<nav aria-label="Footer">
+					{footerMenu?.items.map((item) => <a href={item.url}>{item.label}</a>)}
+				</nav>
+			</div>
+		</footer>
+
+		<EmDashBodyEnd page={pageCtx} />
+	</body>
+</html>

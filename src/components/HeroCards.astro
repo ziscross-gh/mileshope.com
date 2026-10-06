@@ -1,0 +1,139 @@
+---
+/**
+ * Three illustrative cards for the home page hero. These are brand drawings
+ * built from the MilesHope sign and planet glyphs. They are not reproductions
+ * of the Promayarn deck's own artwork.
+ */
+const cards = [
+	{
+		kicker: "01",
+		name: "Sun",
+		thai: "อาทิตย์",
+		group: "Day card",
+		tone: "light",
+		ink: "var(--earth)",
+		path: "M14.5 24 A9.5 9.5 0 1 0 33.5 24 A9.5 9.5 0 1 0 14.5 24 M24 24 L24.01 24",
+		dot: { cx: 24, cy: 2.5 },
+		tilt: -4,
+	},
+	{
+		kicker: "LEO",
+		name: "Leo",
+		thai: "สิงห์",
+		group: "Sign card",
+		tone: "dark",
+		ink: "var(--cream)",
+		path: "M14 27.5 A3.6 3.6 0 1 0 21.2 27.5 A3.6 3.6 0 1 0 14 27.5 M20.6 25.2 C18.6 19.5 19.6 13 25.4 13 C31.2 13 32.4 19 30.4 24 C28.8 28 28.2 31 29.6 33 C30.8 34.7 33 34.6 34.5 33",
+		dot: { cx: 42.6, cy: 13.25 },
+		tilt: 0,
+	},
+	{
+		kicker: "07",
+		name: "Saturn",
+		thai: "เสาร์",
+		group: "Day card",
+		tone: "light",
+		ink: "var(--wood)",
+		path: "M17.5 12.5 V30 M13.5 16.8 H21.5 M17.5 23 C19.5 19.6 26.4 18.8 27.8 23.2 C28.9 26.6 25.2 29 25.8 32.2 C26.2 34.4 28.8 35.4 31.4 33.4",
+		dot: { cx: 3.55, cy: 17.36 },
+		tilt: 4,
+	},
+];
+---
+
+<div class="hero-cards" aria-hidden="true">
+	{
+		cards.map((c) => (
+			<div class:list={["slot", c.tilt === 0 && "is-centre"]}>
+				<div class:list={["tcard", c.tone]} style={`transform: rotate(${c.tilt}deg)`}>
+					<span class="k">{c.kicker}</span>
+					<svg viewBox="0 0 48 48">
+						<circle class="orbit" cx="24" cy="24" r="21.5" fill="none" stroke-width="1" />
+						<path
+							d={c.path}
+							fill="none"
+							stroke={c.ink}
+							stroke-width="2.5"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						/>
+						<circle cx={c.dot.cx} cy={c.dot.cy} r="2.2" fill="var(--fire)" />
+					</svg>
+					<span class="n">
+						{c.name} · <span lang="th">{c.thai}</span>
+					</span>
+				</div>
+				<span class="label g">{c.group}</span>
+			</div>
+		))
+	}
+</div>
+
+<style>
+	.hero-cards {
+		display: flex;
+		justify-content: center;
+		gap: var(--space-4);
+	}
+	.slot {
+		flex: 1 1 0;
+		min-width: 0;
+		max-width: 168px;
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-4);
+		margin-top: 32px;
+	}
+	.slot.is-centre {
+		margin-top: 0;
+	}
+	.tcard {
+		aspect-ratio: 168 / 272;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		padding: var(--space-4);
+		border-radius: var(--radius-md);
+		background: var(--paper);
+		border: 1px solid var(--sand);
+		color: var(--earth);
+	}
+	.tcard.dark {
+		background: var(--ink);
+		border-color: var(--ink);
+		color: var(--cream);
+	}
+	.tcard svg {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+	.orbit {
+		stroke: var(--sand);
+	}
+	.dark .orbit {
+		stroke: var(--ink-muted);
+	}
+	.k,
+	.n {
+		font-family: var(--font-mono);
+		font-weight: 500;
+		letter-spacing: 0.08em;
+	}
+	.k {
+		font-size: 12px;
+		line-height: 16px;
+		color: var(--ink-muted);
+	}
+	.dark .k {
+		color: var(--sand);
+	}
+	.n {
+		font-size: 11px;
+		line-height: 16px;
+		text-transform: uppercase;
+	}
+	.g {
+		text-align: center;
+	}
+</style>

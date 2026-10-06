@@ -1,0 +1,162 @@
+---
+import { getEmDashCollection, getEmDashEntry } from "emdash";
+import Base from "../layouts/Base.astro";
+import SessionCard from "../components/SessionCard.astro";
+import { sortSessions } from "../utils/content";
+
+const [pageResult, sessionsResult] = await Promise.all([
+	getEmDashEntry("consult_page", "consultations"),
+	getEmDashCollection("sessions", { limit: 10 }),
+]);
+if (Astro.cache?.enabled) {
+	Astro.cache.set(pageResult.cacheHint);
+	Astro.cache.set(sessionsResult.cacheHint);
+}
+
+const page = pageResult.entry;
+const c = page?.data ?? {};
+const sessions = sortSessions(sessionsResult.entries);
+const step = (i: number) => String(i + 1).padStart(2, "0");
+---
+
+<Base title={c.headline ?? "Consultations"} description={c.lead}>
+	{
+		!page ? (
+			<section class="wrap section">
+				<h1>Consultations page content is missing</h1>
+				<p>
+					Create the entry in <a href="/_emdash/admin">the admin</a> under Consultations page, with
+					the slug <code>consultations</code>.
+				</p>
+			</section>
+		) : (
+			<>
+				<section class="wrap section stack">
+					<p class="label" {...page.edit.eyebrow}>
+						{c.eyebrow}
+					</p>
+					<h1 class="display" style="max-width: 760px" {...page.edit.headline}>
+						{c.headline}
+					</h1>
+					<p class="lead measure" {...page.edit.lead}>
+						{c.lead}
+					</p>
+				</section>
+
+				<section class="wrap row" style="padding-bottom: var(--space-6)">
+					{sessions.map((s) => (
+						<SessionCard session={s} />
+					))}
+				</section>
+
+				{c.thai_note && (
+					<section class="wrap" id="thai" style="padding-bottom: var(--space-12)">
+						<div class="thai rule-top rule-bottom" lang="th">
+							<span {...page.edit.thai_note}>{c.thai_note}</span>
+							<a class="textlink" href="#book" {...page.edit.thai_link}>
+								{c.thai_link}
+							</a>
+						</div>
+					</section>
+				)}
+
+				<section class="wrap stack" id="how" style="gap: var(--space-6); padding-bottom: var(--space-12)">
+					<h2 {...page.edit.steps_title}>{c.steps_title}</h2>
+					<div class="row-lg" {...page.edit.steps}>
+						{(c.steps ?? []).map((s: any, i: number) => (
+							<div class="col stack-sm">
+								<p class="label num">{step(i)}</p>
+								<h3>{s.title}</h3>
+								<p>{s.text}</p>
+							</div>
+						))}
+					</div>
+				</section>
+
+				<section class="rule-top rule-bottom">
+					<div class="wrap section row-lg">
+						<div class="stack" style="flex: 1 1 360px; min-width: 0">
+							<h2 {...page.edit.get_title}>{c.get_title}</h2>
+							<ul class="plain-list" {...page.edit.get_list}>
+								{(c.get_list ?? []).map((item: any) => (
+									<li>{item.text}</li>
+								))}
+							</ul>
+						</div>
+						<div class="stack" style="flex: 1 1 360px; min-width: 0">
+							<h2 {...page.edit.not_title}>{c.not_title}</h2>
+							<ul class="plain-list" {...page.edit.not_list}>
+								{(c.not_list ?? []).map((item: any) => (
+									<li>{item.text}</li>
+								))}
+							</ul>
+						</div>
+					</div>
+				</section>
+
+				<section class="wrap stack" id="book" style="gap: var(--space-6); padding-block: 72px">
+					<div class="stack-sm measure">
+						<h2 {...page.edit.book_title}>{c.book_title}</h2>
+						<p {...page.edit.book_text}>{c.book_text}</p>
+					</div>
+					<div class="row">
+						<div class="card channel">
+							<div class="stack-sm" style="gap: 4px">
+								<p class="label" {...page.edit.whatsapp_label}>
+									{c.whatsapp_label}
+								</p>
+								<p class="h3 strong" {...page.edit.whatsapp_number}>
+									{c.whatsapp_number}
+								</p>
+							</div>
+							<a class="btn btn-earth" href={c.whatsapp_url || "#book"} {...page.edit.whatsapp_button}>
+								{c.whatsapp_button}
+							</a>
+						</div>
+						<div class="card channel">
+							<div class="stack-sm" style="gap: 4px">
+								<p class="label" {...page.edit.line_label}>
+									{c.line_label}
+								</p>
+								<p class="h3 strong" {...page.edit.line_id}>
+									{c.line_id}
+								</p>
+							</div>
+							<a class="btn btn-wood" href={c.line_url || "#book"} {...page.edit.line_button}>
+								{c.line_button}
+							</a>
+						</div>
+					</div>
+				</section>
+			</>
+		)
+	}
+</Base>
+
+<style>
+	.thai {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-4);
+		padding-block: var(--space-4);
+	}
+	.num {
+		color: var(--fire-deep);
+	}
+	.channel {
+		flex: 1 1 400px;
+		min-width: 0;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: var(--space-4);
+	}
+	.strong {
+		font-weight: 600;
+		letter-spacing: -0.02em;
+		color: var(--earth);
+	}
+</style>

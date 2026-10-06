@@ -1,0 +1,1383 @@
+{
+ "$schema": "https://emdashcms.com/seed.schema.json",
+ "version": "1",
+ "meta": {
+  "name": "MilesHope",
+  "description": "Thai tarot and Thai astrology consultations, explained clearly",
+  "author": "Hope"
+ },
+ "settings": {
+  "title": "MilesHope",
+  "tagline": "Technology · Spirituality · Personal growth"
+ },
+ "collections": [
+  {
+   "slug": "posts",
+   "label": "Posts",
+   "labelSingular": "Post",
+   "urlPattern": "/posts/{slug}",
+   "sortOrder": 1,
+   "supports": [
+    "drafts",
+    "revisions",
+    "preview",
+    "scheduling",
+    "search",
+    "seo"
+   ],
+   "fields": [
+    {
+     "slug": "title",
+     "label": "Title",
+     "type": "string",
+     "required": true,
+     "searchable": true
+    },
+    {
+     "slug": "excerpt",
+     "label": "Excerpt",
+     "type": "text"
+    },
+    {
+     "slug": "featured",
+     "label": "Feature on the home page",
+     "type": "boolean"
+    },
+    {
+     "slug": "featured_image",
+     "label": "Featured image",
+     "type": "image"
+    },
+    {
+     "slug": "content",
+     "label": "Content",
+     "type": "portableText",
+     "searchable": true
+    }
+   ]
+  },
+  {
+   "slug": "pages",
+   "label": "Pages",
+   "labelSingular": "Page",
+   "urlPattern": "/{slug}",
+   "sortOrder": 2,
+   "supports": [
+    "drafts",
+    "revisions",
+    "preview",
+    "search",
+    "seo"
+   ],
+   "fields": [
+    {
+     "slug": "title",
+     "label": "Title",
+     "type": "string",
+     "required": true,
+     "searchable": true
+    },
+    {
+     "slug": "lead",
+     "label": "Opening paragraph",
+     "type": "text"
+    },
+    {
+     "slug": "content",
+     "label": "Content",
+     "type": "portableText",
+     "searchable": true
+    }
+   ]
+  },
+  {
+   "slug": "sessions",
+   "label": "Consultation sessions",
+   "labelSingular": "Session",
+   "sortOrder": 3,
+   "routable": false,
+   "supports": [
+    "drafts",
+    "revisions"
+   ],
+   "fields": [
+    {
+     "slug": "title",
+     "label": "Name",
+     "type": "string",
+     "required": true
+    },
+    {
+     "slug": "kicker",
+     "label": "Small label above the name",
+     "type": "string"
+    },
+    {
+     "slug": "price",
+     "label": "Price for Singapore and Malaysia",
+     "type": "string"
+    },
+    {
+     "slug": "price_thb",
+     "label": "Price for Thai clients",
+     "type": "string"
+    },
+    {
+     "slug": "description",
+     "label": "Description",
+     "type": "text"
+    },
+    {
+     "slug": "button_label",
+     "label": "Button label",
+     "type": "string"
+    },
+    {
+     "slug": "highlight",
+     "label": "Highlight this session",
+     "type": "boolean"
+    },
+    {
+     "slug": "sort_order",
+     "label": "Order on the page",
+     "type": "integer"
+    }
+   ]
+  },
+  {
+   "slug": "home_page",
+   "label": "Home page",
+   "labelSingular": "Home page",
+   "sortOrder": 4,
+   "routable": false,
+   "supports": [
+    "drafts",
+    "revisions"
+   ],
+   "fields": [
+    {
+     "slug": "title",
+     "label": "Internal name",
+     "type": "string",
+     "required": true
+    },
+    {
+     "slug": "eyebrow",
+     "label": "Hero: small label",
+     "type": "string"
+    },
+    {
+     "slug": "headline",
+     "label": "Hero: headline",
+     "type": "string"
+    },
+    {
+     "slug": "lead",
+     "label": "Hero: intro",
+     "type": "text"
+    },
+    {
+     "slug": "primary_button",
+     "label": "Hero: button label",
+     "type": "string"
+    },
+    {
+     "slug": "secondary_link",
+     "label": "Hero: link label",
+     "type": "string"
+    },
+    {
+     "slug": "points",
+     "label": "Three promises",
+     "type": "repeater",
+     "validation": {
+      "subFields": [
+       {
+        "slug": "title",
+        "label": "Title",
+        "type": "string",
+        "required": true
+       },
+       {
+        "slug": "text",
+        "label": "Text",
+        "type": "text"
+       }
+      ]
+     }
+    },
+    {
+     "slug": "posts_eyebrow",
+     "label": "Articles: small label",
+     "type": "string"
+    },
+    {
+     "slug": "posts_title",
+     "label": "Articles: heading",
+     "type": "string"
+    },
+    {
+     "slug": "astro_eyebrow",
+     "label": "Astrology panel: small label",
+     "type": "string"
+    },
+    {
+     "slug": "astro_title",
+     "label": "Astrology panel: heading",
+     "type": "string"
+    },
+    {
+     "slug": "astro_text",
+     "label": "Astrology panel: text",
+     "type": "text"
+    },
+    {
+     "slug": "astro_button",
+     "label": "Astrology panel: button label",
+     "type": "string"
+    },
+    {
+     "slug": "astro_note",
+     "label": "Astrology panel: note",
+     "type": "string"
+    },
+    {
+     "slug": "consult_eyebrow",
+     "label": "Consultations: small label",
+     "type": "string"
+    },
+    {
+     "slug": "consult_title",
+     "label": "Consultations: heading",
+     "type": "string"
+    },
+    {
+     "slug": "consult_text",
+     "label": "Consultations: text",
+     "type": "text"
+    },
+    {
+     "slug": "thai_link",
+     "label": "Consultations: Thai link text",
+     "type": "string"
+    },
+    {
+     "slug": "about_eyebrow",
+     "label": "About: small label",
+     "type": "string"
+    },
+    {
+     "slug": "about_title",
+     "label": "About: heading",
+     "type": "string"
+    },
+    {
+     "slug": "about_lead",
+     "label": "About: first paragraph",
+     "type": "text"
+    },
+    {
+     "slug": "about_body",
+     "label": "About: second paragraph",
+     "type": "text"
+    },
+    {
+     "slug": "about_link",
+     "label": "About: link label",
+     "type": "string"
+    }
+   ]
+  },
+  {
+   "slug": "consult_page",
+   "label": "Consultations page",
+   "labelSingular": "Consultations page",
+   "sortOrder": 5,
+   "routable": false,
+   "supports": [
+    "drafts",
+    "revisions"
+   ],
+   "fields": [
+    {
+     "slug": "title",
+     "label": "Internal name",
+     "type": "string",
+     "required": true
+    },
+    {
+     "slug": "eyebrow",
+     "label": "Small label",
+     "type": "string"
+    },
+    {
+     "slug": "headline",
+     "label": "Headline",
+     "type": "string"
+    },
+    {
+     "slug": "lead",
+     "label": "Intro",
+     "type": "text"
+    },
+    {
+     "slug": "thai_note",
+     "label": "Thai price line",
+     "type": "string"
+    },
+    {
+     "slug": "thai_link",
+     "label": "Thai link text",
+     "type": "string"
+    },
+    {
+     "slug": "steps_title",
+     "label": "How it works: heading",
+     "type": "string"
+    },
+    {
+     "slug": "steps",
+     "label": "How it works: steps",
+     "type": "repeater",
+     "validation": {
+      "subFields": [
+       {
+        "slug": "title",
+        "label": "Title",
+        "type": "string",
+        "required": true
+       },
+       {
+        "slug": "text",
+        "label": "Text",
+        "type": "text"
+       }
+      ]
+     }
+    },
+    {
+     "slug": "get_title",
+     "label": "What you get: heading",
+     "type": "string"
+    },
+    {
+     "slug": "get_list",
+     "label": "What you get: points",
+     "type": "repeater",
+     "validation": {
+      "subFields": [
+       {
+        "slug": "text",
+        "label": "Point",
+        "type": "text",
+        "required": true
+       }
+      ]
+     }
+    },
+    {
+     "slug": "not_title",
+     "label": "What it is not: heading",
+     "type": "string"
+    },
+    {
+     "slug": "not_list",
+     "label": "What it is not: points",
+     "type": "repeater",
+     "validation": {
+      "subFields": [
+       {
+        "slug": "text",
+        "label": "Point",
+        "type": "text",
+        "required": true
+       }
+      ]
+     }
+    },
+    {
+     "slug": "book_title",
+     "label": "Booking: heading",
+     "type": "string"
+    },
+    {
+     "slug": "book_text",
+     "label": "Booking: text",
+     "type": "text"
+    },
+    {
+     "slug": "whatsapp_label",
+     "label": "WhatsApp: small label",
+     "type": "string"
+    },
+    {
+     "slug": "whatsapp_number",
+     "label": "WhatsApp: number shown",
+     "type": "string"
+    },
+    {
+     "slug": "whatsapp_url",
+     "label": "WhatsApp: link",
+     "type": "url"
+    },
+    {
+     "slug": "whatsapp_button",
+     "label": "WhatsApp: button label",
+     "type": "string"
+    },
+    {
+     "slug": "line_label",
+     "label": "LINE: small label",
+     "type": "string"
+    },
+    {
+     "slug": "line_id",
+     "label": "LINE: ID shown",
+     "type": "string"
+    },
+    {
+     "slug": "line_url",
+     "label": "LINE: link",
+     "type": "url"
+    },
+    {
+     "slug": "line_button",
+     "label": "LINE: button label",
+     "type": "string"
+    }
+   ]
+  }
+ ],
+ "taxonomies": [
+  {
+   "name": "category",
+   "label": "Sections",
+   "labelSingular": "Section",
+   "hierarchical": true,
+   "collections": [
+    "posts"
+   ],
+   "terms": [
+    {
+     "slug": "understand",
+     "label": "Understand",
+     "description": "How Thai tarot and Thai astrology work."
+    },
+    {
+     "slug": "build",
+     "label": "Build",
+     "description": "Notes on the systems behind the practice."
+    },
+    {
+     "slug": "apply",
+     "label": "Apply",
+     "description": "Using a consultation in real life."
+    },
+    {
+     "slug": "notes",
+     "label": "Notes",
+     "description": "Personal posts."
+    }
+   ]
+  },
+  {
+   "name": "tag",
+   "label": "Topics",
+   "labelSingular": "Topic",
+   "hierarchical": false,
+   "collections": [
+    "posts"
+   ],
+   "terms": [
+    {
+     "slug": "thai-tarot",
+     "label": "Thai tarot"
+    },
+    {
+     "slug": "thai-astrology",
+     "label": "Thai astrology"
+    },
+    {
+     "slug": "feng-shui",
+     "label": "Feng shui"
+    },
+    {
+     "slug": "bazi",
+     "label": "Bazi"
+    }
+   ]
+  }
+ ],
+ "menus": [
+  {
+   "name": "primary",
+   "label": "Main menu",
+   "items": [
+    {
+     "type": "custom",
+     "label": "Understand",
+     "url": "/category/understand"
+    },
+    {
+     "type": "custom",
+     "label": "Build",
+     "url": "/category/build"
+    },
+    {
+     "type": "custom",
+     "label": "Apply",
+     "url": "/category/apply"
+    },
+    {
+     "type": "custom",
+     "label": "Consultations",
+     "url": "/consultations"
+    },
+    {
+     "type": "custom",
+     "label": "About",
+     "url": "/about"
+    }
+   ]
+  },
+  {
+   "name": "footer",
+   "label": "Footer menu",
+   "items": [
+    {
+     "type": "custom",
+     "label": "Understand",
+     "url": "/category/understand"
+    },
+    {
+     "type": "custom",
+     "label": "Build",
+     "url": "/category/build"
+    },
+    {
+     "type": "custom",
+     "label": "Apply",
+     "url": "/category/apply"
+    },
+    {
+     "type": "custom",
+     "label": "Consultations",
+     "url": "/consultations"
+    },
+    {
+     "type": "custom",
+     "label": "About",
+     "url": "/about"
+    },
+    {
+     "type": "custom",
+     "label": "Notes",
+     "url": "/category/notes"
+    }
+   ]
+  }
+ ],
+ "content": {
+  "home_page": [
+   {
+    "id": "home",
+    "slug": "home",
+    "status": "published",
+    "data": {
+     "title": "Home page",
+     "eyebrow": "Thai tarot · Thai astrology",
+     "headline": "Thai tarot and astrology, read together and explained clearly.",
+     "lead": "I'm Hope, a web developer who reads Thai tarot, known in Thailand as Promayarn cards (ไพ่พรหมญาณ), and Thai astrology. In a consultation I use both, and I show you what each one says and why, so you can decide for yourself.",
+     "primary_button": "Book a consultation",
+     "secondary_link": "How a consultation works",
+     "points": [
+      {
+       "title": "I show the reasoning",
+       "text": "Every interpretation says what it is based on, so you can follow it and disagree with it."
+      },
+      {
+       "title": "No fear, no theatre",
+       "text": "A consultation is for reflection and decisions. It is not a prediction of doom."
+      },
+      {
+       "title": "Built, not just written",
+       "text": "Where a tool explains something better than an article, I build the tool."
+      }
+     ],
+     "posts_eyebrow": "Start here",
+     "posts_title": "Understand how it works before you trust it",
+     "astro_eyebrow": "Thai astrology",
+     "astro_title": "Two practices, one consultation",
+     "astro_text": "The cards and the chart are separate practices that share the same signs and planets. In a consultation I read both side by side and explain each one piece by piece, starting with your sign.",
+     "astro_button": "Start with your sign",
+     "astro_note": "Feng shui and bazi are part of the practice too, and will follow.",
+     "consult_eyebrow": "Consultations",
+     "consult_title": "Bring one question, or ten",
+     "consult_text": "A consultation combines Thai tarot and Thai astrology. Mostly by voice call, in English or Thai, with unlimited questions in the time.",
+     "thai_link": "ลูกค้าไทย ดูราคาเป็นบาทและจองผ่าน LINE",
+     "about_eyebrow": "About",
+     "about_title": "Why a developer reads cards",
+     "about_lead": "I build websites for a living and read Thai tarot and Thai astrology for the people who ask. Both jobs come down to the same thing: taking a system apart until it makes sense.",
+     "about_body": "[Two or three sentences in your own words: the travelling, the spiritual path, and how they led to the practice.]",
+     "about_link": "Read my story"
+    }
+   }
+  ],
+  "consult_page": [
+   {
+    "id": "consultations",
+    "slug": "consultations",
+    "status": "published",
+    "data": {
+     "title": "Consultations page",
+     "eyebrow": "Consultations",
+     "headline": "A consultation you can follow",
+     "lead": "Each consultation combines Thai tarot, known as Promayarn cards (ไพ่พรหมญาณ), and Thai astrology. Mostly by voice call, with no video, in English or Thai. You ask as many questions as fit in the time, and I explain what the cards and your chart say, and why.",
+     "thai_note": "สำหรับลูกค้าไทย: 30 นาที 1,500 บาท · 1 ชั่วโมง 2,000 บาท · ถามได้ไม่จำกัด",
+     "thai_link": "จองคิวผ่าน LINE",
+     "steps_title": "How it works",
+     "steps": [
+      {
+       "title": "Message me",
+       "text": "WhatsApp for Singapore, Malaysia and everywhere else, LINE for Thailand. Tell me which session you want, and your date, time and place of birth for the chart."
+      },
+      {
+       "title": "Pick a time and pay",
+       "text": "You get a link to choose a slot. Payment is by [PAYMENT METHOD] and confirms the booking."
+      },
+      {
+       "title": "We talk by voice call",
+       "text": "A voice call with no video, at the time you chose: on LINE in Thailand, and on WhatsApp everywhere else. Bring your questions; a notebook helps."
+      }
+     ],
+     "get_title": "What you get",
+     "get_list": [
+      {
+       "text": "What each card or chart position suggests, and what that is based on."
+      },
+      {
+       "text": "Plain words. Every term is explained the first time it comes up."
+      },
+      {
+       "text": "Time to push back, ask again, and look at the question another way."
+      }
+     ],
+     "not_title": "What it is not",
+     "not_list": [
+      {
+       "text": "A prediction. I will not tell you what is going to happen."
+      },
+      {
+       "text": "A warning meant to frighten you into coming back."
+      },
+      {
+       "text": "A substitute for medical, legal or financial advice."
+      }
+     ],
+     "book_title": "Book a consultation",
+     "book_text": "Messaging is the quickest way to book.",
+     "whatsapp_label": "Singapore, Malaysia and international · English",
+     "whatsapp_number": "[YOUR WHATSAPP NUMBER]",
+     "whatsapp_url": "https://wa.me/",
+     "whatsapp_button": "Message on WhatsApp",
+     "line_label": "Thailand · ภาษาไทย",
+     "line_id": "[YOUR LINE ID]",
+     "line_url": "https://line.me/",
+     "line_button": "Add on LINE"
+    }
+   }
+  ],
+  "sessions": [
+   {
+    "id": "session-short",
+    "slug": "short",
+    "status": "published",
+    "data": {
+     "title": "Short session",
+     "kicker": "30 minutes · voice call",
+     "price": "S$60",
+     "price_thb": "1,500 บาท",
+     "description": "Unlimited questions for 30 minutes. Good for a first consultation or one situation looked at properly.",
+     "button_label": "Book 30 minutes",
+     "highlight": false,
+     "sort_order": 1
+    }
+   },
+   {
+    "id": "session-full",
+    "slug": "full",
+    "status": "published",
+    "data": {
+     "title": "Full session",
+     "kicker": "1 hour · voice call",
+     "price": "S$80",
+     "price_thb": "2,000 บาท",
+     "description": "Unlimited questions for a full hour. Room to go deeper, or to cover several parts of your life.",
+     "button_label": "Book 1 hour",
+     "highlight": true,
+     "sort_order": 2
+    }
+   },
+   {
+    "id": "session-inperson",
+    "slug": "face-to-face",
+    "status": "published",
+    "data": {
+     "title": "Face to face",
+     "kicker": "In person · Singapore",
+     "price": "[PRICE]",
+     "price_thb": "",
+     "description": "On request. We meet somewhere quiet in Singapore, at [VENUE OR AREA].",
+     "button_label": "Ask about meeting",
+     "highlight": false,
+     "sort_order": 3
+    }
+   }
+  ],
+  "pages": [
+   {
+    "id": "about",
+    "slug": "about",
+    "status": "published",
+    "data": {
+     "title": "Why a developer reads cards",
+     "lead": "I build websites for a living and read Thai tarot and Thai astrology for the people who ask. Both jobs come down to the same thing: taking a system apart until it makes sense.",
+     "content": [
+      {
+       "_type": "block",
+       "_key": "k001",
+       "style": "normal",
+       "markDefs": [],
+       "children": [
+        {
+         "_type": "span",
+         "_key": "k002",
+         "text": "[Your story goes here. Two threads to tell: the travelling, and the spiritual path, and how they led to the practice.]",
+         "marks": []
+        }
+       ]
+      },
+      {
+       "_type": "block",
+       "_key": "k003",
+       "style": "h2",
+       "markDefs": [],
+       "children": [
+        {
+         "_type": "span",
+         "_key": "k004",
+         "text": "How I work",
+         "marks": []
+        }
+       ]
+      },
+      {
+       "_type": "block",
+       "_key": "k005",
+       "style": "normal",
+       "markDefs": [],
+       "children": [
+        {
+         "_type": "span",
+         "_key": "k006",
+         "text": "I use two separate practices. Thai tarot, properly called Promayarn cards (ไพ่พรหมญาณ), answers the question in front of you. Thai astrology reads your chart from your date, time and place of birth. Most people get both in one consultation.",
+         "marks": []
+        }
+       ]
+      },
+      {
+       "_type": "block",
+       "_key": "k007",
+       "style": "normal",
+       "markDefs": [],
+       "children": [
+        {
+         "_type": "span",
+         "_key": "k008",
+         "text": "Whatever I tell you, I also tell you what it is based on. You are free to disagree with it.",
+         "marks": []
+        }
+       ]
+      }
+     ]
+    }
+   }
+  ],
+  "posts": [
+   {
+    "id": "post-69",
+    "slug": "thai-tarot-is-not-quite-tarot",
+    "status": "published",
+    "taxonomies": {
+     "category": [
+      "understand"
+     ],
+     "tag": [
+      "thai-tarot"
+     ]
+    },
+    "data": {
+     "title": "Thai tarot is not quite tarot: the 69 Promayarn cards",
+     "featured": true,
+     "excerpt": "People call it Thai tarot because that is the easiest way to explain it. The deck itself is different: 69 cards in five groups, built on Thai astrology.",
+     "content": [
+      {
+       "_type": "block",
+       "_key": "k009",
+       "style": "normal",
+       "markDefs": [],
+       "children": [
+        {
+         "_type": "span",
+         "_key": "k010",
+         "text": "[Draft from published descriptions of the deck. Check every detail against your own practice before publishing.]",
+         "marks": []
+        }
+       ]
+      },
+      {
+       "_type": "block",
+       "_key": "k011",
+       "style": "normal",
+       "markDefs": [],
+       "children": [
+        {
+         "_type": "span",
+         "_key": "k012",
+         "text": "If you know Western tarot, you expect 78 cards, a Fool and a Tower. Promayarn cards (ไพ่พรหมญาณ) have none of those. The deck has 69 cards, and it is drawn from Thai astrology and Thai literature.",
+         "marks": []
+        }
+       ]
+      },
+      {
+       "_type": "block",
+       "_key": "k013",
+       "style": "h2",
+       "markDefs": [],
+       "children": [
+        {
+         "_type": "span",
+         "_key": "k014",
+         "text": "The five groups",
+         "marks": []
+        }
+       ]
+      },
+      {
+       "_type": "block",
+       "_key": "k015",
+       "style": "normal",
+       "markDefs": [],
+       "children": [
+        {
+         "_type": "span",
+         "_key": "k016",
+         "text": "2 teacher cards, which are set aside and not used in a reading.",
+         "marks": []
+        }
+       ],
+       "listItem": "bullet",
+       "level": 1
+      },
+      {
+       "_type": "block",
+       "_key": "k017",
+       "style": "normal",
+       "markDefs": [],
+       "children": [
+        {
+         "_type": "span",
+         "_key": "k018",
+         "text": "7 day cards, one for each day of birth and its planet.",
+         "marks": []
+        }
+       ],
+       "listItem": "bullet",
+       "level": 1
+      },
+      {
+       "_type": "block",
+       "_key": "k019",
+       "style": "normal",
+       "markDefs": [],
+       "children": [
+        {
+         "_type": "span",
+         "_key": "k020",
+         "text": "12 sign cards, one for each sign of the zodiac.",
+         "marks": []
+        }
+       ],
+       "listItem": "bullet",
+       "level": 1
+      },
+      {
+       "_type": "block",
+       "_key": "k021",
+       "style": "normal",
+       "markDefs": [],
+       "children": [
+        {
+         "_type": "span",
+         "_key": "k022",
+         "text": "12 year cards, one for each birth year in the twelve-year cycle.",
+         "marks": []
+        }
+       ],
+       "listItem": "bullet",
+       "level": 1
+      },
+      {
+       "_type": "block",
+       "_key": "k023",
+       "style": "normal",
+       "markDefs": [],
+       "children": [
+        {
+         "_type": "span",
+         "_key": "k024",
+         "text": "36 prediction cards, which do most of the talking in a reading.",
+         "marks": []
+        }
+       ],
+       "listItem": "bullet",
+       "level": 1
+      },
+      {
+       "_type": "block",
+       "_key": "k025",
+       "style": "h2",
+       "markDefs": [],
+       "children": [
+        {
+         "_type": "span",
+         "_key": "k026",
+         "text": "The three readings",
+         "marks": []
+        }
+       ]
+      },
+      {
+       "_type": "block",
+       "_key": "k027",
+       "style": "normal",
+       "markDefs": [],
+       "children": [
+        {
+         "_type": "span",
+         "_key": "k028",
+         "text": "Three cards, for one specific question.",
+         "marks": []
+        }
+       ],
+       "listItem": "bullet",
+       "level": 1
+      },
+      {
+       "_type": "block",
+       "_key": "k029",
+       "style": "normal",
+       "markDefs": [],
+       "children": [
+        {
+         "_type": "span",
+         "_key": "k030",
+         "text": "Twelve cards, for the month ahead.",
+         "marks": []
+        }
+       ],
+       "listItem": "bullet",
+       "level": 1
+      },
+      {
+       "_type": "block",
+       "_key": "k031",
+       "style": "normal",
+       "markDefs": [],
+       "children": [
+        {
+         "_type": "span",
+         "_key": "k032",
+         "text": "Forty-three cards, the life graph, for the year.",
+         "marks": []
+        }
+       ],
+       "listItem": "bullet",
+       "level": 1
+      },
+      {
+       "_type": "block",
+       "_key": "k033",
+       "style": "h2",
+       "markDefs": [],
+       "children": [
+        {
+         "_type": "span",
+         "_key": "k034",
+         "text": "So why call it tarot?",
+         "marks": []
+        }
+       ]
+      },
+      {
+       "_type": "block",
+       "_key": "k035",
+       "style": "normal",
+       "markDefs": [],
+       "children": [
+        {
+         "_type": "span",
+         "_key": "k036",
+         "text": "Because the word gets you through the door. Once you are in, the differences are the interesting part.",
+         "marks": []
+        }
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "id": "post-three",
+    "slug": "how-a-three-card-reading-works",
+    "status": "published",
+    "taxonomies": {
+     "category": [
+      "understand"
+     ],
+     "tag": [
+      "thai-tarot"
+     ]
+    },
+    "data": {
+     "title": "How a three-card reading works",
+     "featured": false,
+     "excerpt": "Three cards, one specific question. Here is what the cards are, how they talk to each other, and where the method stops being useful.",
+     "content": [
+      {
+       "_type": "block",
+       "_key": "k037",
+       "style": "normal",
+       "markDefs": [],
+       "children": [
+        {
+         "_type": "span",
+         "_key": "k038",
+         "text": "[Outline only. Replace with your own writing.]",
+         "marks": []
+        }
+       ]
+      },
+      {
+       "_type": "block",
+       "_key": "k039",
+       "style": "normal",
+       "markDefs": [],
+       "children": [
+        {
+         "_type": "span",
+         "_key": "k040",
+         "text": "What question suits three cards, and what does not.",
+         "marks": []
+        }
+       ],
+       "listItem": "bullet",
+       "level": 1
+      },
+      {
+       "_type": "block",
+       "_key": "k041",
+       "style": "normal",
+       "markDefs": [],
+       "children": [
+        {
+         "_type": "span",
+         "_key": "k042",
+         "text": "How the three cards are laid out and read together.",
+         "marks": []
+        }
+       ],
+       "listItem": "bullet",
+       "level": 1
+      },
+      {
+       "_type": "block",
+       "_key": "k043",
+       "style": "normal",
+       "markDefs": [],
+       "children": [
+        {
+         "_type": "span",
+         "_key": "k044",
+         "text": "A worked example, with the reasoning shown.",
+         "marks": []
+        }
+       ],
+       "listItem": "bullet",
+       "level": 1
+      },
+      {
+       "_type": "block",
+       "_key": "k045",
+       "style": "normal",
+       "markDefs": [],
+       "children": [
+        {
+         "_type": "span",
+         "_key": "k046",
+         "text": "Where the method stops being useful.",
+         "marks": []
+        }
+       ],
+       "listItem": "bullet",
+       "level": 1
+      }
+     ]
+    }
+   },
+   {
+    "id": "post-lagna",
+    "slug": "why-a-thai-chart-starts-with-your-rising-sign",
+    "status": "published",
+    "taxonomies": {
+     "category": [
+      "understand"
+     ],
+     "tag": [
+      "thai-astrology"
+     ]
+    },
+    "data": {
+     "title": "Why a Thai chart starts with your rising sign",
+     "featured": false,
+     "excerpt": "Your date of birth is not enough. A Thai chart needs the time and place too, and this is why.",
+     "content": [
+      {
+       "_type": "block",
+       "_key": "k047",
+       "style": "normal",
+       "markDefs": [],
+       "children": [
+        {
+         "_type": "span",
+         "_key": "k048",
+         "text": "[Outline only. Replace with your own writing.]",
+         "marks": []
+        }
+       ]
+      },
+      {
+       "_type": "block",
+       "_key": "k049",
+       "style": "normal",
+       "markDefs": [],
+       "children": [
+        {
+         "_type": "span",
+         "_key": "k050",
+         "text": "What the rising sign is, in plain words.",
+         "marks": []
+        }
+       ],
+       "listItem": "bullet",
+       "level": 1
+      },
+      {
+       "_type": "block",
+       "_key": "k051",
+       "style": "normal",
+       "markDefs": [],
+       "children": [
+        {
+         "_type": "span",
+         "_key": "k052",
+         "text": "Why the time and place of birth change the chart.",
+         "marks": []
+        }
+       ],
+       "listItem": "bullet",
+       "level": 1
+      },
+      {
+       "_type": "block",
+       "_key": "k053",
+       "style": "normal",
+       "markDefs": [],
+       "children": [
+        {
+         "_type": "span",
+         "_key": "k054",
+         "text": "What to do if you do not know your birth time.",
+         "marks": []
+        }
+       ],
+       "listItem": "bullet",
+       "level": 1
+      }
+     ]
+    }
+   },
+   {
+    "id": "post-line",
+    "slug": "a-line-bot-that-answers-and-takes-bookings",
+    "status": "published",
+    "taxonomies": {
+     "category": [
+      "build"
+     ],
+     "tag": []
+    },
+    "data": {
+     "title": "A LINE bot that answers and takes bookings",
+     "featured": false,
+     "excerpt": "Nobody was answering my LINE account, so I built something that does.",
+     "content": [
+      {
+       "_type": "block",
+       "_key": "k055",
+       "style": "normal",
+       "markDefs": [],
+       "children": [
+        {
+         "_type": "span",
+         "_key": "k056",
+         "text": "[Outline only. Replace with your own writing.]",
+         "marks": []
+        }
+       ]
+      },
+      {
+       "_type": "block",
+       "_key": "k057",
+       "style": "normal",
+       "markDefs": [],
+       "children": [
+        {
+         "_type": "span",
+         "_key": "k058",
+         "text": "The problem: clients on LINE and no time to reply.",
+         "marks": []
+        }
+       ],
+       "listItem": "bullet",
+       "level": 1
+      },
+      {
+       "_type": "block",
+       "_key": "k059",
+       "style": "normal",
+       "markDefs": [],
+       "children": [
+        {
+         "_type": "span",
+         "_key": "k060",
+         "text": "How the LINE Messaging API works, and why replies are free.",
+         "marks": []
+        }
+       ],
+       "listItem": "bullet",
+       "level": 1
+      },
+      {
+       "_type": "block",
+       "_key": "k061",
+       "style": "normal",
+       "markDefs": [],
+       "children": [
+        {
+         "_type": "span",
+         "_key": "k062",
+         "text": "What the bot answers and what it leaves to me.",
+         "marks": []
+        }
+       ],
+       "listItem": "bullet",
+       "level": 1
+      }
+     ]
+    }
+   },
+   {
+    "id": "post-which",
+    "slug": "which-reading-to-book",
+    "status": "published",
+    "taxonomies": {
+     "category": [
+      "apply"
+     ],
+     "tag": [
+      "thai-tarot"
+     ]
+    },
+    "data": {
+     "title": "Three cards, twelve cards or the life graph: which reading to book",
+     "featured": false,
+     "excerpt": "A short guide to matching the reading to the question you actually have.",
+     "content": [
+      {
+       "_type": "block",
+       "_key": "k063",
+       "style": "normal",
+       "markDefs": [],
+       "children": [
+        {
+         "_type": "span",
+         "_key": "k064",
+         "text": "[Outline only. Replace with your own writing.]",
+         "marks": []
+        }
+       ]
+      },
+      {
+       "_type": "block",
+       "_key": "k065",
+       "style": "normal",
+       "markDefs": [],
+       "children": [
+        {
+         "_type": "span",
+         "_key": "k066",
+         "text": "One decision to make: three cards.",
+         "marks": []
+        }
+       ],
+       "listItem": "bullet",
+       "level": 1
+      },
+      {
+       "_type": "block",
+       "_key": "k067",
+       "style": "normal",
+       "markDefs": [],
+       "children": [
+        {
+         "_type": "span",
+         "_key": "k068",
+         "text": "A month to plan: twelve cards.",
+         "marks": []
+        }
+       ],
+       "listItem": "bullet",
+       "level": 1
+      },
+      {
+       "_type": "block",
+       "_key": "k069",
+       "style": "normal",
+       "markDefs": [],
+       "children": [
+        {
+         "_type": "span",
+         "_key": "k070",
+         "text": "A year to map: the life graph.",
+         "marks": []
+        }
+       ],
+       "listItem": "bullet",
+       "level": 1
+      }
+     ]
+    }
+   }
+  ]
+ }
+}

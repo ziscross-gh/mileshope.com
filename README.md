@@ -1,139 +1,57 @@
-# MilesHope.com
+# MilesHope.com on EmDash
 
-A modern static blog exploring spirituality, technology, and personal growth. Built with Zola and styled with Tailwind CSS v4.
+The new MilesHope.com: Thai tarot (Promayarn cards) and Thai astrology consultations, with articles under Understand, Build and Apply. Built with [EmDash](https://emdashcms.com) on Astro.
 
-**Live site**: https://www.mileshope.com
+This is a review build on the `emdash` branch. It is not deployed anywhere. The live Zola site stays on `main`, which Cloudflare Pages deploys automatically, so do not merge this branch into `main` until the Cloudflare setup for EmDash is done.
 
-## Tech Stack
+## Run it on your computer
 
-- **Zola** - Fast static site generator written in Rust
-- **Tailwind CSS v4** - Utility-first CSS framework (standalone CLI)
-- **Notion** - Content management via Notion API
-- **Cloudflare Pages** - Deployment and hosting
-- **Google Analytics 4** - Analytics and event tracking
-
-## Features
-
-- **Modern Design** - Purple/gold color scheme with Lora serif headings
-- **Dark Mode** - Full dark mode support with smooth transitions
-- **Search** - Client-side search powered by elasticlunr.js
-- **Blog** - Posts with tags, categories, reading time, and table of contents
-- **Related Posts** - Smart post recommendations based on tags
-- **RSS Feeds** - Auto-generated feeds for blog and taxonomies
-- **SEO Optimized** - Meta tags, Open Graph, Twitter Cards, structured data
-- **Mobile Responsive** - Hamburger menu and responsive layouts
-- **Notion Sync** - Automated blog post syncing from Notion database
-- **Analytics** - GA4 with custom events (search, share, code copy)
-- **Performance** - Fast builds (~50ms), optimized CSS
-
-## Quick Start
-
-### Prerequisites
-
-- [Zola](https://www.getzola.org/documentation/getting-started/installation/) (v0.18.0+)
-- Python 3 (for Notion sync)
-
-### Development
+You need Node.js 22 or newer and pnpm.
 
 ```bash
-# Clone the repository
-git clone https://github.com/ziscross-gh/mileshope.com.git
-cd mileshope.com
-
-# Start development server with Tailwind watch mode
-./dev.sh
-
-# Or manually:
-# Terminal 1: Watch Tailwind CSS
-./tailwindcss -i ./styles/input.css -o ./static/css/tailwind.css --watch
-
-# Terminal 2: Start Zola server
-zola serve
+pnpm install
+pnpm dev
 ```
 
-Visit `http://127.0.0.1:1111` to see the site locally.
+1. Open http://localhost:4321/_emdash/admin and finish the short setup. You register your own passkey there. Setup creates the database and loads the starting content from `seed/seed.json`.
+2. Open http://localhost:4321 to see the site.
 
-### Production Build
+To start again from the original content, stop the server, delete `data.db`, and run `npx emdash seed seed/seed.json`.
 
-```bash
-# Build everything
-./build.sh
+## What you can edit in the admin
 
-# Or manually:
-./tailwindcss -i ./styles/input.css -o ./static/css/tailwind.css --minify
-zola build
-```
+| In the admin | What it changes |
+|---|---|
+| Posts | Articles. Each has a Section (Understand, Build, Apply, Notes) and Topics. Tick "Featured" to put one in the large card on the home page. |
+| Pages | Simple pages such as About. |
+| Sessions | The consultation cards: name, length, price, description, button, order. |
+| Home page | Every heading, paragraph and button label on the home page. |
+| Consultations page | Every heading, the steps, the two lists, and the WhatsApp and LINE details. |
+| Menus | The links in the header and footer. |
+| Settings | Site title and tagline. |
 
-## Project Structure
+When you are signed in, you can also click text on the site itself to edit it in place.
 
-```
-mileshope.com/
-├── content/              # Markdown content
-│   ├── blog/            # Blog posts
-│   ├── about.md         # About page
-│   ├── contact.md       # Contact page
-│   └── services.md      # Services page
-├── templates/           # Tera HTML templates
-│   ├── base.html        # Base layout with GA4
-│   ├── index.html       # Homepage
-│   ├── section.html     # Blog listing
-│   ├── page.html        # Individual posts
-│   └── 404.html         # Error page
-├── static/              # Static assets
-│   ├── css/tailwind.css # Compiled CSS
-│   ├── favicon.svg      # Site favicon
-│   └── images/          # Images and OG image
-├── styles/input.css     # Tailwind v4 source
-├── config.toml          # Zola + GA4 configuration
-├── sync.py              # Notion sync script
-├── build.sh             # Production build
-└── dev.sh               # Development script
-```
+## Still to fill in
 
-## Notion Sync
+Search the admin for square brackets. These are waiting for real details:
 
-Sync blog posts from Notion:
+- `[YOUR WHATSAPP NUMBER]` and `[YOUR LINE ID]`, plus their links (Consultations page)
+- `[PAYMENT METHOD]` (Consultations page, step 2)
+- `[PRICE]` and `[VENUE OR AREA]` (Sessions, Face to face)
+- The About story (Pages, About, and the About block on the Home page)
+- Four posts are outlines only, and the Promayarn article is a draft to check against your own practice.
 
-```bash
-# Setup
-pip3 install requests
-cp .env.example .env
-# Edit .env with NOTION_API_KEY and NOTION_DATABASE_ID
+## Not built yet
 
-# Sync
-source .env
-python3 sync.py
-```
+- Thai versions of the pages (planned under `/th/`)
+- A contact form
+- Deployment to Cloudflare
 
-See [SYNC_README.md](SYNC_README.md) for detailed setup.
+## Where things are
 
-## Styling
-
-Custom design system with Tailwind CSS v4:
-
-- **Colors**: Purple (#805ad5) primary, Gold (#d69e2e) accent
-- **Typography**: Lora (headings), Inter (body)
-- **Dark Mode**: Class-based toggle with localStorage persistence
-
-Edit `styles/input.css` and rebuild with `./tailwindcss`.
-
-## Deployment
-
-Auto-deploys to Cloudflare Pages on push to `main`:
-
-1. Push: `git push origin main`
-2. Cloudflare runs `build.sh`
-3. Deploys to https://www.mileshope.com
-
-## Analytics
-
-Google Analytics 4 is configured with custom event tracking:
-- Page views
-- Search queries
-- Share button clicks
-- Code block copies
-- Navigation clicks
-
-## License
-
-Copyright 2025 Miles Hope. All rights reserved.
+- `seed/seed.json`: the content model and starting content
+- `src/pages/`: one file per page type
+- `src/layouts/Base.astro`: header and footer
+- `src/styles/theme.css`: brand colours, type and shared styles
+- `public/brand/`, `public/fonts/`: logo, zodiac badges, fonts

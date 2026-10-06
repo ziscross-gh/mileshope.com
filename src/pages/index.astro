@@ -1,0 +1,282 @@
+---
+import { getEmDashCollection, getEmDashEntry, getSiteSettings, getTermsForEntries } from "emdash";
+import Base from "../layouts/Base.astro";
+import HeroCards from "../components/HeroCards.astro";
+import SessionCard from "../components/SessionCard.astro";
+import { resolveStarterSiteIdentity } from "../utils/site-identity";
+import { sortSessions, SIGNS } from "../utils/content";
+
+const [homeResult, postsResult, sessionsResult] = await Promise.all([
+	getEmDashEntry("home_page", "home"),
+	getEmDashCollection("posts", { orderBy: { published_at: "desc" }, limit: 12 }),
+	getEmDashCollection("sessions", { limit: 10 }),
+]);
+if (Astro.cache?.enabled) {
+	Astro.cache.set(homeResult.cacheHint);
+	Astro.cache.set(postsResult.cacheHint);
+	Astro.cache.set(sessionsResult.cacheHint);
+}
+
+const home = homeResult.entry;
+const h = home?.data ?? {};
+const posts = postsResult.entries;
+const featured = posts.find((p) => p.data.featured) ?? posts[0];
+const others = posts.filter((p) => p !== featured).slice(0, 4);
+// The home page shows the first two sessions; the full list is on /consultations.
+const sessions = sortSessions(sessionsResult.entries).slice(0, 2);
+
+// One batched query for the Section of every post shown.
+const sectionsByEntry = await getTermsForEntries(
+	"posts",
+	posts.map((p) => p.data.id),
+	"category",
+);
+const sectionLabel = (post: (typeof posts)[number]) =>
+	sectionsByEntry.get(post.data.id)?.[0]?.label ?? "Article";
+
+const { siteTitle, siteTagline } = resolveStarterSiteIdentity(await getSiteSettings());
+---
+
+<Base title={siteTitle} description={h.lead ?? siteTagline}>
+	{
+		!home ? (
+			<section class="wrap section">
+				<h1>Home page content is missing</h1>
+				<p>
+					Create the entry in <a href="/_emdash/admin">the admin</a> under Home page, with the slug
+					<code>home</code>.
+				</p>
+			</section>
+		) : (
+			<>
+				<section class="wrap hero">
+					<div class="hero-text stack">
+						<p class="label" {...home.edit.eyebrow}>
+							{h.eyebrow}
+						</p>
+						<h1 class="display" {...home.edit.headline}>
+							{h.headline}
+						</h1>
+						<p class="lead measure" {...home.edit.lead}>
+							{h.lead}
+						</p>
+						<div class="actions">
+							<a class="btn btn-book" href="/consultations" {...home.edit.primary_button}>
+								{h.primary_button}
+							</a>
+							<a class="textlink" href="/consultations#how" {...home.edit.secondary_link}>
+								{h.secondary_link}
+							</a>
+						</div>
+					</div>
+					<div class="hero-art">
+						<HeroCards />
+					</div>
+				</section>
+
+				{h.points?.length > 0 && (
+					<section class="rule-top rule-bottom">
+						<div class="wrap section row-lg" {...home.edit.points}>
+							{h.points.map((p: any) => (
+								<div class="col stack-sm">
+									<h2 class="h3">{p.title}</h2>
+									<p>{p.text}</p>
+								</div>
+							))}
+						</div>
+					</section>
+				)}
+
+				<section class="wrap section stack" id="understand" style="gap: var(--space-6)">
+					<div class="stack-sm">
+						<p class="label" {...home.edit.posts_eyebrow}>
+							{h.posts_eyebrow}
+						</p>
+						<h2 {...home.edit.posts_title}>{h.posts_title}</h2>
+					</div>
+					{posts.length === 0 ? (
+						<p>
+							No posts yet. <a href="/_emdash/admin/content/posts/new">Write the first one</a>.
+						</p>
+					) : (
+						<div class="row">
+							<article class="card feature stack">
+								<p class="label">
+									{sectionLabel(featured)}
+								</p>
+								<h3 class="h1" {...featured.edit.title}>
+									{featured.data.title}
+								</h3>
+								{featured.data.excerpt && (
+									<p class="lead" {...featured.edit.excerpt}>
+										{featured.data.excerpt}
+									</p>
+								)}
+								<a class="textlink" href={`/posts/${featured.id}`}>
+									Read the article
+								</a>
+							</article>
+							<div class="feature-list">
+								{others.map((post) => (
+									<a class="postlink" href={`/posts/${post.id}`}>
+										<span class="label">{sectionLabel(post)}</span>
+										<span class="h3">{post.data.title}</span>
+									</a>
+								))}
+							</div>
+						</div>
+					)}
+				</section>
+
+				<section class="wrap" id="astrology" style="padding-bottom: var(--space-12)">
+					<div class="night stack" style="gap: 32px">
+						<div class="stack-sm measure">
+							<p class="label" {...home.edit.astro_eyebrow}>
+								{h.astro_eyebrow}
+							</p>
+							<h2 {...home.edit.astro_title}>{h.astro_title}</h2>
+							<p class="soft" {...home.edit.astro_text}>
+								{h.astro_text}
+							</p>
+						</div>
+						<div class="signs">
+							{SIGNS.map(([slug, name]) => (
+								<img
+									src={`/brand/zodiac-${slug}-night.svg`}
+									alt={name}
+									width="64"
+									height="64"
+									loading="lazy"
+								/>
+							))}
+						</div>
+						<div class="actions">
+							<a class="btn btn-cream" href="/category/understand" {...home.edit.astro_button}>
+								{h.astro_button}
+							</a>
+							<span class="small soft" {...home.edit.astro_note}>
+								{h.astro_note}
+							</span>
+						</div>
+					</div>
+				</section>
+
+				<section class="wrap section stack" id="consultations" style="gap: var(--space-6)">
+					<div class="stack-sm measure">
+						<p class="label" {...home.edit.consult_eyebrow}>
+							{h.consult_eyebrow}
+						</p>
+						<h2 {...home.edit.consult_title}>{h.consult_title}</h2>
+						<p {...home.edit.consult_text}>{h.consult_text}</p>
+					</div>
+					<div class="row">
+						{sessions.map((s) => (
+							<SessionCard session={s} compact />
+						))}
+						<div class="col stack" style="justify-content: center">
+							<a class="btn btn-book" href="/consultations">
+								{h.primary_button}
+							</a>
+							<a
+								class="small"
+								style="text-align: center; padding: 10px 0"
+								href="/consultations#thai"
+								lang="th"
+								{...home.edit.thai_link}
+							>
+								{h.thai_link}
+							</a>
+						</div>
+					</div>
+				</section>
+
+				<section class="rule-top" id="about">
+					<div class="wrap row-lg" style="padding-block: var(--space-12) 72px">
+						<div class="stack-sm" style="flex: 1 1 280px; min-width: 0">
+							<p class="label" {...home.edit.about_eyebrow}>
+								{h.about_eyebrow}
+							</p>
+							<h2 {...home.edit.about_title}>{h.about_title}</h2>
+						</div>
+						<div class="stack" style="flex: 2 1 480px; min-width: 0">
+							<p class="lead" {...home.edit.about_lead}>
+								{h.about_lead}
+							</p>
+							<p class="muted" {...home.edit.about_body}>
+								{h.about_body}
+							</p>
+							<a class="textlink" style="align-self: flex-start" href="/about" {...home.edit.about_link}>
+								{h.about_link}
+							</a>
+						</div>
+					</div>
+				</section>
+			</>
+		)
+	}
+</Base>
+
+<style>
+	.hero {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: var(--space-12);
+		padding-block: var(--space-12) 72px;
+	}
+	.hero-text {
+		flex: 1 1 480px;
+		min-width: 0;
+		gap: var(--space-6);
+	}
+	.hero-art {
+		flex: 1 1 400px;
+		min-width: 0;
+	}
+	.actions {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: var(--space-4) var(--space-6);
+	}
+	.feature {
+		flex: 2 1 480px;
+		min-width: 0;
+		padding: 32px;
+	}
+	.feature .textlink {
+		align-self: flex-start;
+	}
+	.feature-list {
+		flex: 1 1 300px;
+		min-width: 0;
+		display: flex;
+		flex-direction: column;
+	}
+	.night {
+		background: var(--ink);
+		color: var(--cream);
+		border-radius: var(--radius-md);
+		padding: var(--space-12);
+	}
+	.night h2 {
+		color: var(--cream);
+	}
+	.night .label,
+	.night .soft {
+		color: var(--sand);
+	}
+	.signs {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-4);
+	}
+	.signs img {
+		display: block;
+	}
+	@media (max-width: 640px) {
+		.night {
+			padding: var(--space-6);
+		}
+	}
+</style>
