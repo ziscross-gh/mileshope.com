@@ -33,7 +33,16 @@ pnpm wrangler login
 pnpm deploy
 ```
 
-Or connect this branch in the Cloudflare dashboard (Workers & Pages, Create application, Import a repository) with the project name `mileshope`, branch `emdash`, build command `pnpm build` and deploy command `npx wrangler deploy`.
+Or let Cloudflare build it from GitHub. In the Cloudflare dashboard go to Workers & Pages, Create application, Import a repository, pick this repository and set:
+
+| Setting | Value |
+|---|---|
+| Project name | `mileshope` (must match `name` in `wrangler.jsonc`) |
+| Branch | `emdash` |
+| Build command | `pnpm build` |
+| Deploy command | `npx wrangler deploy` |
+
+Then turn off builds for other branches on that Worker, so pushes to `main` (the old Zola site) do not start builds there. Node.js is pinned to version 22 by `.node-version`, and pnpm picks its own version from `package.json`.
 
 After the first deploy, open `/_emdash/admin` on the Worker's address and run setup there, with the starting content included. A passkey registered on the `workers.dev` address only works on that address, so setup needs revisiting when the site moves to `www.mileshope.com`.
 
