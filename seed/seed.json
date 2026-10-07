@@ -573,6 +573,11 @@
      "type": "custom",
      "label": "Notes",
      "url": "/category/notes"
+    },
+    {
+     "type": "custom",
+     "label": "hello@mileshope.com",
+     "url": "mailto:hello@mileshope.com"
     }
    ]
   }

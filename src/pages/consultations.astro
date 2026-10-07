@@ -3,7 +3,7 @@ import Text from "../components/Text.astro";
 import { getEmDashCollection, getEmDashEntry } from "emdash";
 import Base from "../layouts/Base.astro";
 import SessionCard from "../components/SessionCard.astro";
-import { sortSessions } from "../utils/content";
+import { sortSessions, CONTACT_EMAIL } from "../utils/content";
 
 const [pageResult, sessionsResult] = await Promise.all([
 	getEmDashEntry("consult_page", "consultations"),
@@ -131,6 +131,13 @@ const colsLg = sessions.length === 4 ? 2 : Math.min(sessions.length, 3) || 1;
 								{c.line_button}
 							</a>
 						</div>
+						<div class="card channel">
+							<div class="stack-sm" style="gap: 4px">
+								<p class="label">Email</p>
+								<p class="h3 strong address">{CONTACT_EMAIL}</p>
+							</div>
+							<a class="btn btn-outline" href={`mailto:${CONTACT_EMAIL}`}>Write an email</a>
+						</div>
 					</div>
 				</section>
 			</>
@@ -167,13 +174,16 @@ const colsLg = sessions.length === 4 ? 2 : Math.min(sessions.length, 3) || 1;
 		color: var(--fire-deep);
 	}
 	.channel {
-		flex: 1 1 400px;
+		flex: 1 1 300px;
 		min-width: 0;
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
 		justify-content: space-between;
 		gap: var(--space-4);
+	}
+	.address {
+		overflow-wrap: anywhere;
 	}
 	.strong {
 		font-weight: 600;

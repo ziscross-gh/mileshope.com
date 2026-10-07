@@ -20,3 +20,9 @@ export const SIGNS = [
 	["aquarius", "Aquarius"],
 	["pisces", "Pisces"],
 ] as const;
+
+/**
+ * The public contact address. Cloudflare Email Routing forwards it to Hope's
+ * inbox, so changing it here also needs a new routing rule on Cloudflare.
+ */
+export const CONTACT_EMAIL = "hello@mileshope.com";
