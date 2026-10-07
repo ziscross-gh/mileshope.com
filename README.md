@@ -80,7 +80,7 @@ Search the admin for square brackets. These are waiting for real details:
 ## Where things are
 
 - `seed/seed.json`: the content model and starting content
-- `wrangler.jsonc`, `astro.config.mjs`: Cloudflare and EmDash setup
+- `wrangler.jsonc`, `astro.config.mjs`: Cloudflare and EmDash setup, plus the redirects from the old site's addresses
 - `src/pages/`: one file per page type
 - `src/layouts/Base.astro`: header and footer
 - `src/styles/theme.css`: brand colours, type and shared styles
