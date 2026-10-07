@@ -1,0 +1,155 @@
+/*
+ * Motion. Calm and short: things settle into place, nothing performs.
+ * All of it is skipped for visitors who ask their device for less motion,
+ * and browsers that lack a feature simply show the page without it.
+ */
+
+:root {
+	--ease-settle: cubic-bezier(0.2, 0.7, 0.2, 1);
+	--time-quick: 160ms;
+	--time-settle: 420ms;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	/* ── Moving between pages ─────────────────────────────────────────────
+	   The header stays where it is; the page content fades out, and the
+	   next page fades in a few pixels lower and rises into place. */
+	@view-transition {
+		navigation: auto;
+	}
+	.site-header {
+		view-transition-name: site-header;
+	}
+	main {
+		view-transition-name: page;
+	}
+	::view-transition-old(page) {
+		animation: page-out 140ms ease-in both;
+	}
+	::view-transition-new(page) {
+		animation: page-in 320ms var(--ease-settle) both;
+	}
+	::view-transition-old(root),
+	::view-transition-new(root) {
+		animation-duration: 200ms;
+	}
+
+	/* ── Buttons and links ─────────────────────────────────────────────── */
+	.btn {
+		transition:
+			background-color var(--time-quick) ease,
+			color var(--time-quick) ease,
+			border-color var(--time-quick) ease,
+			filter var(--time-quick) ease,
+			transform var(--time-quick) ease;
+	}
+	.btn:active {
+		transform: translateY(1px);
+	}
+	a {
+		transition:
+			color var(--time-quick) ease,
+			text-decoration-color var(--time-quick) ease,
+			text-underline-offset var(--time-quick) ease;
+	}
+	a.textlink:hover {
+		text-underline-offset: 6px;
+	}
+	.postlink .h3 {
+		transition: transform var(--time-quick) var(--ease-settle);
+	}
+	.postlink:hover .h3 {
+		transform: translateX(4px);
+	}
+
+	/* ── Phone menu: the list eases in under the header ───────────────── */
+	@media (max-width: 960px) {
+		.js .site-header[data-open] .site-nav {
+			animation: menu-in 220ms var(--ease-settle) both;
+		}
+	}
+
+	/* ── Home page opening: text first, then the three cards ──────────── */
+	.hero-text > * {
+		animation: rise-in var(--time-settle) var(--ease-settle) both;
+	}
+	.hero-text > :nth-child(2) {
+		animation-delay: 60ms;
+	}
+	.hero-text > :nth-child(3) {
+		animation-delay: 120ms;
+	}
+	.hero-text > :nth-child(4) {
+		animation-delay: 180ms;
+	}
+	.hero-cards .slot {
+		animation: rise-in 520ms var(--ease-settle) both;
+		animation-delay: 220ms;
+	}
+	.hero-cards .slot:nth-child(2) {
+		animation-delay: 300ms;
+	}
+	.hero-cards .slot:nth-child(3) {
+		animation-delay: 380ms;
+	}
+
+	/* The coral dot on each hero card travels slowly round its orbit, each
+	   at its own pace, the way the planets do. */
+	.hero-cards .orbit-dot {
+		transform-box: view-box;
+		transform-origin: 24px 24px;
+		animation: orbit 70s linear infinite;
+	}
+	.hero-cards .slot:nth-child(2) .orbit-dot {
+		animation-duration: 95s;
+	}
+	.hero-cards .slot:nth-child(3) .orbit-dot {
+		animation-duration: 120s;
+	}
+
+	/* ── Sections rise into view as you scroll to them ────────────────────
+	   Tied to the scroll position, so it never runs ahead of the reader.
+	   Only where the browser supports it; otherwise nothing is hidden. */
+	@supports (animation-timeline: view()) {
+		[data-reveal] {
+			animation: reveal linear both;
+			animation-timeline: view();
+			animation-range: entry 0px entry 180px;
+		}
+	}
+}
+
+@keyframes page-out {
+	to {
+		opacity: 0;
+	}
+}
+@keyframes page-in {
+	from {
+		opacity: 0;
+		transform: translateY(8px);
+	}
+}
+@keyframes menu-in {
+	from {
+		opacity: 0;
+		transform: translateY(-6px);
+	}
+}
+@keyframes rise-in {
+	from {
+		opacity: 0;
+		transform: translateY(12px);
+	}
+}
+@keyframes orbit {
+	to {
+		transform: rotate(360deg);
+	}
+}
+@keyframes reveal {
+	from {
+		opacity: 0;
+		transform: translateY(16px);
+	}
+}

@@ -66,7 +66,7 @@ const colsLg = sessions.length === 4 ? 2 : Math.min(sessions.length, 3) || 1;
 
 				<section class="wrap stack" id="how" style="gap: var(--space-6); padding-bottom: var(--space-12)">
 					<h2 {...page.edit.steps_title}>{c.steps_title}</h2>
-					<div class="row-lg" {...page.edit.steps}>
+					<div class="row-lg" data-reveal {...page.edit.steps}>
 						{(c.steps ?? []).map((s: any, i: number) => (
 							<div class="col stack-sm">
 								<p class="label num">{step(i)}</p>
@@ -78,7 +78,7 @@ const colsLg = sessions.length === 4 ? 2 : Math.min(sessions.length, 3) || 1;
 				</section>
 
 				<section class="rule-top rule-bottom">
-					<div class="wrap section row-lg">
+					<div class="wrap section row-lg" data-reveal>
 						<div class="stack" style="flex: 1 1 360px; min-width: 0">
 							<h2 {...page.edit.get_title}>{c.get_title}</h2>
 							<ul class="plain-list" {...page.edit.get_list}>
@@ -103,7 +103,7 @@ const colsLg = sessions.length === 4 ? 2 : Math.min(sessions.length, 3) || 1;
 						<h2 {...page.edit.book_title}>{c.book_title}</h2>
 						<p {...page.edit.book_text}>{c.book_text}</p>
 					</div>
-					<div class="row">
+					<div class="row" data-reveal>
 						<div class="card channel">
 							<div class="stack-sm" style="gap: 4px">
 								<p class="label" {...page.edit.whatsapp_label}>

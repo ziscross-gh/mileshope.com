@@ -84,4 +84,5 @@ Search the admin for square brackets. These are waiting for real details:
 - `src/pages/`: one file per page type
 - `src/layouts/Base.astro`: header and footer
 - `src/styles/theme.css`: brand colours, type and shared styles
+- `src/styles/motion.css`: page transitions and other animation, all in one place
 - `public/brand/`, `public/fonts/`: logo, zodiac badges, fonts

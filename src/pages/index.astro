@@ -76,7 +76,7 @@ const { siteTitle, siteTagline } = resolveStarterSiteIdentity(await getSiteSetti
 
 				{h.points?.length > 0 && (
 					<section class="rule-top rule-bottom">
-						<div class="wrap section row-lg" {...home.edit.points}>
+						<div class="wrap section row-lg" data-reveal {...home.edit.points}>
 							{h.points.map((p: any) => (
 								<div class="col stack-sm">
 									<h2 class="h3">{p.title}</h2>
@@ -100,7 +100,7 @@ const { siteTitle, siteTagline } = resolveStarterSiteIdentity(await getSiteSetti
 						</p>
 					) : (
 						<div class="row">
-							<article class="card feature stack">
+							<article class="card feature stack" data-reveal>
 								<p class="label">
 									{sectionLabel(featured)}
 								</p>
@@ -116,7 +116,7 @@ const { siteTitle, siteTagline } = resolveStarterSiteIdentity(await getSiteSetti
 									Read the article
 								</a>
 							</article>
-							<div class="feature-list">
+							<div class="feature-list" data-reveal>
 								{others.map((post) => (
 									<a class="postlink" href={`/posts/${post.id}`}>
 										<span class="label">{sectionLabel(post)}</span>
@@ -129,7 +129,7 @@ const { siteTitle, siteTagline } = resolveStarterSiteIdentity(await getSiteSetti
 				</section>
 
 				<section class="wrap" id="astrology" style="padding-bottom: var(--space-12)">
-					<div class="night stack" style="gap: 32px">
+					<div class="night stack" style="gap: 32px" data-reveal>
 						<div class="stack-sm measure">
 							<p class="label" {...home.edit.astro_eyebrow}>
 								{h.astro_eyebrow}
@@ -169,7 +169,7 @@ const { siteTitle, siteTagline } = resolveStarterSiteIdentity(await getSiteSetti
 						<h2 {...home.edit.consult_title}>{h.consult_title}</h2>
 						<p {...home.edit.consult_text}>{h.consult_text}</p>
 					</div>
-					<div class="row">
+					<div class="row" data-reveal>
 						{sessions.map((s) => (
 							<SessionCard session={s} compact />
 						))}
@@ -191,7 +191,7 @@ const { siteTitle, siteTagline } = resolveStarterSiteIdentity(await getSiteSetti
 				</section>
 
 				<section class="rule-top" id="about">
-					<div class="wrap row-lg" style="padding-block: var(--space-12) 72px">
+					<div class="wrap row-lg" style="padding-block: var(--space-12) 72px" data-reveal>
 						<div class="stack-sm" style="flex: 1 1 280px; min-width: 0">
 							<p class="label" {...home.edit.about_eyebrow}>
 								{h.about_eyebrow}
