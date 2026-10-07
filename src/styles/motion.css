@@ -82,15 +82,18 @@
 	.hero-text > :nth-child(4) {
 		animation-delay: 180ms;
 	}
-	.hero-cards .slot {
-		animation: rise-in 520ms var(--ease-settle) both;
-		animation-delay: 220ms;
+	/* The cards open like a spread: dealt face down from one stack, left to
+	   right, then turned over one by one. Their group labels follow. */
+	.hero-cards .mover {
+		animation:
+			fade-in 200ms ease-out both,
+			card-deal 520ms var(--ease-settle) calc(150ms + var(--i) * 100ms) both;
 	}
-	.hero-cards .slot:nth-child(2) {
-		animation-delay: 300ms;
+	.hero-cards .tcard {
+		animation: card-turn 560ms var(--ease-settle) calc(900ms + var(--i) * 200ms) both;
 	}
-	.hero-cards .slot:nth-child(3) {
-		animation-delay: 380ms;
+	.hero-cards .slot > .label {
+		animation: fade-in 320ms ease-out calc(1300ms + var(--i) * 200ms) both;
 	}
 
 	/* The coral dot on each hero card travels slowly round its orbit, each
@@ -140,6 +143,27 @@
 	from {
 		opacity: 0;
 		transform: translateY(12px);
+	}
+}
+@keyframes fade-in {
+	from {
+		opacity: 0;
+	}
+}
+@keyframes card-deal {
+	from {
+		transform: translate(var(--from-x), var(--from-y)) rotate(0deg);
+	}
+	to {
+		transform: translate(0, 0) rotate(var(--tilt));
+	}
+}
+@keyframes card-turn {
+	from {
+		transform: rotateY(180deg);
+	}
+	to {
+		transform: rotateY(0deg);
 	}
 }
 @keyframes orbit {

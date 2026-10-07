@@ -3,6 +3,9 @@
  * Three illustrative cards for the home page hero. These are brand drawings
  * built from the MilesHope sign and planet glyphs. They are not reproductions
  * of the Promayarn deck's own artwork.
+ *
+ * Each card has a face and a back, so the opening in motion.css can deal
+ * them face down and turn them over.
  */
 const cards = [
 	{
@@ -43,25 +46,38 @@ const cards = [
 
 <div class="hero-cards" aria-hidden="true">
 	{
-		cards.map((c) => (
-			<div class:list={["slot", c.tilt === 0 && "is-centre"]}>
-				<div class:list={["tcard", c.tone]} style={`transform: rotate(${c.tilt}deg)`}>
-					<span class="k">{c.kicker}</span>
-					<svg viewBox="0 0 48 48">
-						<circle class="orbit" cx="24" cy="24" r="21.5" fill="none" stroke-width="1" />
-						<path
-							d={c.path}
-							fill="none"
-							stroke={c.ink}
-							stroke-width="2.5"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-						/>
-						<circle class="orbit-dot" cx={c.dot.cx} cy={c.dot.cy} r="2.2" fill="var(--fire)" />
-					</svg>
-					<span class="n">
-						{c.name} · <span lang="th">{c.thai}</span>
-					</span>
+		cards.map((c, i) => (
+			<div class:list={["slot", c.tilt === 0 && "is-centre"]} style={`--i: ${i}`}>
+				<div class="mover" style={`--tilt: ${c.tilt}deg`}>
+					<div class="tcard">
+						<div class="face back">
+							<svg viewBox="-60 -60 120 120">
+								<circle cx="-21.21" cy="-21.21" r="30" />
+								<circle cx="-21.21" cy="21.21" r="30" />
+								<circle cx="21.21" cy="-21.21" r="30" />
+								<circle cx="21.21" cy="21.21" r="30" />
+								<circle class="back-dot" r="7" />
+							</svg>
+						</div>
+						<div class:list={["face", "front", c.tone]}>
+							<span class="k">{c.kicker}</span>
+							<svg viewBox="0 0 48 48">
+								<circle class="orbit" cx="24" cy="24" r="21.5" fill="none" stroke-width="1" />
+								<path
+									d={c.path}
+									fill="none"
+									stroke={c.ink}
+									stroke-width="2.5"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								/>
+								<circle class="orbit-dot" cx={c.dot.cx} cy={c.dot.cy} r="2.2" fill="var(--fire)" />
+							</svg>
+							<span class="n">
+								{c.name} · <span lang="th">{c.thai}</span>
+							</span>
+						</div>
+					</div>
 				</div>
 				<span class="label g">{c.group}</span>
 			</div>
@@ -87,8 +103,44 @@ const cards = [
 	.slot.is-centre {
 		margin-top: 0;
 	}
+
+	/* Where each card sits while the three are still one stack in the middle.
+	   The opening animation in motion.css starts from here. */
+	.slot {
+		--from-x: 0px;
+		--from-y: -32px;
+	}
+	.slot.is-centre {
+		--from-y: 0px;
+	}
+	.slot:first-child {
+		--from-x: calc(100% + var(--space-4));
+	}
+	.slot:last-child {
+		--from-x: calc(-100% - var(--space-4));
+	}
+	.slot:first-child .mover {
+		z-index: 3;
+	}
+	.slot.is-centre .mover {
+		z-index: 2;
+	}
+
+	/* The mover carries the card's place and tilt; the card inside it turns over. */
+	.mover {
+		position: relative;
+		z-index: 1;
+		transform: rotate(var(--tilt));
+		perspective: 900px;
+	}
 	.tcard {
+		position: relative;
 		aspect-ratio: 168 / 272;
+		transform-style: preserve-3d;
+	}
+	.face {
+		position: absolute;
+		inset: 0;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
@@ -97,16 +149,39 @@ const cards = [
 		background: var(--paper);
 		border: 1px solid var(--sand);
 		color: var(--earth);
+		backface-visibility: hidden;
+		-webkit-backface-visibility: hidden;
 	}
-	.tcard.dark {
+	.face.dark {
 		background: var(--ink);
 		border-color: var(--ink);
 		color: var(--cream);
 	}
-	.tcard svg {
+	.face svg {
 		display: block;
 		width: 100%;
 		height: auto;
+	}
+
+	/* The back of every card: the four rings on the night ground. */
+	.face.back {
+		align-items: center;
+		justify-content: center;
+		background: var(--ink);
+		border-color: var(--ink-muted);
+		transform: rotateY(180deg);
+	}
+	.face.back svg {
+		width: 62%;
+	}
+	.face.back circle {
+		fill: none;
+		stroke: var(--ink-muted);
+		stroke-width: 6;
+	}
+	.face.back .back-dot {
+		fill: var(--fire);
+		stroke: none;
 	}
 	.orbit {
 		stroke: var(--sand);
