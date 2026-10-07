@@ -69,7 +69,6 @@ Search the admin for square brackets. These are waiting for real details:
 
 - `[YOUR WHATSAPP NUMBER]` and `[YOUR LINE ID]`, plus their links (Consultations page)
 - `[PAYMENT METHOD]` (Consultations page, step 2)
-- `[PRICE]` and `[VENUE OR AREA]` (Sessions, Face to face)
 - The About story (Pages, About, and the About block on the Home page)
 - Four posts are outlines only, and the Promayarn article is a draft to check against your own practice.
 
