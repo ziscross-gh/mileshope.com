@@ -1,7 +1,11 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
 	// The Worker name. It must match the Worker's name in the Cloudflare dashboard.
-	"name": "mileshope",
+	"name": "mileshope-com",
+	// www.mileshope.com is attached to this Worker in the Cloudflare dashboard
+	// (Settings, Domains & Routes), so no routes are listed here and Wrangler
+	// leaves the domain alone. The workers.dev address stays switched off.
+	"workers_dev": false,
 	"main": "./src/worker.ts",
 	"compatibility_date": "2026-02-24",
 	"compatibility_flags": ["nodejs_compat"],
@@ -12,9 +16,13 @@
 			"database_id": "2a039a9e-636f-4c61-ae92-b1791ff4b1da",
 		},
 	],
-	// Image uploads: enable R2 in the Cloudflare dashboard, then uncomment this
-	// and turn on `storage` in astro.config.mjs.
-	// "r2_buckets": [{ "binding": "MEDIA", "bucket_name": "mileshope-media" }],
+	// Uploaded images and files (Standard storage, Asia-Pacific).
+	"r2_buckets": [
+		{
+			"binding": "MEDIA",
+			"bucket_name": "mileshope-media",
+		},
+	],
 	// Logs and traces in the Cloudflare dashboard, for finding errors and
 	// slow requests after a deploy.
 	"observability": {

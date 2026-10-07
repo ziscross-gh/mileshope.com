@@ -4,7 +4,7 @@ The new MilesHope.com: Thai tarot (Promayarn cards) and Thai astrology consultat
 
 This is the `main` branch. The previous Zola site, with its posts and Notion sync script, is kept on the `zola-archive` branch.
 
-The new site is not live yet. `www.mileshope.com` still serves the last build of the old site from Cloudflare Pages, and stays that way until the domain is moved to the new Worker.
+The site is live at `www.mileshope.com`. Every push to `main` is built and deployed by Cloudflare.
 
 ## Run it on your computer
 
@@ -22,11 +22,12 @@ pnpm dev
 
 ## Cloudflare
 
-The site runs as a Cloudflare Worker named `mileshope`, set up in `wrangler.jsonc`:
+The site runs as a Cloudflare Worker named `mileshope-com`, set up in `wrangler.jsonc`, and is live at `www.mileshope.com`:
 
 - **Database:** the D1 database `mileshope` (already created, Asia-Pacific).
 - **Sessions:** a KV namespace that Cloudflare creates on the first deploy.
-- **Images:** not set up yet. Uploads need an R2 bucket, and R2 has to be enabled on the account first. The steps are in the comments in `wrangler.jsonc` and `astro.config.mjs`.
+- **Images:** the R2 bucket `mileshope-media` (Standard storage, Asia-Pacific).
+- **Domain:** `www.mileshope.com` is attached to the Worker in the Cloudflare dashboard, not in `wrangler.jsonc`. The `workers.dev` address is switched off.
 
 To deploy from your computer:
 
@@ -39,14 +40,14 @@ Or let Cloudflare build it from GitHub. In the Cloudflare dashboard go to Worker
 
 | Setting | Value |
 |---|---|
-| Project name | `mileshope` (must match `name` in `wrangler.jsonc`) |
+| Project name | `mileshope-com` (must match `name` in `wrangler.jsonc`) |
 | Branch | `main` |
 | Build command | `pnpm build` |
 | Deploy command | `npx wrangler deploy` |
 
 Then turn off builds for other branches on that Worker, so pushes to `zola-archive` (the old Zola site) do not start builds there. Node.js is pinned to version 22 by `.node-version`, and pnpm picks its own version from `package.json`.
 
-After the first deploy, open `/_emdash/admin` on the Worker's address and run setup there, with the starting content included. A passkey registered on the `workers.dev` address only works on that address, so setup needs revisiting when the site moves to `www.mileshope.com`.
+The admin is at `https://www.mileshope.com/_emdash/admin`. Setup has been run there, so passkeys are registered on that address.
 
 ## What you can edit in the admin
 
@@ -76,8 +77,6 @@ Search the admin for square brackets. These are waiting for real details:
 
 - Thai versions of the pages (planned under `/th/`)
 - A contact form
-- Image uploads (needs R2 enabled on the Cloudflare account)
-- Moving `www.mileshope.com` over from the old site
 
 ## Where things are
 
