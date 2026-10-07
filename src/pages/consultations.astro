@@ -1,4 +1,5 @@
 ---
+import Text from "../components/Text.astro";
 import { getEmDashCollection, getEmDashEntry } from "emdash";
 import Base from "../layouts/Base.astro";
 import SessionCard from "../components/SessionCard.astro";
@@ -43,7 +44,7 @@ const colsLg = sessions.length === 4 ? 2 : Math.min(sessions.length, 3) || 1;
 						{c.headline}
 					</h1>
 					<p class="lead measure" {...page.edit.lead}>
-						{c.lead}
+						<Text text={c.lead} />
 					</p>
 				</section>
 

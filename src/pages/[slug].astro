@@ -1,4 +1,5 @@
 ---
+import Text from "../components/Text.astro";
 import { getEmDashEntry, getSeoMeta, decodeSlug } from "emdash";
 import { PortableText } from "emdash/ui";
 import Base from "../layouts/Base.astro";
@@ -37,10 +38,10 @@ const seo = getSeoMeta(page, {
 	<article class="wrap section stack" style="gap: var(--space-6)">
 		<header class="stack" style="max-width: 760px">
 			<h1 {...page.edit.title}>{page.data.title}</h1>
-			{page.data.lead && <p class="lead" {...page.edit.lead}>{page.data.lead}</p>}
+			{page.data.lead && <p class="lead" {...page.edit.lead}><Text text={page.data.lead} /></p>}
 		</header>
 		<div class="prose" {...page.edit.content}>
-			<PortableText value={page.data.content} />
+			<PortableText value={page.data.content} components={{ text: Text }} />
 		</div>
 	</article>
 </Base>

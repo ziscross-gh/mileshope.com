@@ -1,4 +1,5 @@
 ---
+import Text from "../components/Text.astro";
 import { getEmDashCollection, getEmDashEntry, getSiteSettings, getTermsForEntries } from "emdash";
 import Base from "../layouts/Base.astro";
 import HeroCards from "../components/HeroCards.astro";
@@ -58,7 +59,7 @@ const { siteTitle, siteTagline } = resolveStarterSiteIdentity(await getSiteSetti
 							{h.headline}
 						</h1>
 						<p class="lead measure" {...home.edit.lead}>
-							{h.lead}
+							<Text text={h.lead} />
 						</p>
 						<div class="actions">
 							<a class="btn btn-book" href="/consultations" {...home.edit.primary_button}>
@@ -80,7 +81,7 @@ const { siteTitle, siteTagline } = resolveStarterSiteIdentity(await getSiteSetti
 							{h.points.map((p: any) => (
 								<div class="col stack-sm">
 									<h2 class="h3">{p.title}</h2>
-									<p>{p.text}</p>
+									<p><Text text={p.text} /></p>
 								</div>
 							))}
 						</div>
@@ -200,10 +201,10 @@ const { siteTitle, siteTagline } = resolveStarterSiteIdentity(await getSiteSetti
 						</div>
 						<div class="stack" style="flex: 2 1 480px; min-width: 0">
 							<p class="lead" {...home.edit.about_lead}>
-								{h.about_lead}
+								<Text text={h.about_lead} />
 							</p>
 							<p class="muted" {...home.edit.about_body}>
-								{h.about_body}
+								<Text text={h.about_body} />
 							</p>
 							<a class="textlink" style="align-self: flex-start" href="/about" {...home.edit.about_link}>
 								{h.about_link}

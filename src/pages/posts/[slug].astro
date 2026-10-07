@@ -1,4 +1,5 @@
 ---
+import Text from "../../components/Text.astro";
 import { getEmDashEntry, getSeoMeta, decodeSlug } from "emdash";
 import { Image, PortableText } from "emdash/ui";
 import Base from "../../layouts/Base.astro";
@@ -61,7 +62,7 @@ const published = post.data.publishedAt?.toLocaleDateString("en-GB", {
 		}
 
 		<div class="prose" {...post.edit.content}>
-			<PortableText value={post.data.content} />
+			<PortableText value={post.data.content} components={{ text: Text }} />
 		</div>
 
 		{

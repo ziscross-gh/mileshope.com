@@ -1,0 +1,37 @@
+---
+/**
+ * Plain text that keeps a short Thai word on one line.
+ *
+ * On an English page the browser may break a Thai word such as ไพ่พรหมญาณ in
+ * the middle, or leave its bracket behind on the previous line. This wraps
+ * each short Thai run, with any bracket or punctuation touching it, in a
+ * no-wrap span marked lang="th". Longer Thai runs are marked lang="th" only,
+ * so real Thai sentences still wrap.
+ *
+ * Use it for a text field: <Text text={entry.data.lead} />
+ * or hand it to Portable Text: <PortableText components={{ text: Text }} />
+ */
+interface Props {
+	text?: string | null;
+	node?: { text?: string };
+}
+
+const value = Astro.props.text ?? Astro.props.node?.text ?? "";
+
+/** Thai letters in one unbroken run before it is treated as a sentence. */
+const MAX_TERM = 24;
+const THAI_RUN = /[(\[“‘"']*[฀-๿]+[)\]”’"'.,;:!?]*/g;
+
+const parts: { text: string; thai?: "term" | "run" }[] = [];
+let last = 0;
+for (const match of value.matchAll(THAI_RUN)) {
+	const start = match.index ?? 0;
+	if (start > last) parts.push({ text: value.slice(last, start) });
+	const letters = match[0].replace(/[^฀-๿]/g, "").length;
+	parts.push({ text: match[0], thai: letters <= MAX_TERM ? "term" : "run" });
+	last = start + match[0].length;
+}
+if (last < value.length) parts.push({ text: value.slice(last) });
+---
+
+{parts.map((part) => part.thai ? <span lang="th" class={part.thai === "term" ? "th-term" : undefined}>{part.text}</span> : part.text)}
