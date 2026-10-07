@@ -17,6 +17,10 @@ const page = pageResult.entry;
 const c = page?.data ?? {};
 const sessions = sortSessions(sessionsResult.entries);
 const step = (i: number) => String(i + 1).padStart(2, "0");
+// Session cards per row: up to two on tablets; on wide screens three across,
+// or two by two when there are exactly four.
+const colsMd = Math.min(sessions.length, 2) || 1;
+const colsLg = sessions.length === 4 ? 2 : Math.min(sessions.length, 3) || 1;
 ---
 
 <Base title={c.headline ?? "Consultations"} description={c.lead}>
@@ -43,7 +47,7 @@ const step = (i: number) => String(i + 1).padStart(2, "0");
 					</p>
 				</section>
 
-				<section class="wrap row" style="padding-bottom: var(--space-6)">
+				<section class="wrap sessions" style={`--cols-md: ${colsMd}; --cols-lg: ${colsLg}`}>
 					{sessions.map((s) => (
 						<SessionCard session={s} />
 					))}
@@ -134,6 +138,22 @@ const step = (i: number) => String(i + 1).padStart(2, "0");
 </Base>
 
 <style>
+	.sessions {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: var(--space-6);
+		padding-bottom: var(--space-6);
+	}
+	@media (min-width: 700px) {
+		.sessions {
+			grid-template-columns: repeat(var(--cols-md), 1fr);
+		}
+	}
+	@media (min-width: 1000px) {
+		.sessions {
+			grid-template-columns: repeat(var(--cols-lg), 1fr);
+		}
+	}
 	.thai {
 		display: flex;
 		flex-wrap: wrap;

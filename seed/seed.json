@@ -732,6 +732,21 @@
      "highlight": false,
      "sort_order": 3
     }
+   },
+   {
+    "id": "session-fengshui",
+    "slug": "feng-shui-inspection",
+    "status": "published",
+    "data": {
+     "title": "Feng shui inspection",
+     "kicker": "Feng shui · on request",
+     "price": "Contact us",
+     "price_thb": "",
+     "description": "A feng shui inspection of your space. Tell me where it is and what you'd like looked at, and I'll reply with a price.",
+     "button_label": "Ask about an inspection",
+     "highlight": false,
+     "sort_order": 4
+    }
    }
   ],
   "pages": [
