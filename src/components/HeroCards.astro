@@ -51,13 +51,7 @@ const cards = [
 				<div class="mover" style={`--tilt: ${c.tilt}deg`}>
 					<div class="tcard">
 						<div class="face back">
-							<svg viewBox="-60 -60 120 120">
-								<circle cx="-21.21" cy="-21.21" r="30" />
-								<circle cx="-21.21" cy="21.21" r="30" />
-								<circle cx="21.21" cy="-21.21" r="30" />
-								<circle cx="21.21" cy="21.21" r="30" />
-								<circle class="back-dot" r="7" />
-							</svg>
+							<img src="/brand/mileshope-mark-reversed.svg" alt="" width="150" height="150" />
 						</div>
 						<div class:list={["face", "front", c.tone]}>
 							<span class="k">{c.kicker}</span>
@@ -163,7 +157,7 @@ const cards = [
 		height: auto;
 	}
 
-	/* The back of every card: the four rings on the night ground. */
+	/* The back of every card: the reversed logo mark on the night ground. */
 	.face.back {
 		align-items: center;
 		justify-content: center;
@@ -171,17 +165,10 @@ const cards = [
 		border-color: var(--ink-muted);
 		transform: rotateY(180deg);
 	}
-	.face.back svg {
-		width: 62%;
-	}
-	.face.back circle {
-		fill: none;
-		stroke: var(--ink-muted);
-		stroke-width: 6;
-	}
-	.face.back .back-dot {
-		fill: var(--fire);
-		stroke: none;
+	.face.back img {
+		display: block;
+		width: 76%;
+		height: auto;
 	}
 	.orbit {
 		stroke: var(--sand);
