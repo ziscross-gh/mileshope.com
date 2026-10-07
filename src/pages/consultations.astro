@@ -23,7 +23,7 @@ const colsMd = Math.min(sessions.length, 2) || 1;
 const colsLg = sessions.length === 4 ? 2 : Math.min(sessions.length, 3) || 1;
 ---
 
-<Base title={c.headline ?? "Consultations"} description={c.lead}>
+<Base title="Consultations" preferNavLabel pageTitle={c.headline} description={c.lead}>
 	{
 		!page ? (
 			<section class="wrap section">

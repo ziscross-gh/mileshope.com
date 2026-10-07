@@ -1,8 +1,7 @@
 ---
-import { getEmDashEntry, getSeoMeta, decodeSlug, getSiteSettings } from "emdash";
+import { getEmDashEntry, getSeoMeta, decodeSlug } from "emdash";
 import { Image, PortableText } from "emdash/ui";
 import Base from "../../layouts/Base.astro";
-import { resolveStarterSiteIdentity } from "../../utils/site-identity";
 
 const slug = decodeSlug(Astro.params.slug);
 
@@ -17,10 +16,8 @@ if (!post) {
 }
 
 if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
-const { siteTitle } = resolveStarterSiteIdentity(await getSiteSettings());
 
 const seo = getSeoMeta(post, {
-	siteTitle,
 	siteUrl: Astro.url.origin,
 	path: Astro.url.pathname.replace(/\/$/, ""),
 });
@@ -37,6 +34,7 @@ const published = post.data.publishedAt?.toLocaleDateString("en-GB", {
 
 <Base
 	title={seo.title}
+	kind={section?.label ?? "Articles"}
 	pageTitle={seo.ogTitle}
 	description={seo.description}
 	canonical={seo.canonical}

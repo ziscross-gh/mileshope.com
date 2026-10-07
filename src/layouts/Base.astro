@@ -7,7 +7,14 @@ import "../styles/theme.css";
 import "../styles/motion.css";
 
 interface Props {
+	/** The page's own name, without the site name. */
 	title: string;
+	/** The kind of page or the section it sits in, e.g. "Topics" or "Understand". */
+	kind?: string | null;
+	/** The home page: the browser title is the site name and tagline. */
+	home?: boolean;
+	/** Use the menu's label for this address as the page name, when there is one. */
+	preferNavLabel?: boolean;
 	pageTitle?: string | null;
 	description?: string | null;
 	image?: string | null;
@@ -16,7 +23,8 @@ interface Props {
 	content?: { collection: string; id: string; slug?: string | null };
 }
 
-const { title, pageTitle, description, image, canonical, content } = Astro.props;
+const { title, kind, home, preferNavLabel, pageTitle, description, image, canonical, content } =
+	Astro.props;
 const [settingsResult, menuResult, footerResult] = await Promise.all([
 	getSiteSettingsWithCacheHint(),
 	getMenuWithCacheHint("primary"),
@@ -29,13 +37,24 @@ if (Astro.cache?.enabled) {
 }
 
 const { siteTitle, siteTagline } = resolveStarterSiteIdentity(settingsResult.data);
-const titleIncludesSiteName =
-	title === siteTitle || title.endsWith(` | ${siteTitle}`) || title.endsWith(` — ${siteTitle}`);
-const fullTitle = titleIncludesSiteName ? title : `${title} — ${siteTitle}`;
 const pageDescription = description ?? siteTagline;
 const menu = menuResult.data;
 const footerMenu = footerResult.data;
 const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+
+// Browser title, one scheme for every page: the page's name first, then the
+// kind of page or its section, then the site name. The home page is the site
+// name and tagline. Pages that sit in the menu are named after their menu
+// label, so the title matches the link and the address.
+const navLabel = [...(menu?.items ?? []), ...(footerMenu?.items ?? [])].find(
+	(item) => item.url === path,
+)?.label;
+const name = (preferNavLabel && navLabel) || title;
+const fullTitle = home
+	? [siteTitle, siteTagline].filter(Boolean).join(" — ")
+	: [name, kind && kind !== name ? kind : null, name === siteTitle ? null : siteTitle]
+			.filter(Boolean)
+			.join(" — ");
 
 const pageCtx = createPublicPageContext({
 	Astro,

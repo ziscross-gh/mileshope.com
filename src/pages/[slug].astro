@@ -1,8 +1,7 @@
 ---
-import { getEmDashEntry, getSeoMeta, decodeSlug, getSiteSettings } from "emdash";
+import { getEmDashEntry, getSeoMeta, decodeSlug } from "emdash";
 import { PortableText } from "emdash/ui";
 import Base from "../layouts/Base.astro";
-import { resolveStarterSiteIdentity } from "../utils/site-identity";
 
 const slug = decodeSlug(Astro.params.slug);
 
@@ -17,10 +16,11 @@ if (!page) {
 }
 
 if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
-const { siteTitle } = resolveStarterSiteIdentity(await getSiteSettings());
 
+// A title typed into the entry's SEO panel wins; otherwise the page is named
+// after its menu label (About), falling back to its own heading.
+const hasSeoTitle = Boolean((page as any).seo?.title ?? (page.data as any).seo?.title);
 const seo = getSeoMeta(page, {
-	siteTitle,
 	siteUrl: Astro.url.origin,
 	path: Astro.url.pathname.replace(/\/$/, ""),
 });
@@ -28,6 +28,7 @@ const seo = getSeoMeta(page, {
 
 <Base
 	title={seo.title}
+	preferNavLabel={!hasSeoTitle}
 	pageTitle={seo.ogTitle}
 	description={seo.description}
 	canonical={seo.canonical}

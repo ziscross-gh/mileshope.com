@@ -37,7 +37,7 @@ const sectionLabel = (post: (typeof posts)[number]) =>
 const { siteTitle, siteTagline } = resolveStarterSiteIdentity(await getSiteSettings());
 ---
 
-<Base title={siteTitle} description={h.lead ?? siteTagline}>
+<Base title={siteTitle} home description={h.lead ?? siteTagline}>
 	{
 		!home ? (
 			<section class="wrap section">
