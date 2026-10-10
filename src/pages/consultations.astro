@@ -16,6 +16,12 @@ if (Astro.cache?.enabled) {
 
 const page = pageResult.entry;
 const c = page?.data ?? {};
+
+// A contact card shows only once its number or ID is filled in, so an empty
+// or "[placeholder]" value in the admin keeps that card off the live page.
+const isReal = (value?: string | null) => !!value && !value.trim().startsWith("[");
+const hasWhatsApp = isReal(c?.whatsapp_number);
+const hasLine = isReal(c?.line_id);
 const sessions = sortSessions(sessionsResult.entries);
 const step = (i: number) => String(i + 1).padStart(2, "0");
 // Session cards per row: up to two on tablets; on wide screens three across,
@@ -105,7 +111,7 @@ const colsLg = sessions.length === 4 ? 2 : Math.min(sessions.length, 3) || 1;
 						<p {...page.edit.book_text}>{c.book_text}</p>
 					</div>
 					<div class="row" data-reveal>
-						<div class="card channel">
+						{hasWhatsApp && (<div class="card channel">
 							<div class="stack-sm" style="gap: 4px">
 								<p class="label" {...page.edit.whatsapp_label}>
 									{c.whatsapp_label}
@@ -117,8 +123,8 @@ const colsLg = sessions.length === 4 ? 2 : Math.min(sessions.length, 3) || 1;
 							<a class="btn btn-earth" href={c.whatsapp_url || "#book"} {...page.edit.whatsapp_button}>
 								{c.whatsapp_button}
 							</a>
-						</div>
-						<div class="card channel">
+						</div>)}
+						{hasLine && (<div class="card channel">
 							<div class="stack-sm" style="gap: 4px">
 								<p class="label" {...page.edit.line_label}>
 									{c.line_label}
@@ -130,13 +136,13 @@ const colsLg = sessions.length === 4 ? 2 : Math.min(sessions.length, 3) || 1;
 							<a class="btn btn-wood" href={c.line_url || "#book"} {...page.edit.line_button}>
 								{c.line_button}
 							</a>
-						</div>
+						</div>)}
 						<div class="card channel">
 							<div class="stack-sm" style="gap: 4px">
 								<p class="label">Email</p>
 								<p class="h3 strong address">{CONTACT_EMAIL}</p>
 							</div>
-							<a class="btn btn-outline" href={`mailto:${CONTACT_EMAIL}`}>Write an email</a>
+							<a class:list={["btn", hasWhatsApp || hasLine ? "btn-outline" : "btn-earth"]} href={`mailto:${CONTACT_EMAIL}`}>Write an email</a>
 						</div>
 					</div>
 				</section>
@@ -175,6 +181,7 @@ const colsLg = sessions.length === 4 ? 2 : Math.min(sessions.length, 3) || 1;
 	}
 	.channel {
 		flex: 1 1 300px;
+		max-width: 480px;
 		min-width: 0;
 		display: flex;
 		flex-direction: column;

@@ -619,7 +619,7 @@
      "consult_eyebrow": "Consultations",
      "consult_title": "Bring one question, or ten",
      "consult_text": "A consultation combines Thai tarot and Thai astrology. Mostly by voice call, in English or Thai, with unlimited questions in the time.",
-     "thai_link": "ลูกค้าไทย ดูราคาเป็นบาทและจองผ่าน LINE",
+     "thai_link": "ลูกค้าไทย ดูราคาเป็นบาทและจองทางอีเมล",
      "about_eyebrow": "About",
      "about_title": "Why a developer reads cards",
      "about_lead": "I build websites for a living and read Thai tarot and Thai astrology for the people who ask. Both jobs come down to the same thing: taking a system apart until it makes sense.",
@@ -639,16 +639,16 @@
      "headline": "A consultation you can follow",
      "lead": "Each consultation combines Thai tarot, known as Promayarn cards (ไพ่พรหมญาณ), and Thai astrology. Mostly by voice call, with no video, in English or Thai. You ask as many questions as fit in the time, and I explain what the cards and your chart say, and why.",
      "thai_note": "สำหรับลูกค้าไทย: 30 นาที 1,500 บาท · 1 ชั่วโมง 2,000 บาท · ถามได้ไม่จำกัด",
-     "thai_link": "จองคิวผ่าน LINE",
+     "thai_link": "จองคิวทางอีเมล",
      "steps_title": "How it works",
      "steps": [
       {
-       "title": "Message me",
-       "text": "WhatsApp for Singapore, Malaysia and everywhere else, LINE for Thailand. Tell me which session you want, and your date, time and place of birth for the chart."
+       "title": "Email me",
+       "text": "Write to hello@mileshope.com. Tell me which session you want, and your date, time and place of birth for the chart."
       },
       {
        "title": "Pick a time and pay",
-       "text": "You get a link to choose a slot. Payment is by [PAYMENT METHOD] and confirms the booking."
+       "text": "I reply with the times I have free and how to pay. Payment confirms the booking."
       },
       {
        "title": "We talk by voice call",
@@ -680,7 +680,7 @@
       }
      ],
      "book_title": "Book a consultation",
-     "book_text": "Messaging is the quickest way to book.",
+     "book_text": "Email me to book, in English or Thai.",
      "whatsapp_label": "Singapore, Malaysia and international · English",
      "whatsapp_number": "[YOUR WHATSAPP NUMBER]",
      "whatsapp_url": "https://wa.me/",
@@ -732,7 +732,7 @@
      "kicker": "In person · Singapore",
      "price": "Contact us",
      "price_thb": "",
-     "description": "In person in Singapore, by arrangement. Message me for the price and where we can meet.",
+     "description": "In person in Singapore, by arrangement. Email me for the price and where we can meet.",
      "button_label": "Ask about meeting",
      "highlight": false,
      "sort_order": 3
