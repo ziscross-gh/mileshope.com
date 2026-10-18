@@ -1,0 +1,265 @@
+---
+/**
+ * Privacy notice, in English and Thai.
+ *
+ * The wording is the approved notice (version 1.0, October 2026) and is kept
+ * word for word in both languages. Change it here only when the notice itself
+ * changes, and raise the version line when it does.
+ *
+ * Without JavaScript both languages show, one after the other. With
+ * JavaScript the English / ไทย switch shows one at a time, starting in Thai
+ * when the visitor's browser is set to Thai.
+ */
+import Base from "../layouts/Base.astro";
+import { CONTACT_EMAIL } from "../utils/content";
+
+const mail = `mailto:${CONTACT_EMAIL}`;
+---
+
+<Base
+	title="Privacy"
+	pageTitle="Privacy Notice"
+	description="How MilesHope.com collects, keeps and deletes your birth details. In English and Thai."
+>
+	<div class="privacy" data-lang="en">
+		<section class="wrap section stack privacy-head">
+			<p class="label">
+				MilesHope.com · <span lang="en">Version 1.0, October 2026</span><span lang="th">ฉบับที่ 1.0 ตุลาคม 2569</span>
+			</p>
+			<h1>
+				<span lang="en">Privacy Notice</span><span lang="th">ประกาศ<wbr /><span class="keep">ความเป็นส่วนตัว</span></span>
+			</h1>
+			<div class="lang-switch" role="group" aria-label="Language">
+				<button type="button" data-set-lang="en" aria-pressed="true">English</button>
+				<button type="button" data-set-lang="th" aria-pressed="false"><span lang="th">ไทย</span></button>
+			</div>
+		</section>
+
+		<div class="wrap privacy-body">
+			<section class="item">
+				<p class="label num">01</p>
+				<h2 class="h3"><span lang="en">Who I am</span><span lang="th">ผู้ควบคุมข้อมูล</span></h2>
+				<div class="text">
+					<p lang="en">MilesHope.com, a solo Thai tarot reading practice. Contact: <a href={mail}>{CONTACT_EMAIL}</a></p>
+					<p lang="th">MilesHope.com ผู้ให้บริการดูไพ่พรหมญาณรายบุคคล ติดต่อ: <a href={mail}>{CONTACT_EMAIL}</a></p>
+				</div>
+			</section>
+
+			<section class="item">
+				<p class="label num">02</p>
+				<h2 class="h3"><span lang="en">What I collect</span><span lang="th">ข้อมูลที่เก็บ</span></h2>
+				<div class="text">
+					<p lang="en">Your birth date, birth time and birth place, plus the date of each session and my reading notes. I do not need your name, phone number or ID.</p>
+					<p lang="th">วันเกิด เวลาเกิด และสถานที่เกิดของท่าน รวมถึงวันที่รับบริการและบันทึกการดูดวง โดยไม่จำเป็นต้องใช้ชื่อ เบอร์โทรศัพท์ หรือเลขบัตรประชาชน</p>
+				</div>
+			</section>
+
+			<section class="item">
+				<p class="label num">03</p>
+				<h2 class="h3"><span lang="en">Why</span><span lang="th">วัตถุประสงค์</span></h2>
+				<div class="text">
+					<p lang="en">Only to give you your reading. When you ask further questions, I may also use astrology and BaZi in the consultation, using the birth details you give.</p>
+					<p lang="th">เพื่อให้คำพยากรณ์แก่ท่านเท่านั้น หากท่านมีคำถามเพิ่มเติม อาจใช้โหราศาสตร์และปาจื้อประกอบการดูดวง โดยใช้ข้อมูลวันเวลาเกิดที่ท่านให้ไว้</p>
+				</div>
+			</section>
+
+			<section class="item">
+				<p class="label num">04</p>
+				<h2 class="h3"><span lang="en">How it is kept</span><span lang="th">การจัดเก็บ</span></h2>
+				<div class="text">
+					<p lang="en">Stored under a random code, encrypted, on a private computer, and readable only with my passphrase. It is not shared with or sold to anyone. Your data may be stored on a cloud server outside Singapore or Thailand, where data protection laws may differ. It is encrypted and readable only by me.</p>
+					<p lang="th">จัดเก็บด้วยรหัสสุ่ม เข้ารหัสไว้ในคอมพิวเตอร์ส่วนตัว อ่านได้ด้วยรหัสผ่านของผู้ให้บริการเท่านั้น ไม่เปิดเผยหรือขายให้ผู้อื่น ข้อมูลของท่านอาจถูกจัดเก็บในเซิร์ฟเวอร์คลาวด์นอกประเทศสิงคโปร์หรือประเทศไทย ซึ่งอาจมีกฎหมายคุ้มครองข้อมูลแตกต่างกัน ข้อมูลถูกเข้ารหัสและมีเพียงผู้ให้บริการเท่านั้นที่อ่านได้</p>
+				</div>
+			</section>
+
+			<section class="item">
+				<p class="label num">05</p>
+				<h2 class="h3"><span lang="en">How long</span><span lang="th">ระยะเวลา</span></h2>
+				<div class="text">
+					<p lang="en">If you do not choose to keep your file, your data is deleted 14 days after your session. If you choose to keep it, it is kept until you ask me to delete it, and reviewed if you have no session for 24 months.</p>
+					<p lang="th">หากท่านไม่เลือกให้เก็บข้อมูลไว้ ข้อมูลจะถูกลบภายใน 14 วันหลังรับบริการ หากเลือกให้เก็บ จะเก็บไว้จนกว่าท่านจะขอให้ลบ และจะทบทวนหากไม่มีการรับบริการเป็นเวลา 24 เดือน</p>
+				</div>
+			</section>
+
+			<section class="item">
+				<p class="label num">06</p>
+				<h2 class="h3"><span lang="en">Your rights</span><span lang="th">สิทธิของท่าน</span></h2>
+				<div class="text">
+					<p lang="en">You can ask to see, correct or delete your data, or withdraw consent, at any time. Contact: <a href={mail}>{CONTACT_EMAIL}</a>. I will respond within 30 days.</p>
+					<p lang="th">ท่านสามารถขอดู แก้ไข หรือลบข้อมูล หรือถอนความยินยอมได้ทุกเมื่อ ติดต่อ: <a href={mail}>{CONTACT_EMAIL}</a> โดยจะตอบกลับภายใน 30 วัน</p>
+				</div>
+			</section>
+
+			<section class="item">
+				<p class="label num">07</p>
+				<h2 class="h3"><span lang="en">Online tools and payments</span><span lang="th">เครื่องมือออนไลน์และการชำระเงิน</span></h2>
+				<div class="text">
+					<p lang="en">Bookings are made through Google Calendar (MilesHope.com); booking entries contain only your client code and service type, never your birth details. Booking, chat and payment apps may briefly hold your details. I copy your birth details into my encrypted file. Payment records are kept separately as required for tax purposes. Sessions are not recorded unless you agree.</p>
+					<p lang="th">การจองคิวทำผ่าน Google Calendar (MilesHope.com) โดยบันทึกเพียงรหัสลูกค้าและประเภทบริการ ไม่มีข้อมูลวันเวลาเกิด แอปจองคิว แชท และชำระเงิน อาจเก็บข้อมูลของท่านชั่วคราว ข้อมูลวันเวลาเกิดจะถูกคัดลอกไปยังไฟล์ที่เข้ารหัส บันทึกการชำระเงินจะเก็บแยกไว้ตามข้อกำหนดทางภาษี และจะไม่บันทึกเสียงการดูดวงหากท่านไม่ยินยอม</p>
+				</div>
+			</section>
+
+			<section class="item">
+				<p class="label num">08</p>
+				<h2 class="h3"><span lang="en">Sensitive details</span><span lang="th">ข้อมูลอ่อนไหว</span></h2>
+				<div class="text">
+					<p lang="en">Please do not share health, religious or other sensitive details unless needed. If you do, I will ask for your explicit consent first.</p>
+					<p lang="th">กรุณาอย่าให้ข้อมูลด้านสุขภาพ ศาสนา หรือข้อมูลอ่อนไหวอื่นหากไม่จำเป็น หากให้ข้อมูลดังกล่าว จะขอความยินยอมโดยชัดแจ้งก่อน</p>
+				</div>
+			</section>
+
+			<section class="item">
+				<p class="label num">09</p>
+				<h2 class="h3"><span lang="en">If something goes wrong</span><span lang="th">กรณีข้อมูลรั่วไหล</span></h2>
+				<div class="text">
+					<p lang="en">If your data is ever compromised, I will inform you and the relevant authority as required. You may also complain to Singapore's PDPC or Thailand's PDPC (<span lang="th" class="th-inline">สำนักงานคณะกรรมการคุ้มครองข้อมูลส่วนบุคคล</span>).</p>
+					<p lang="th">หากข้อมูลของท่านรั่วไหล จะแจ้งให้ท่านและหน่วยงานที่เกี่ยวข้องทราบตามกฎหมาย ท่านสามารถร้องเรียนต่อ PDPC สิงคโปร์ หรือสำนักงานคณะกรรมการคุ้มครองข้อมูลส่วนบุคคล (สคส.) ของไทยได้</p>
+				</div>
+			</section>
+
+			<section class="item">
+				<p class="label num">10</p>
+				<h2 class="h3"><span lang="en">Your choices</span><span lang="th">ทางเลือกของท่าน</span></h2>
+				<div class="text">
+					<ul class="plain-list" lang="en">
+						<li><strong>Required:</strong> I agree to my birth details being used for my reading.</li>
+						<li><strong>Optional:</strong> Keep my chart and session notes on file for future sessions. I can ask for deletion at any time.</li>
+					</ul>
+					<ul class="plain-list" lang="th">
+						<li><strong>จำเป็น:</strong> ข้าพเจ้ายินยอมให้ใช้ข้อมูลวันเวลาเกิดเพื่อการดูดวง</li>
+						<li><strong>ไม่บังคับ:</strong> ให้เก็บดวงและบันทึกการดูดวงไว้สำหรับการรับบริการครั้งต่อไป และขอให้ลบได้ทุกเมื่อ</li>
+					</ul>
+				</div>
+			</section>
+		</div>
+	</div>
+</Base>
+
+<script is:inline>
+	// English / ไทย switch. Starts in Thai when the browser is set to Thai.
+	(function () {
+		var root = document.querySelector(".privacy");
+		if (!root) return;
+		var buttons = root.querySelectorAll("[data-set-lang]");
+		function setLang(lang) {
+			root.setAttribute("data-lang", lang);
+			document.documentElement.lang = lang;
+			buttons.forEach(function (b) {
+				b.setAttribute("aria-pressed", String(b.getAttribute("data-set-lang") === lang));
+			});
+		}
+		buttons.forEach(function (b) {
+			b.addEventListener("click", function () {
+				setLang(b.getAttribute("data-set-lang"));
+			});
+		});
+		if ((navigator.language || "").toLowerCase().indexOf("th") === 0) setLang("th");
+	})();
+</script>
+
+<style>
+	/* With JavaScript, show one language at a time. Without it, show both. */
+	:global(.js) .privacy[data-lang="en"] :is(.privacy-head h1, .privacy-head .label, .privacy-body) [lang="th"]:not(.th-inline),
+	:global(.js) .privacy[data-lang="th"] :is(.privacy-head h1, .privacy-head .label, .privacy-body) [lang="en"] {
+		display: none;
+	}
+	/* Without JavaScript the switch does nothing, so it is hidden. */
+	.lang-switch {
+		display: none;
+	}
+	:global(.js) .lang-switch {
+		display: inline-flex;
+	}
+
+	/* No-JS: the two headings sit on separate lines. */
+	.privacy-head h1 > span,
+	.privacy-body h2 > span {
+		display: block;
+	}
+	/* Keep "ความเป็นส่วนตัว" whole when the Thai title wraps on a phone. */
+	.keep {
+		white-space: nowrap;
+	}
+
+	.privacy-head {
+		padding-bottom: var(--space-6);
+	}
+	.privacy-head .label [lang="th"] {
+		text-transform: none;
+		letter-spacing: 0;
+		font-family: var(--font-body);
+	}
+
+	.lang-switch {
+		align-self: flex-start;
+		gap: 4px;
+		padding: 4px;
+		border: 1px solid var(--sand);
+		border-radius: var(--radius-full);
+		background: var(--paper);
+	}
+	.lang-switch button {
+		min-height: 40px;
+		padding: 8px 20px;
+		border: 0;
+		border-radius: var(--radius-full);
+		background: transparent;
+		color: var(--earth);
+		font-family: var(--font-body);
+		font-weight: 500;
+		font-size: 16px;
+		line-height: 24px;
+		cursor: pointer;
+	}
+	.lang-switch button:hover {
+		background: var(--cream);
+	}
+	.lang-switch button[aria-pressed="true"] {
+		background: var(--earth);
+		color: var(--cream);
+	}
+
+	.privacy-body {
+		padding-bottom: 72px;
+	}
+	.item {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: var(--space-2) var(--space-6);
+		padding-block: var(--space-6);
+		border-top: 1px solid var(--sand);
+	}
+	.item:last-child {
+		border-bottom: 1px solid var(--sand);
+	}
+	.num {
+		color: var(--fire-deep);
+	}
+	.text {
+		max-width: 640px;
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-4);
+	}
+	.text a {
+		overflow-wrap: anywhere;
+	}
+	.text strong {
+		font-weight: 600;
+		color: var(--earth);
+	}
+	@media (min-width: 860px) {
+		.item {
+			grid-template-columns: 48px minmax(0, 300px) minmax(0, 1fr);
+			align-items: baseline;
+		}
+	}
+
+	/* Thai text: the brand's line height for running text, no extra spacing. */
+	[lang="th"] {
+		letter-spacing: 0;
+	}
+	.text [lang="th"] {
+		line-height: 1.8;
+	}
+</style>

@@ -41,6 +41,9 @@ const pageDescription = description ?? siteTagline;
 const menu = menuResult.data;
 const footerMenu = footerResult.data;
 const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+// The privacy notice is linked from the footer of every page, in code rather
+// than in the footer menu, so it cannot be removed by accident in the admin.
+const PRIVACY_PATH = "/privacy";
 
 // Browser title, one scheme for every page: the page's name first, then the
 // kind of page or its section, then the site name. The home page is the site
@@ -166,8 +169,17 @@ const pageCtx = createPublicPageContext({
 					<p class="label">{siteTagline}</p>
 				</div>
 				<nav aria-label="Footer">
-					{footerMenu?.items.map((item) => <a href={item.url}>{item.label}</a>)}
+					{footerMenu?.items
+						.filter((item) => item.url !== PRIVACY_PATH)
+						.map((item) => <a href={item.url}>{item.label}</a>)}
 				</nav>
+			</div>
+			<div class="wrap">
+				<div class="legal">
+					<a href={PRIVACY_PATH} aria-current={path === PRIVACY_PATH ? "page" : undefined}>
+						Privacy / <span lang="th">ความเป็นส่วนตัว</span>
+					</a>
+				</div>
 			</div>
 		</footer>
 

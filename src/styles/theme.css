@@ -480,6 +480,25 @@ h3,
 .site-footer nav a:hover {
 	text-decoration: underline;
 }
+/* The legal line under the footer: the privacy notice. */
+.site-footer .legal {
+	padding-block: var(--space-4) var(--space-6);
+	border-top: 1px solid var(--ink-muted);
+}
+.site-footer .legal a {
+	display: inline-block;
+	padding: 10px 0;
+	font-size: 14px;
+	line-height: 24px;
+	color: var(--sand);
+	text-decoration: none;
+}
+.site-footer .legal a:hover,
+.site-footer .legal a[aria-current="page"] {
+	color: var(--cream);
+	text-decoration: underline;
+	text-underline-offset: 4px;
+}
 
 /* Post lists */
 .postlink {
